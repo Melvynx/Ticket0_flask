@@ -1,5 +1,5 @@
 # connect_db.py
-# OM 2020.03.12 Connexion bd
+# MM 12 mars 2020 Connexion bd
 
 import mysql.connector
 
@@ -10,6 +10,7 @@ class DatabaseTools():
         print("Constructeur classe DatabaseTools ")
 
     def connect_ma_bd(self):
+        # set db condig
         config = {
             'user': 'root',
             'password': 'root',
@@ -18,7 +19,7 @@ class DatabaseTools():
             'database': 'melvyn_malherbe_tiqet_bd_104',
             'raise_on_warnings': True,
         }
-
+        # connect db
         self.db = mysql.connector.connect(**config)
         print("db connect impec")
 
