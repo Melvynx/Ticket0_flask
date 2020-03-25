@@ -1,5 +1,5 @@
 # insert_one_table.py
-# OM 2020.03.10 le but est d'insérer des valeurs en MySql dans une seule table
+# MM 12 mars 2020  le but est d'insérer des valeurs en MySql dans une seule table
 
 import connectdb
 

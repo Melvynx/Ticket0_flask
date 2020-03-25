@@ -1,5 +1,5 @@
 # insert_new_category.py
-# OM 2698.03.21 essai d'insertion
+# MM 12 mars 2020 essai d'insertion
 
 import connect_db
 # Importer le fichier "InsertOneTable" dans lequel il y a quelques classes et méthodes en rapport avec le sujet d'insertion dans UNE SEULE table.
