@@ -1,5 +1,5 @@
 # select_db.py
-# MM 19 mars 2020
+# MM 19 mars 2020 select from database
 
 from mysql.connector import Error
 

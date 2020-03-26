@@ -1,5 +1,5 @@
 # connect_db.py
-# MM 12 mars 2020 Connexion bd
+# MM 12 mars 2020 connect bd
 
 import mysql.connector
 

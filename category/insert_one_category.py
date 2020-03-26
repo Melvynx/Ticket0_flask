@@ -1,3 +1,6 @@
+# insert_one_category.py
+# MM 2020 test insert one value
+
 from db.INSERT import insert_one_table
 
 print("please input new category !")
