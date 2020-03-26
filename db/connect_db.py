@@ -7,9 +7,6 @@ import mysql.connector
 # OM 2020.03.16 Se connecter à la BD.
 class DatabaseTools():
     def __init__(self):
-        print("Constructeur classe DatabaseTools ")
-
-    def connect_ma_bd(self):
         # set db condig
         config = {
             'user': 'root',
@@ -21,14 +18,15 @@ class DatabaseTools():
         }
         # connect db
         self.db = mysql.connector.connect(**config)
+        self.cursor = self.db.cursor()
         print("db connect impec")
 
-        return self
 
-    # OM 2020.03.11 Petite méthode pour fermer la connection à la BD
+    # MM 2020 close db connection
     def close_connection(self):
-        if self.connect_ma_bd().db:
+        if self.db:
             print("Dans la méthode close_connection et la BD est FERMEE")
+            self.cursor.close()
             self.db.close()
         else:
             print("Dans la méthode close_connection et y'a rien a fermer")
