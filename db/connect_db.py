@@ -21,7 +21,6 @@ class DatabaseTools():
         self.cursor = self.db.cursor()
         print("db connect impec")
 
-
     # MM 2020 close db connection
     def close_connection(self):
         if self.db:

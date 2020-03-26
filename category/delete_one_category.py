@@ -9,8 +9,7 @@ number = input("> ")
 
 # define request
 request = "DELETE FROM `T_Category` WHERE `T_Category`.`id_category` = %(id)s"
-DBDelete.delete_one_record(request, number)
 
+db_delete = DBDelete()
 
-
-
+db_delete.delete_one_record(request, number)
