@@ -3,7 +3,7 @@
 
 import connect_db
 # Importer le fichier "InsertOneTable" dans lequel il y a quelques classes et méthodes en rapport avec le sujet d'insertion dans UNE SEULE table.
-from INSERT import insert_one_table
+from db.INSERT import insert_one_table
 
 # OM 202.03.11 Démonstration en classe, juste pour faire un objet "jeveux_etre_connecte"
 

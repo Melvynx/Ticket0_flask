@@ -1,6 +1,6 @@
 import connect_db
-from GET import select_all_category
-from INSERT import insert_one_table
+from db.GET import select_all_category
+from db.INSERT import insert_one_table
 
 print("please input new category !")
 # input a value from console
