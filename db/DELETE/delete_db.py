@@ -11,7 +11,7 @@ class DBDelete():
         try:
             #Database connect
             db = connect_db.DatabaseTools()
-
+            #execute request with id
             db.cursor.execute(request, {"id": id_record})
 
             db.db.commit()
