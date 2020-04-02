@@ -1,0 +1,8 @@
+{% extends "model/layout.html" %} {% block content %}
+
+<div class="alert alert-warning error" role="alert">
+  404 - Page not found ( {{ error }}
+</div>
+<a class="btn btn-primary" href="{{ url_for('home') }}" role="button">Link</a>
+
+{% endblock content %}

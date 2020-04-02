@@ -18,7 +18,7 @@ class DatabaseTools():
         }
         # connect db
         self.db = mysql.connector.connect(**config)
-        self.cursor = self.db.cursor()
+        self.cursor = self.db.cursor(dictionary=True)
         print("db connect impec")
 
     # MM 2020 close db connection

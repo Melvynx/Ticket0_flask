@@ -1,4 +1,4 @@
-# insert_one_table.py
+# insert.py
 # MM 12 mars 2020 objectif is insert some value in database
 
 from db import connect_db

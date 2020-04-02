@@ -1,0 +1,67 @@
+{% extends "model/layout.html" %}
+<!-- block content -->
+{% block content %}
+<div class="border category-list-block">
+  <h1>All Category</h1>
+  <ul class="category-list">
+    {% if categories %}
+    <!-- if categories-->
+    {% for category in categories %}
+    <li class="remove-link-style">
+      <div class="category-block">
+        <div class="title-id">
+          <h3>{{ category["name"] }}</h3>
+          <p class="id">id: {{ category["id_category"] }}</p>
+        </div>
+        {% if category["description"] %}
+        <div class="description">
+          <p>{{ category["description"] }}</p>
+        </div>
+        {% else %}
+        <div class="description">
+          <p>no desc</p>
+        </div>
+        {% endif %}
+      </div>
+    </li>
+    {% endfor %} {% endif %}
+  </ul>
+  <form method="POST" action="/category/new">
+    <legend>Crée une category !</legend>
+    <div class="input-group flex-nowrap margin-top">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="name">name</span>
+      </div>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Username"
+        aria-label="Username"
+        name="category_name"
+        aria-describedby="addon-wrapping"
+      />
+    </div>
+    <div class="input-group flex-nowrap margin-top">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="message">Description</span>
+      </div>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Description"
+        aria-label="Username"
+        name="category_description"
+        aria-describedby="addon-wrapping"
+      />
+    </div>
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if messages
+    %} {% for category, message in messages %}
+    <div class="alert alert-{{ category }}" role="alert">
+      {{ message }}
+    </div>
+    {% endfor %} {% endif %} {% endwith %}
+    <input type="submit" value="SUBMIT" class="btn btn-primary margin-top" />
+  </form>
+</div>
+<!-- end content -->
+{% endblock content %}
