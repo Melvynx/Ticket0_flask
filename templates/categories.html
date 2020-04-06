@@ -1,34 +1,35 @@
-{% extends "model/layout.html" %}
+{% extends "model/settings.html" %}
 <!-- block content -->
-{% block head %}
+{% block link %}
 <link
   rel="stylesheet"
   href="{{ url_for('static', filename='css/categories.css') }}"
 />
-{% endblock %} {% block content %}
-<div class="border category-list-block">
-  <h1>All Category</h1>
+{% endblock %} {% block setting %}
+<div class="category-list-block">
   <div class="category-list">
     {% if categories %}
     <!-- if categories-->
     {% for category in categories %}
-    <div class="category-block">
+    <div class="category-block border-bottom">
       <div class="title-id">
         {% if category["name"] %}
         <h3>{{ category["name"] }}</h3>
         {% else %}
         <h3 class="no-title">No-title</h3>
         {% endif %}
-        <a class="link" href="{{ url_for('category', id=category['id_category']) }}"
+        <a
+          class="link"
+          href="{{ url_for('category', id_category=category['id_category']) }}"
           >edit category and item
         </a>
       </div>
     </div>
     {% endfor %} {% endif %}
   </div>
-  <form method="POST" action="/category/new">
+  <form method="POST" action="/category/new" class="mt-4">
     <legend>Crée une category !</legend>
-    <div class="input-group flex-nowrap mt-1">
+    <div class="input-group flex-nowrap mt-2">
       <div class="input-group-prepend">
         <span class="input-group-text" id="name">name</span>
       </div>
@@ -41,7 +42,7 @@
         aria-describedby="addon-wrapping"
       />
     </div>
-    <div class="input-group flex-nowrap mt-1">
+    <div class="input-group flex-nowrap mt-2">
       <div class="input-group-prepend">
         <span class="input-group-text" id="message">Description</span>
       </div>
@@ -60,8 +61,12 @@
       {{ message }}
     </div>
     {% endfor %} {% endif %} {% endwith %}
-    <input type="submit" value="SUBMIT" class="btn btn-primary margin-top" />
+    <input
+      type="submit"
+      value="SUBMIT"
+      class="btn btn-sm btn-primary margin-top mt-2"
+    />
   </form>
 </div>
 <!-- end content -->
-{% endblock content %}
+{% endblock setting %}

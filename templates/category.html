@@ -1,15 +1,15 @@
 <!-- items = [array of item] category = obj -->
-{% extends "model/layout.html" %}
+{% extends "model/settings.html" %}
 <!-- block content -->
-{% block head %}
+{% block link %}
 <script>
   const API_CATEGORY_ID = Number("{{ category[0]['id_category'] }}");
 </script>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/category.css') }}" />
 <script src="{{ url_for('static', filename='js/category.js') }}"></script>
-{% endblock %} {% block content %}
+{% endblock %} {% block setting %}
+<a class="btn-link btn-sm p-0 pt-1" href="{{ url_for('categories') }}"><- Back</a>
 <div class="category-block">
-  <h1 id="category-title">Category : {{ category[0]["name"] }}</h1>
   <div class="category">
     {% if category %}
     <!-- category-name-settings -->
@@ -58,10 +58,10 @@
     <!-- items map -->
     {% if items %}
     <!-- items map -->
-    <h3 class="mt-2">List des items</h3>
-    <div class="items mt-2">
+    <h3 class="mt-4">List des items</h3>
+    <div class="items my-2">
       {% for item in items %}
-      <div class="item border shadow p-3 mb-5 bg-white rounded">
+      <div class="item border shadow p-3 mb-2 bg-white rounded item-new mt-2">
         <div class="input-block mt-1">
           <label class="label" for="item-name">Name</label>
           <input
@@ -94,9 +94,9 @@
           </button>
         </div>
       </div>
-      {% endfor %}
+      {% endfor %} {% endif%}
       <!-- new items -->
-      <div class="item border shadow p-3 mb-5 bg-white rounded item-new">
+      <div class="item border shadow p-3 mb-2 bg-white rounded item-new mt-2">
         <div class="box-hide" id="item-new-box">
           <button
             id="item-button-new-hide"
@@ -147,7 +147,7 @@
     <div class="alert alert-{{ category }}" role="alert">
       {{ message }}
     </div>
-    {% endfor %} {% endif %} {% endwith %} {% endif%} {% else %}
+    {% endfor %} {% endif %} {% endwith %} {% else %}
     <p>no-category with this id</p>
     {% endif %}
   </div>
@@ -155,5 +155,5 @@
 <div class="snackbar" id="snackbar">
   Succes
 </div>
-<!-- end content -->
-{% endblock content %}
+<!-- end setting -->
+{% endblock setting %}

@@ -16,9 +16,6 @@ function toggleEditName() {
 // event focus out input name
 function onFocusOutName() {
   let inputName = document.getElementById("category-name");
-  document.getElementById(
-    "category-title"
-  ).innerHTML = `Category : ${inputName.value}`;
   document.getElementById("category-name-button").innerHTML = "Edit";
   inputName.disabled = !inputName.disabled;
   setTimeout(() => (nameFocus = false), 100);

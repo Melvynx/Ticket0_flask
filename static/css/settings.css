@@ -1,0 +1,12 @@
+.settings-block {
+  display: flex;
+  align-items: flex-start;
+}
+
+.settings-nav .title {
+  font-size: 18px;
+}
+
+.settings-nav .nav-bar {
+  margin-bottom: 8px;
+}

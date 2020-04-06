@@ -20,24 +20,15 @@ def home():
   route_name = request.base_url
   return f"<h1>First Page</h1><p>you're on {route_name}"
 
+@app.route("/test")
+def test():
+  return render_template("test.html", title="Cat", title_setting="cati")
 
 @app.errorhandler(404)
 def page_not_found(error):
   # Afficher un message dans la console
   app.logger.info(f"L'URL est fausse... {request.url}")
   return render_template("error.html", error=error), 404
-
-
-@app.route("/form", methods=["POST", "GET"])
-def input_post_fields():
-  # Récupère les deux "contenus" dans le formulaire du fichier "form_input_2_fields.html"
-  name = request.form.get('username')
-  message = request.form.get('message')
-  # Affiche les 2 variables récupérées dans la page HTML
-  print(name, "   ", message)
-  # On fait référence au fichier html avec un formulaire ou on entre deux valeurs
-  # "nom_utilisateur_html" et "prenom_utilisateur_html"
-  return render_template("form.html", name=name, message=message)
 
 # --------------
 # | CATEGORIES |
@@ -47,14 +38,14 @@ def input_post_fields():
 @app.route("/categories")
 def categories():
   categories = select_db.DBSelect().select("SELECT * FROM T_Category")
-  return render_template('categories.html', title="Categories index", categories=categories)
+  return render_template('categories.html', title="Categories index", title_setting="Categories", categories=categories)
 
 
 @app.route("/category/<id_category>")
 def category(id_category):
   category = select_db.DBSelect().select(f"SELECT * FROM `T_Category` WHERE `id_category` = {id_category} ")
   items = select_db.DBSelect().select(f"SELECT * FROM `T_Item` WHERE `fk_category` = {id_category} ")
-  return render_template('category.html', title="Category", category=category, items=items)
+  return render_template('category.html', title="Category", title_setting="Category", category=category, items=items)
 
 
 @app.route("/categories/<id_category>", methods=["PATCH"])
@@ -94,10 +85,10 @@ def category_new():
     flash("Can't create category with empty value.", "danger")
   return redirect(url_for("categories"))
 
-# --------------
-# | CATEGORIES |
-# --------------
 
+# --------------
+# | ITEM |
+# --------------
 
 @app.route("/items/<id_item>", methods=["PATCH"])
 def item_edit(id_item):
@@ -127,7 +118,8 @@ def item_new():
   description = request.form.get('item-description')
   category_id = request.form.get('category-id')
 
-  sql_request = "INSERT INTO `T_Item` (`id_item`, `fk_category`, `name`, `description`, `created_at`) VALUES (NULL, %(id_category)s, %(name)s, %(description)s, CURRENT_TIMESTAMP);"
+  sql_request = "INSERT INTO `T_Item` (`id_item`, `fk_category`, `name`, `description`, `created_at`) VALUES (NULL, " \
+                "%(id_category)s, %(name)s, %(description)s, CURRENT_TIMESTAMP); "
   values = {"id_category": category_id, "name": name, "description": description}
   if len(name) > 1 and len(description) > 1:
     insert.DbInsertOneTable().insert(sql_request, values)

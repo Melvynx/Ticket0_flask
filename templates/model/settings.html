@@ -1,0 +1,43 @@
+{% extends "model/layout.html" %}
+<!-- block head -->
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/settings.css') }}" />
+{% block link %} {% endblock %} {% endblock %}
+<!-- start block content -->
+{% block content %}
+
+<div class="row mt-2">
+  <nav class="col-sm-3">
+    <div class="settings-nav border rounded mr-2 pt-2 pl-2 shadow-sm">
+      <div class="title mb-1">
+        <h6 class="title-h6">App</h6>
+      </div>
+      <div class="nav-bar">
+        <a href="{{ url_for('categories') }}" class="nav-a">Categories</a>
+      </div>
+      <div class="nav-bar">
+        <a href="#" class="nav-a">Priority</a>
+      </div>
+      <div class="nav-bar">
+        <a href="#" class="nav-a">Users</a>
+      </div>
+      <div class="title mb-1 mt-4">
+        <h6 class="title-h6">Account</h6>
+      </div>
+      <div class="nav-bar">
+        <a href="#" class="nav-a">Profile</a>
+      </div>
+      <div class="nav-bar">
+        <a href="#" class="nav-a">Security</a>
+      </div>
+    </div>
+  </nav>
+  <div class="settings col-sm-8 border rounded shadow-sm">
+    <div class="border-bottom mt-2">
+      <h3>{{ title_setting }}</h3>
+    </div>
+    {% block setting %} {% endblock %}
+  </div>
+</div>
+<!-- end content -->
+{% endblock content %}

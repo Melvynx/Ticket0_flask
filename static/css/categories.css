@@ -5,13 +5,11 @@
 }
 
 .category-list-block {
-  margin-top: 16px;
   padding: 8px;
   list-style-type: none;
 }
 
 .category-block {
-  border-bottom: 1px solid black;
   padding: 8px;
   width: 100%;
 }
@@ -41,4 +39,8 @@
 
 .category-block .link {
   font-size: 12px;
+}
+
+.category-block .title-id h3 {
+  margin: 4px;
 }
