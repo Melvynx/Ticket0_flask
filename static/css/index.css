@@ -7,54 +7,97 @@ h1 {
   font-size: 24px;
 }
 
-.margin-top  {
-  margin-top: 8px;
+.snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 2px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  left: 50%;
+  bottom: 30px;
+  font-size: 17px;
 }
 
-.error {
-  margin-top: 8px;
+.sb-success {
+  background-color: #28a745;
 }
 
-.remove-link-style {
-  list-style-type: none;
+.sb-danger {
+  background-color: #dc3545;
 }
 
-.category-list {
+.snackbar.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 4.5s;
+  animation: fadein 0.5s, fadeout 0.5s 4.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadein {
+  from {
+    bottom: 0;
+    opacity: 0;
+  }
+  to {
+    bottom: 30px;
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  from {
+    bottom: 30px;
+    opacity: 1;
+  }
+  to {
+    bottom: 0;
+    opacity: 0;
+  }
+}
+
+.flex-center {
   display: flex;
-  padding: 0px;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
+  align-items: center;
 }
 
-.category-list-block {
-  margin-top: 16px;
-  padding: 8px;
+.width-4 {
+  width: 32px;
 }
 
-.category-block {
-  border: 1px solid black;
-  border-radius: 4px;
-  width: 100%;
-  min-width: 128px;
-  max-width: 400px;
-  margin: 8px;
-  padding: 8px;
+.width-8 {
+  width: 64px;
 }
 
-.category-block .title-id {
-  display: flex;
-  justify-content: space-between;
+.width-16 {
+  width: 128px;
 }
 
-.category-block .title-id .id {
-  font-size: 12px;
-  padding: 0;
-}
-
-.category-block .title-id h3 {
-  font-size: 18px;
-}
-
-.category-block .description {
-  font-size: 14px;
+.width-32 {
+  width: 256px;
 }

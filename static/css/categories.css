@@ -1,0 +1,44 @@
+.category-list {
+  display: flex;
+  flex-direction: column;
+  padding: 0px;
+}
+
+.category-list-block {
+  margin-top: 16px;
+  padding: 8px;
+  list-style-type: none;
+}
+
+.category-block {
+  border-bottom: 1px solid black;
+  padding: 8px;
+  width: 100%;
+}
+
+.category-block .title-id {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.category-block .title-id .id {
+  font-size: 12px;
+  padding: 0;
+}
+
+.category-block .title-id h3 {
+  font-size: 18px;
+}
+
+.category-block .description {
+  font-size: 14px;
+}
+
+.category-block .no-title {
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.category-block .link {
+  font-size: 12px;
+}

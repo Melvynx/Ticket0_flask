@@ -1,0 +1,159 @@
+<!-- items = [array of item] category = obj -->
+{% extends "model/layout.html" %}
+<!-- block content -->
+{% block head %}
+<script>
+  const API_CATEGORY_ID = Number("{{ category[0]['id_category'] }}");
+</script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/category.css') }}" />
+<script src="{{ url_for('static', filename='js/category.js') }}"></script>
+{% endblock %} {% block content %}
+<div class="category-block">
+  <h1 id="category-title">Category : {{ category[0]["name"] }}</h1>
+  <div class="category">
+    {% if category %}
+    <!-- category-name-settings -->
+    <div class="input-block">
+      <label class="label" for="category-name">Name</label>
+      <div class="flex-center">
+        <input
+          id="category-name"
+          class="form-control form-control-sm"
+          value="{{ category[0]['name'] }}"
+          onfocusout="onFocusOutName()"
+          disabled
+        />
+        <button
+          id="category-name-button"
+          type="button"
+          class="btn btn-link btn-sm"
+          onclick="toggleEditName()"
+        >
+          Edit
+        </button>
+      </div>
+    </div>
+    <!-- category-description-settings -->
+    <div class="input-block">
+      <label class="label" for="category-description">Description</label>
+      <div class="flex-center">
+        <textarea
+          id="category-description"
+          class="form-control form-control-sm"
+          onfocusout="onFocusOutDescription()"
+          disabled
+        >
+{{ category[0]['description'] }}</textarea
+        >
+        <button
+          id="category-description-button"
+          type="button"
+          class="btn btn-link btn-sm"
+          onclick="toggleEditDescription()"
+        >
+          Edit
+        </button>
+      </div>
+    </div>
+    <!-- items map -->
+    {% if items %}
+    <!-- items map -->
+    <h3 class="mt-2">List des items</h3>
+    <div class="items mt-2">
+      {% for item in items %}
+      <div class="item border shadow p-3 mb-5 bg-white rounded">
+        <div class="input-block mt-1">
+          <label class="label" for="item-name">Name</label>
+          <input
+            id="item-name-{{ item['id_item'] }}"
+            class="form-control form-control-sm"
+            value="{{ item['name'] }}"
+            disabled
+          />
+        </div>
+        <div class="input-block">
+          <label class="label" for="item-description-{{ item['id_item'] }}"
+            >Description</label
+          >
+          <textarea
+            id="item-description-{{ item['id_item'] }}"
+            class="form-control form-control-sm"
+            disabled
+          >
+{{ item['description'] }}</textarea
+          >
+        </div>
+        <div class="item-button">
+          <button
+            id="item-button-{{ item['id_item'] }}"
+            type="button"
+            class="btn btn-link btn-sm"
+            onclick="toggleEditItem(`{{ item['id_item'] }}`)"
+          >
+            Edit
+          </button>
+        </div>
+      </div>
+      {% endfor %}
+      <!-- new items -->
+      <div class="item border shadow p-3 mb-5 bg-white rounded item-new">
+        <div class="box-hide" id="item-new-box">
+          <button
+            id="item-button-new-hide"
+            type="button"
+            class="btn btn-link btn-sm"
+            onclick="displayCreateBox()"
+          >
+            new item
+          </button>
+        </div>
+        <form method="POST" action="/items">
+          <input
+            style="display: none;"
+            value="{{ category[0]['id_category'] }}"
+            name="category-id"
+          />
+          <div class="input-block mt-1">
+            <label class="label" for="item-name-new">Name</label>
+            <input
+              id="item-name-new"
+              name="item-name"
+              class="form-control form-control-sm"
+              placeholder="name you're item"
+            />
+          </div>
+          <div class="input-block">
+            <label class="label" for="item-description-new">Description</label>
+            <textarea
+              id="item-description-new"
+              name="item-description"
+              class="form-control form-control-sm"
+              placeholder="describe you're item"
+            ></textarea>
+          </div>
+          <div class="item-button">
+            <input
+              id="item-button-new"
+              type="submit"
+              class="btn btn-link btn-sm"
+              value="Create"
+            />
+          </div>
+        </form>
+      </div>
+    </div>
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if messages
+    %} {% for category, message in messages %}
+    <div class="alert alert-{{ category }}" role="alert">
+      {{ message }}
+    </div>
+    {% endfor %} {% endif %} {% endwith %} {% endif%} {% else %}
+    <p>no-category with this id</p>
+    {% endif %}
+  </div>
+</div>
+<div class="snackbar" id="snackbar">
+  Succes
+</div>
+<!-- end content -->
+{% endblock content %}

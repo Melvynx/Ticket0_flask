@@ -18,8 +18,10 @@ class DbInsertOneTable:
             # MM 2020 commit and close connection
             self.db.db.commit()
             self.db.close_connection()
+            return True
 
         except Exception as e:
             # MM 2020 rollback (undo commit) on error
             self.db.db.rollback()
             print("Unknown error occurred", e)
+            return False

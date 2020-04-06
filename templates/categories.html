@@ -1,34 +1,34 @@
 {% extends "model/layout.html" %}
 <!-- block content -->
-{% block content %}
+{% block head %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/categories.css') }}"
+/>
+{% endblock %} {% block content %}
 <div class="border category-list-block">
   <h1>All Category</h1>
-  <ul class="category-list">
+  <div class="category-list">
     {% if categories %}
     <!-- if categories-->
     {% for category in categories %}
-    <li class="remove-link-style">
-      <div class="category-block">
-        <div class="title-id">
-          <h3>{{ category["name"] }}</h3>
-          <p class="id">id: {{ category["id_category"] }}</p>
-        </div>
-        {% if category["description"] %}
-        <div class="description">
-          <p>{{ category["description"] }}</p>
-        </div>
+    <div class="category-block">
+      <div class="title-id">
+        {% if category["name"] %}
+        <h3>{{ category["name"] }}</h3>
         {% else %}
-        <div class="description">
-          <p>no desc</p>
-        </div>
+        <h3 class="no-title">No-title</h3>
         {% endif %}
+        <a class="link" href="{{ url_for('category', id=category['id_category']) }}"
+          >edit category and item
+        </a>
       </div>
-    </li>
+    </div>
     {% endfor %} {% endif %}
-  </ul>
+  </div>
   <form method="POST" action="/category/new">
     <legend>Crée une category !</legend>
-    <div class="input-group flex-nowrap margin-top">
+    <div class="input-group flex-nowrap mt-1">
       <div class="input-group-prepend">
         <span class="input-group-text" id="name">name</span>
       </div>
@@ -41,7 +41,7 @@
         aria-describedby="addon-wrapping"
       />
     </div>
-    <div class="input-group flex-nowrap margin-top">
+    <div class="input-group flex-nowrap mt-1">
       <div class="input-group-prepend">
         <span class="input-group-text" id="message">Description</span>
       </div>

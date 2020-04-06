@@ -1,0 +1,61 @@
+.category .label {
+  font-size: 12px;
+  margin-bottom: 2px;
+}
+
+.category .input {
+  font-size: 18px;
+  border-radius: 4px;
+  background-color: white;
+  border-width: 1px;
+  border-color: rgba(0, 0, 0, 0.54);
+}
+
+.category .input:disabled {
+  color: black;
+  background-color: rgba(0, 0, 0, 0.26);
+  border-color: rgba(0, 0, 0, 0.26);
+}
+
+.category .input-block {
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+}
+
+.items {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.item {
+  width: 256px;
+  padding: 8px;
+}
+
+.item .item-button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.item-new {
+  position: relative;
+}
+
+.box-hide {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: white;
+}
+
+.item-new .hide {
+  display: none;
+}
