@@ -20,9 +20,11 @@ def home():
   route_name = request.base_url
   return f"<h1>First Page</h1><p>you're on {route_name}"
 
+
 @app.route("/test")
 def test():
   return render_template("test.html", title="Cat", title_setting="cati")
+
 
 @app.errorhandler(404)
 def page_not_found(error):
@@ -37,15 +39,32 @@ def page_not_found(error):
 
 @app.route("/categories")
 def categories():
-  categories = select_db.DBSelect().select("SELECT * FROM T_Category")
-  return render_template('categories.html', title="Categories index", title_setting="Categories", categories=categories)
+  categories_db = select_db.DBSelect().select("SELECT * FROM T_Category")
+  return render_template('categories.html', title="Categories index", title_setting="Categories",
+                         categories=categories_db)
 
 
-@app.route("/category/<id_category>")
+@app.route("/category/<id_category>", methods=["GET"])
 def category(id_category):
-  category = select_db.DBSelect().select(f"SELECT * FROM `T_Category` WHERE `id_category` = {id_category} ")
+  category_db = select_db.DBSelect().select(f"SELECT * FROM `T_Category` WHERE `id_category` = {id_category} ")
   items = select_db.DBSelect().select(f"SELECT * FROM `T_Item` WHERE `fk_category` = {id_category} ")
-  return render_template('category.html', title="Category", title_setting="Category", category=category, items=items)
+  return render_template('category.html', title="Category", title_setting="Category", category=category_db, items=items)
+
+
+@app.route("/category", methods=["POST"])
+def category_new():
+  name = request.form.get('category_name')
+  description = request.form.get('category_description')
+
+  sql_request = "INSERT INTO `T_Category` (`id_category`, `name`, `description`, `created_at`) VALUES (NULL, " \
+                "%(name)s, %(description)s, CURRENT_TIMESTAMP); "
+  values = {"name": name, "description": description}
+  if len(name) > 1 and len(description) > 1:
+    insert.DbInsertOneTable().insert(sql_request, values)
+    flash("Category create successful !", "success")
+  else:
+    flash("Can't create category with empty value.", "danger")
+  return redirect(url_for("categories"))
 
 
 @app.route("/categories/<id_category>", methods=["PATCH"])
@@ -68,22 +87,6 @@ def category_edit(id_category):
       state="danger"
     )
     return make_response(status, 201)
-
-
-@app.route("/category/new", methods=["POST"])
-def category_new():
-  name = request.form.get('category_name')
-  description = request.form.get('category_description')
-
-  sql_request = "INSERT INTO `T_Category` (`id_category`, `name`, `description`, `created_at`) VALUES (NULL, " \
-                "%(name)s, %(description)s, CURRENT_TIMESTAMP); "
-  values = {"name": name, "description": description}
-  if len(name) > 1 and len(description) > 1:
-    insert.DbInsertOneTable().insert(sql_request, values)
-    flash("Category create successful !", "success")
-  else:
-    flash("Can't create category with empty value.", "danger")
-  return redirect(url_for("categories"))
 
 
 # --------------

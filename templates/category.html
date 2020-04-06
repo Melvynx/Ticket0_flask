@@ -56,9 +56,9 @@
       </div>
     </div>
     <!-- items map -->
-    {% if items %}
     <!-- items map -->
     <h3 class="mt-4">List des items</h3>
+    {% if items %}
     <div class="items my-2">
       {% for item in items %}
       <div class="item border shadow p-3 mb-2 bg-white rounded item-new mt-2">
@@ -94,7 +94,12 @@
           </button>
         </div>
       </div>
-      {% endfor %} {% endif%}
+      {% endfor %} {% else %}
+      <div class="border p-1">
+        <span class="text-info">no items with this category</span>
+      </div>
+
+      {% endif%}
       <!-- new items -->
       <div class="item border shadow p-3 mb-2 bg-white rounded item-new mt-2">
         <div class="box-hide" id="item-new-box">
@@ -147,9 +152,7 @@
     <div class="alert alert-{{ category }}" role="alert">
       {{ message }}
     </div>
-    {% endfor %} {% endif %} {% endwith %} {% else %}
-    <p>no-category with this id</p>
-    {% endif %}
+    {% endfor %} {% endif %} {% endwith %} {% else %} {% endif %}
   </div>
 </div>
 <div class="snackbar" id="snackbar">
