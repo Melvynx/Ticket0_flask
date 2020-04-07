@@ -12,10 +12,13 @@ class DBSelect:
         self.db = connect_db.DatabaseTools()
         # set db cusor
 
-    def select(self, request):
+    def select(self, request, values=False):
         try:
             # execute command
-            self.db.cursor.execute(request)
+            if values:
+                self.db.cursor.execute(request, values)
+            else:
+                self.db.cursor.execute(request)
             # get all records
             records = self.db.cursor.fetchall()
             # close db

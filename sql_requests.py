@@ -6,6 +6,12 @@
 # CATEGORY  |
 # -----------
 
+# get all category
+index_category = "SELECT * FROM T_Category"
+
+# show one category NEED ARGUMENT id_category
+show_category = "SELECT * FROM `T_Category` WHERE `id_category` = %(id_category)s "
+
 # create category
 create_category = "INSERT INTO `T_Category` (`id_category`, `name`, `description`, `created_at`) VALUES (NULL, " \
                   "%(name)s, %(description)s, CURRENT_TIMESTAMP); "
@@ -27,6 +33,9 @@ create_item = "INSERT INTO `T_Item` (`id_item`, `fk_category`, `name`, `descript
 update_item = "UPDATE `T_Item` SET `name` = %(name)s, `description` = %(description)s WHERE `T_Item`.`id_item` = %(" \
               "id)s; "
 
+# show item by category NEED ID_CATEGORY
+show_item_by_category = "SELECT * FROM `T_Item` WHERE `fk_category` = %(id_category)s "
+
 # -----------
 # TIQET  |
 # -----------
@@ -47,5 +56,12 @@ index_tiqet = """ SELECT T_Tiqet.id_tiqet, T_Tiqet.title, T_Tiqet.content, T_Tiq
 # STATE  |
 # -----------
 
-# index of state
+#  index of state
 index_state = "SELECT * FROM `T_State`"
+
+# -----------
+# PRIORITY  |
+# -----------
+
+#  index of priority
+index_priorities = "SELECT * FROM `T_Priority`"

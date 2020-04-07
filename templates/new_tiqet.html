@@ -1,10 +1,75 @@
-<!-- tiqets: array of tiqet, states: array of state -->
+<!-- categories: array of category, priorities: array of priority -->
 {% extends "model/layout.html" %}
 <!-- block content -->
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/newtiqet.css') }}" />
-<script src="{{ url_for('static', filename='js/newtiqet.js') }}"></script>
+<script src="{{ url_for('static', filename='js/newTiqet.js') }}"></script>
 {% endblock %} {% block content %}
-<div class="bg-light container-new-tiqet">salut</div>
+<div class="bg-light container-new-tiqet mt-4 p-2 rounded">
+  <h4>Create a tiqet</h4>
+  <form action="#" method="POST">
+    <div class="input-block mt-1">
+      <label class="label" for="tiqet-title">Title</label>
+      <input
+        id="tiqet-title"
+        name="tiqet-title"
+        class="form-control form-control-sm"
+        placeholder="Tiqet title"
+      />
+    </div>
+    <div class="input-block mt-1">
+      <label class="label" for="item-description-new">Content</label>
+      <textarea
+        id="item-description-new"
+        name="item-description"
+        class="form-control form-control-sm"
+        placeholder="Describe you're tiqet"
+      ></textarea>
+    </div>
+    <div class="d-flex mt-1">
+      <div class="input-block w-100 mr-1">
+        <label class="label" for="item-description-new">Category</label>
+        <select
+          class="form-control form-control-sm"
+          id="exampleFormControlSelect1"
+          onchange="categorySelectChange(event)"
+        >
+          <option value="null" selected> - </option>
+          {% for category in categories %}
+          <option value="{{ category['id_category'] }}"
+            >{{ category["name"] }}</option
+          >
+          {% endfor %}
+        </select>
+      </div>
+      <div class="input-block w-100 ml-1">
+        <label class="label" for="item-description-new">Item</label>
+        <select class="form-control form-control-sm" id="select-item">
+          <option value="null" selected> - </option>
+        </select>
+      </div>
+    </div>
+    <label class="label mt-2" for="item-description-new">Priority</label>
+    <div class="">
+      {% for priority in priorities %}
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input checkbox-priority"
+          type="radio"
+          name="inlineRadioOptions"
+          id="priority-label-{{ priority['id_priority'] }}"
+          value="{{ priority['id_priority'] }}"
+        />
+        <label
+          class="form-check-label"
+          for="priority-label-{{ priority['id_priority'] }}"
+          >{{ priority["name"] }}</label
+        >
+      </div>
+      {% endfor %}
+    </div>
+  </form>
+</div>
+
 <!-- end content -->
 {% endblock content %}

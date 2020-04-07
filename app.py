@@ -32,16 +32,17 @@ def page_not_found(error):
 @app.route("/home")
 def dashboard():
   tiqets = select_db.DBSelect().select(sql_requests.index_tiqet)
-  print(tiqets)
-  states = select_db.DBSelect().select("SELECT * FROM `T_State`")
+  states = select_db.DBSelect().select(sql_requests.index_state)
   return render_template("dashboard.html", title="Dashboard", tiqets=tiqets, states=states)
 
 
 @app.route("/tiqet/new")
 @app.route("/new")
 def new():
-  users = select_db.DBSelect().select(sql_requests.index_tiqet)
-  return render_template("new_tiqet.html", title="Create TiQet")
+  categories_db = select_db.DBSelect().select(sql_requests.index_category)
+  priorities_db = select_db.DBSelect().select(sql_requests.index_priorities)
+  return render_template("new_tiqet.html", title="Create TiQet", categories=categories_db, priorities=priorities_db)
+
 
 # --------------
 # | CATEGORIES |
@@ -49,15 +50,16 @@ def new():
 
 @app.route("/categories")
 def categories():
-  categories_db = select_db.DBSelect().select("SELECT * FROM T_Category")
+  categories_db = select_db.DBSelect().select(sql_requests.index_category)
   return render_template('categories.html', title="Categories index", title_setting="Categories",
                          categories=categories_db)
 
 
 @app.route("/category/<id_category>", methods=["GET"])
 def category(id_category):
-  category_db = select_db.DBSelect().select(f"SELECT * FROM `T_Category` WHERE `id_category` = {id_category} ")
-  items = select_db.DBSelect().select(f"SELECT * FROM `T_Item` WHERE `fk_category` = {id_category} ")
+  value = {"id_category": id_category}
+  category_db = select_db.DBSelect().select(sql_requests.show_category, value)
+  items = select_db.DBSelect().select(sql_requests.show_item_by_category, value)
   return render_template('category.html', title="Category", title_setting="Category", category=category_db, items=items)
 
 
@@ -133,6 +135,14 @@ def item_new():
   else:
     flash("Can't create item with empty value.", "danger")
   return redirect(url_for("category", id_category=category_id))
+
+
+@app.route("/items/<id_category>", methods=["GET"])
+def items_category(id_category):
+  items = select_db.DBSelect().select(sql_requests.show_item_by_category, {"id_category": id_category})
+  itemsJSON = jsonify(items)
+  print(itemsJSON)
+  return make_response(itemsJSON, 200)
 
 
 # flask auto run
