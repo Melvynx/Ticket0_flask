@@ -1,0 +1,57 @@
+.dashboard {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.column {
+  display: flex;
+  width: 324px;
+  flex-direction: column;
+}
+
+.column-tiqet {
+  display: flex;
+  flex-direction: column;
+}
+
+.tiqet .title {
+  font-size: 16px;
+  color: black;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  min-width: 1px;
+}
+
+.tiqet .info {
+  font-size: 12px;
+}
+
+.tiqet .data-display .user-data {
+  width: 32px;
+  height: 32px;
+  align-items: center;
+}
+
+.tiqet .data-display .user-data span {
+  font-size: 18px;
+}
+
+.tiqet .data-display .priority-data .priority-icon {
+  width: 20px;
+  position: relative;
+  top: 2px;
+}
+.tiqet .data-display .priority-data {
+  height: 32px;
+  align-items: center;
+}
+
+.tiqet .data-display .priority-data span {
+  font-size: 14px;
+}
+.tiqet .data-display {
+  display: flex;
+}

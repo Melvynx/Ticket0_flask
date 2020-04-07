@@ -12,24 +12,51 @@
       <div class="title mb-1">
         <h6 class="title-h6">App</h6>
       </div>
-      <div class="nav-bar">
-        <a href="{{ url_for('categories') }}" class="nav-a">Categories</a>
+      {% if "Categories" == title_setting or "Category" == title_setting %}
+      <div class="nav-bar mr-4 p-1 rounded bg-primary">
+        <a href="#" class="nav-a text-white d-block">Categories</a>
       </div>
-      <div class="nav-bar">
-        <a href="#" class="nav-a">Priority</a>
+      {% else %}
+      <div class="nav-bar mr-4 p-1 rounded">
+        <a href="{{ url_for('categories') }}" class="nav-a d-block">Categories</a>
       </div>
-      <div class="nav-bar">
-        <a href="#" class="nav-a">Users</a>
+      {% endif %} {% if "Priority" == title_setting %}
+      <div class="nav-bar mr-4 p-1 rounded bg-primary">
+        <a href="#" class="nav-a text-white d-block">Priority</a>
       </div>
-      <div class="title mb-1 mt-4">
+      {% else %}
+      <div class="nav-bar mr-4 p-1 rounded">
+        <a href="#" class="nav-a d-block">Priority</a>
+      </div>
+      {% endif %} {% if "Users" == title_setting %}
+      <div class="nav-bar mr-4 p-1 rounded bg-primary">
+        <a href="#" class="nav-a text-white d-block">Users</a>
+      </div>
+      {% else %}
+      <div class="nav-bar mr-4 p-1 rounded">
+        <a href="#" class="nav-a d-block">Users</a>
+      </div>
+      {% endif %}
+      <div class="title mb-1 mt-2">
         <h6 class="title-h6">Account</h6>
       </div>
-      <div class="nav-bar">
-        <a href="#" class="nav-a">Profile</a>
+      {% if "Profile" == title_setting %}
+      <div class="nav-bar mr-4 p-1 rounded bg-primary">
+        <a href="#" class="nav-a text-white d-block">Profile</a>
       </div>
-      <div class="nav-bar">
-        <a href="#" class="nav-a">Security</a>
+      {% else %}
+      <div class="nav-bar mr-4 p-1 rounded">
+        <a href="#" class="nav-a d-block">Profile</a>
       </div>
+      {% endif %} {% if "Security" == title_setting %}
+      <div class="nav-bar mr-4 p-1 rounded bg-primary">
+        <a href="#" class="nav-a text-white d-block">Security</a>
+      </div>
+      {% else %}
+      <div class="nav-bar mr-4 p-1 rounded">
+        <a href="#" class="nav-a d-block">Security</a>
+      </div>
+      {% endif %}
     </div>
   </nav>
   <div class="settings col-sm-8 border rounded shadow-sm">

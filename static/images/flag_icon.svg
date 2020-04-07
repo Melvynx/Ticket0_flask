@@ -1,0 +1,19 @@
+<svg
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:cc="http://creativecommons.org/ns#"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:svg="http://www.w3.org/2000/svg"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+  xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+  fill="#000000"
+  version="1.1"
+  x="0px"
+  y="0px"
+  viewBox="0 0 100 125"
+>
+  <path
+    style="font-size:medium;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:normal;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;opacity:1;color:#000000;fill:#000000;fill-opacity:1;stroke:none;stroke-width:6;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Sans;-inkscape-font-specification:Sans"
+    d="M 21.96875 4.9375 A 3.0003 3.0003 0 0 0 21.65625 4.96875 A 3.0003 3.0003 0 0 0 19 8 L 19 89 L 16 89 A 3.0003 3.0003 0 0 0 15.6875 89 A 3.0040663 3.0040663 0 1 0 16 95 L 28 95 A 3.0003 3.0003 0 1 0 28 89 L 25 89 L 25 54.4375 C 29.119319 52.807393 32.63166 52 36 52 C 45.926322 52 55.294382 57.895362 66.96875 58 C 72.700641 58.05138 78.868832 56.65955 85.5625 52.5625 A 3.0003 3.0003 0 0 0 87 50 L 87 12 A 3.0003 3.0003 0 0 0 82.4375 9.4375 C 76.828231 12.870812 71.57769 14.05331 67.03125 14 C 62.156007 13.942834 57.5079 12.360874 52.5 10.625 C 47.4921 8.8891255 42.124657 7 36 7 C 32.515511 7 28.750198 7.7601244 25 9.03125 L 25 8 A 3.0003 3.0003 0 0 0 21.96875 4.9375 z M 36 13 C 40.875343 13 45.534725 14.549318 50.53125 16.28125 C 55.527775 18.013182 60.861691 19.928391 66.96875 20 C 71.294599 20.050723 76.077063 19.136579 81 16.9375 L 81 48.1875 C 75.809406 51.073429 71.398748 52.039146 67.03125 52 C 57.558628 51.915096 48.073678 46 36 46 C 32.379234 46 28.776793 46.730745 25 48.03125 L 25 15.4375 C 28.948319 13.895376 32.926795 13 36 13 z "
+  />
+</svg>

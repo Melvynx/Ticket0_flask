@@ -7,23 +7,13 @@ from flask import Flask, request, render_template, redirect, url_for, flash, mak
 from db.SELECT import select_db
 from db.INSERT import insert
 
+import sql_requests
+
 # create object App's Flask
 app = Flask(__name__)
 
 # init SECRET_KEY
 app.config['SECRET_KEY'] = 'MaccaudNePeutPasTestCetteApplication4004040404040040404'
-
-
-@app.route("/")
-@app.route("/home")
-def home():
-  route_name = request.base_url
-  return f"<h1>First Page</h1><p>you're on {route_name}"
-
-
-@app.route("/test")
-def test():
-  return render_template("test.html", title="Cat", title_setting="cati")
 
 
 @app.errorhandler(404)
@@ -32,10 +22,30 @@ def page_not_found(error):
   app.logger.info(f"L'URL est fausse... {request.url}")
   return render_template("error.html", error=error), 404
 
+
+# --------------
+# | Dashboard |
+# --------------
+
+@app.route("/")
+@app.route("/dashboard")
+@app.route("/home")
+def dashboard():
+  tiqets = select_db.DBSelect().select(sql_requests.index_tiqet)
+  print(tiqets)
+  states = select_db.DBSelect().select("SELECT * FROM `T_State`")
+  return render_template("dashboard.html", title="Dashboard", tiqets=tiqets, states=states)
+
+
+@app.route("/tiqet/new")
+@app.route("/new")
+def new():
+  users = select_db.DBSelect().select(sql_requests.index_tiqet)
+  return render_template("new_tiqet.html", title="Create TiQet")
+
 # --------------
 # | CATEGORIES |
 # --------------
-
 
 @app.route("/categories")
 def categories():
@@ -56,11 +66,9 @@ def category_new():
   name = request.form.get('category_name')
   description = request.form.get('category_description')
 
-  sql_request = "INSERT INTO `T_Category` (`id_category`, `name`, `description`, `created_at`) VALUES (NULL, " \
-                "%(name)s, %(description)s, CURRENT_TIMESTAMP); "
   values = {"name": name, "description": description}
   if len(name) > 1 and len(description) > 1:
-    insert.DbInsertOneTable().insert(sql_request, values)
+    insert.DbInsertOneTable().insert(sql_requests.create_category, values)
     flash("Category create successful !", "success")
   else:
     flash("Can't create category with empty value.", "danger")
@@ -71,10 +79,9 @@ def category_new():
 def category_edit(id_category):
   data = request.get_json()
   category_data = data["category"]
-  sql_request = "UPDATE `T_Category` SET `name` = %(name)s, `description` = %(description)s WHERE " \
-                "`T_Category`.`id_category` = %(id)s; "
+
   values = {"name": category_data["name"], "description": category_data["description"], "id": id_category}
-  response = insert.DbInsertOneTable().insert(sql_request, values)
+  response = insert.DbInsertOneTable().insert(sql_requests.update_category, values)
   if response:
     status = jsonify(
       status="category has been updated",
@@ -97,10 +104,8 @@ def category_edit(id_category):
 def item_edit(id_item):
   data = request.get_json()
   item_data = data["item"]
-  sql_request = "UPDATE `T_Item` SET `name` = %(name)s, `description` = %(description)s WHERE `T_Item`.`id_item` = %(" \
-                "id)s; "
   values = {"name": item_data["name"], "description": item_data["description"], "id": id_item}
-  response = insert.DbInsertOneTable().insert(sql_request, values)
+  response = insert.DbInsertOneTable().insert(sql_requests.update_item, values)
   if response:
     status = jsonify(
       status="item has been updated",
@@ -121,11 +126,9 @@ def item_new():
   description = request.form.get('item-description')
   category_id = request.form.get('category-id')
 
-  sql_request = "INSERT INTO `T_Item` (`id_item`, `fk_category`, `name`, `description`, `created_at`) VALUES (NULL, " \
-                "%(id_category)s, %(name)s, %(description)s, CURRENT_TIMESTAMP); "
   values = {"id_category": category_id, "name": name, "description": description}
   if len(name) > 1 and len(description) > 1:
-    insert.DbInsertOneTable().insert(sql_request, values)
+    insert.DbInsertOneTable().insert(sql_requests.create_item, values)
     flash("Item create successful !", "success")
   else:
     flash("Can't create item with empty value.", "danger")

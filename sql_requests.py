@@ -1,0 +1,51 @@
+# sql_requests.py
+# MM 2020 7 avril
+# module of sql request string
+
+# -----------
+# CATEGORY  |
+# -----------
+
+# create category
+create_category = "INSERT INTO `T_Category` (`id_category`, `name`, `description`, `created_at`) VALUES (NULL, " \
+                  "%(name)s, %(description)s, CURRENT_TIMESTAMP); "
+
+# update category
+
+update_category = "UPDATE `T_Category` SET `name` = %(name)s, `description` = %(description)s WHERE " \
+                  "`T_Category`.`id_category` = %(id)s; "
+
+# -----------
+# ITEM  |
+# -----------
+
+# create item
+create_item = "INSERT INTO `T_Item` (`id_item`, `fk_category`, `name`, `description`, `created_at`) VALUES (NULL, " \
+              "%(id_category)s, %(name)s, %(description)s, CURRENT_TIMESTAMP); "
+
+# update item
+update_item = "UPDATE `T_Item` SET `name` = %(name)s, `description` = %(description)s WHERE `T_Item`.`id_item` = %(" \
+              "id)s; "
+
+# -----------
+# TIQET  |
+# -----------
+
+# get index of tiqet, inner join STATE, PRIORITY etc
+index_tiqet = """ SELECT T_Tiqet.id_tiqet, T_Tiqet.title, T_Tiqet.content, T_Tiqet.created_at, 
+                  T_Priority.id_priority, T_Priority.name AS "name_priority", 
+                  T_State.id_state, T_State.name as "name_state",
+                  T_Item.id_item, T_Item.name as "name_item", T_Item.fk_category as "id_category",
+                  T_User.id_user, T_User.username
+                  FROM T_Tiqet 
+                  LEFT OUTER JOIN T_Priority ON T_Tiqet.fk_priority= T_Priority.id_priority
+                  LEFT OUTER JOIN T_State ON T_Tiqet.fk_state = T_State.id_state
+                  LEFT OUTER JOIN T_Item ON T_Tiqet.fk_item = T_Item.id_item
+                  LEFT OUTER JOIN T_User ON T_Tiqet.fk_assigned = T_User.id_user  """
+
+# -----------
+# STATE  |
+# -----------
+
+# index of state
+index_state = "SELECT * FROM `T_State`"

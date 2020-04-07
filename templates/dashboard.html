@@ -1,0 +1,55 @@
+<!-- tiqets: array of tiqet, states: array of state -->
+{% extends "model/layout.html" %}
+<!-- block content -->
+{% block head %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/dashboard.css') }}"
+/>
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+{% endblock %} {% block content %}
+<div class="dashboard mt-4">
+  {% if states and tiqets %} {% for state in states %} {% if state["display"] %}
+  <div class="column border rounded">
+    <div
+      class="column-title rounded-top bg-primary d-flex justify-content-center align-items-center p-1"
+    >
+      <h5 class="text-white mt-1">{{ state["name"] }}</h5>
+    </div>
+    <div class="column-tiqet pt-1 pb-1">
+      {% for tiqet in tiqets %} {% if tiqet["id_state"] == state["id_state"] %}
+      <div class="tiqet border rounded p-2 mr-2 ml-2 mt-1 mb-1 bg-light">
+        <span class="title text-black">{{ tiqet["title"] }}</span>
+        <span class="info text-black-50"
+          >{{ tiqet["name_item"] }} • {{ tiqet["created_at"].strftime("%x") }}</span
+        >
+        <div class="data-display mt-1">
+          {% if tiqet["username"] %}
+          <div
+            class="user-data bg-info rounded-circle d-flex justify-content-center mr-2"
+            title="{{ tiqet['username'] }}"
+          >
+            <span class="text-white">{{ tiqet["username"].upper()[0] }}</span>
+          </div>
+          {%endif%} {% if tiqet["name_priority"] %}
+          <div
+            class="priority-data bg-warning rounded-pill d-flex justify-content-center pl-1 pr-1"
+            title="{{ tiqet['username'] }}"
+          >
+            <img
+              src="{{ url_for('static', filename='images/flag_icon.svg') }}"
+              alt="flag"
+              class="priority-icon"
+            />
+            <span class="text-black ml-1">{{ tiqet["name_priority"] }}</span>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %} {% endfor %}
+    </div>
+  </div>
+  {% endif %} {% endfor %}{% endif %}
+</div>
+<!-- end content -->
+{% endblock content %}
