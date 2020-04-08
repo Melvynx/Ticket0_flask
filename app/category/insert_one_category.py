@@ -1,8 +1,6 @@
 # insert_one_category.py
 # MM 2020 test insert one value
 
-from db.INSERT import insert
-
 print("please input new category !")
 # input a value from console
 newCategory = input("> ")

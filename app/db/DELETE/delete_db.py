@@ -1,7 +1,7 @@
 # delete_db
 # MM 2020 delete one record one my database
 
-from db import connect_db
+from app.db import connect_db
 
 
 class DBDelete:

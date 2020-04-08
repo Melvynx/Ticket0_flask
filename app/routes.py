@@ -1,19 +1,10 @@
-# app.py
-# MM 2020.04.02
-# root file for Flask application
-
-from flask import Flask, request, render_template, redirect, url_for, flash, make_response, jsonify
+from flask import request, render_template, redirect, url_for, flash, make_response, jsonify
 
 from app.db.SELECT import select_db
 from app.db.INSERT import insert
 
+from app import app
 from app.utils import sql_requests
-
-# create object App's Flask
-app = Flask(__name__)
-
-# init SECRET_KEY
-app.config['SECRET_KEY'] = 'MaccaudNePeutPasTestCetteApplication4004040404040040404'
 
 
 @app.errorhandler(404)
@@ -143,9 +134,3 @@ def items_category(id_category):
   itemsJSON = jsonify(items)
   print(itemsJSON)
   return make_response(itemsJSON, 200)
-
-
-# flask auto run
-if __name__ == "__main__":
-  # basic script "__main__"
-  app.run(debug=True)

@@ -1,7 +1,7 @@
 # delete_one_category.py
 # MM 2020 test delete one value
 
-from db.DELETE.delete_db import DBDelete
+from app.db.DELETE.delete_db import DBDelete
 
 # take number from user
 print("Write id of you're table.")

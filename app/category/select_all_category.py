@@ -2,7 +2,7 @@
 # MM 2020 test select
 
 # open DBSelect and choose all category
-from db.SELECT import select_db
+from app.db.SELECT import select_db
 
 record = select_db.DBSelect().select("SELECT * FROM T_Category")
 

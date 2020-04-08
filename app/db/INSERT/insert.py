@@ -1,7 +1,7 @@
 # insert.py
 # MM 12 mars 2020 objectif is insert some value in database
 
-from db import connect_db
+from app.db import connect_db
 
 
 class DbInsertOneTable:

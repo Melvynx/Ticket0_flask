@@ -3,7 +3,7 @@
 
 from mysql.connector import Error
 
-from db import connect_db
+from app.db import connect_db
 
 
 class DBSelect:

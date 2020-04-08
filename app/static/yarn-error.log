@@ -1,0 +1,36 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/Cellar/yarn/1.21.1/libexec/bin/yarn.js init
+
+PATH: 
+  /usr/local/lib/ruby/gems/2.7.0/bin:/usr/local/opt/ruby/bin:/usr/local/opt/ruby/bin:/Library/Frameworks/Python.framework/Versions/3.8/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands
+
+Yarn version: 
+  1.21.1
+
+Node version: 
+  13.8.0
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: canceled
+      at Interface.<anonymous> (/usr/local/Cellar/yarn/1.21.1/libexec/lib/cli.js:136925:13)
+      at Interface.emit (events.js:321:20)
+      at Interface._ttyWrite (readline.js:864:16)
+      at ReadStream.onkeypress (readline.js:203:10)
+      at ReadStream.emit (events.js:321:20)
+      at emitKeys (internal/readline/utils.js:450:14)
+      at emitKeys.next (<anonymous>)
+      at ReadStream.onData (readline.js:1131:36)
+      at ReadStream.emit (events.js:321:20)
+      at addChunk (_stream_readable.js:297:12)
+
+npm manifest: 
+  No manifest
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
