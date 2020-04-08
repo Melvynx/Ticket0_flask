@@ -1,8 +1,8 @@
 {
-  "name": "TiQetoMaccaud",
+  "name": "tiqeto_maccaud",
   "version": "1.0.1",
   "description": "Flask app for manage tiQets ! ",
-  "main": "index.js",
+  "main": "js/index.js",
   "repository": "https://github.com/MelvynX/Tiqeto_Epsic.OM",
   "author": "Melvynx",
   "license": "MIT",

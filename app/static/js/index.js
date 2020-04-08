@@ -10,10 +10,12 @@ function toggleSnackBar(text, state) {
   console.log("state", state);
   switch (state) {
     case "danger":
+      snackBar.classList.remove("sb-success");
       snackBar.classList.add("sb-danger");
       snackBar.classList.add("show");
       break;
     case "success":
+      snackBar.classList.remove("sb-danger");
       snackBar.classList.add("sb-success");
       snackBar.classList.add("show");
       break;

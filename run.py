@@ -1,11 +1,7 @@
-# run_mon_app.py
+# run.py
 #
-# OM 2020.03.29 Démonstration de l'utilisation du microframework Flask
-# Des routes différentes sont définies
-# Le retour des données se fait grâce à une page en HTML et le langage JINJA
-# Avec le traitement de certaines erreurs.
-
-# Importation de la Class Flask
+# MM 8 avril 2020
+# file for run flask app
 from flask import flash, render_template
 from app import app
 
@@ -13,7 +9,7 @@ from app import app
 @app.errorhandler(Exception)
 def exception(error):
   flash(error, "Danger")
-  return render_template("home.html")
+  return render_template("error.html")
 
 
 if __name__ == "__main__":
