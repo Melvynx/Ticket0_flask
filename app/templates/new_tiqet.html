@@ -1,4 +1,4 @@
-<!-- categories: array of category, priorities: array of priority -->
+<!-- categories: array of category, priorities: array of priority, users: array of user admin -->
 {% extends "model/layout.html" %}
 <!-- block content -->
 {% block head %}
@@ -6,8 +6,14 @@
 <script src="{{ url_for('static', filename='js/newTiqet.js') }}"></script>
 {% endblock %} {% block content %}
 <div class="bg-light container-new-tiqet mt-4 p-2 rounded">
+  {% include "components/flash.html" %}
   <h4>Create a tiqet</h4>
-  <form action="#" method="POST">
+  <form
+    id="tiqet-form-new"
+    action="{{ url_for('create_tiqet') }}"
+    method="POST"
+    onsubmit="doSubmit()"
+  >
     <div class="input-block mt-1">
       <label class="label" for="tiqet-title">Title</label>
       <input
@@ -18,21 +24,22 @@
       />
     </div>
     <div class="input-block mt-1">
-      <label class="label" for="item-description-new">Content</label>
+      <label class="label" for="tiqet-description">Content</label>
       <textarea
-        id="item-description-new"
-        name="item-description"
+        id="tiqet-description"
+        name="tiqet-description"
         class="form-control form-control-sm"
         placeholder="Describe you're tiqet"
       ></textarea>
     </div>
     <div class="d-flex mt-1">
       <div class="input-block w-100 mr-1">
-        <label class="label" for="item-description-new">Category</label>
+        <label class="label" for="tiqet-category">Category</label>
         <select
           class="form-control form-control-sm"
-          id="exampleFormControlSelect1"
+          id="tiqet-category"
           onchange="categorySelectChange(event)"
+          name="tiqet-category"
         >
           <option value="null" selected> - </option>
           {% for category in categories %}
@@ -44,29 +51,70 @@
       </div>
       <div class="input-block w-100 ml-1">
         <label class="label" for="item-description-new">Item</label>
-        <select class="form-control form-control-sm" id="select-item">
+        <select
+          class="form-control form-control-sm"
+          id="select-item"
+          name="tiqet-item"
+        >
           <option value="null" selected> - </option>
         </select>
       </div>
     </div>
-    <label class="label mt-2" for="item-description-new">Priority</label>
+    <label class="mt-2 label">Priority</label>
     <div class="">
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input checkbox-priority"
+          type="radio"
+          name="tiqet-priority"
+          id="priority-label-null"
+          value="null"
+        />
+        <label class="form-check-label" for="priority-label-null">-</label>
+      </div>
       {% for priority in priorities %}
       <div class="form-check form-check-inline">
         <input
           class="form-check-input checkbox-priority"
           type="radio"
-          name="inlineRadioOptions"
+          name="tiqet-priority"
           id="priority-label-{{ priority['id_priority'] }}"
           value="{{ priority['id_priority'] }}"
         />
         <label
-          class="form-check-label"
+          class="form-check-label prio-{{ priority['id_priority'] }}"
           for="priority-label-{{ priority['id_priority'] }}"
           >{{ priority["name"] }}</label
         >
       </div>
       {% endfor %}
+    </div>
+    <div class="input-block w-100 mr-1">
+      <label class="label" for="item-description-new">Assigned</label>
+      <select
+        class="form-control form-control-sm"
+        id="select_user"
+        name="tiqet-user"
+      >
+        <option selected value="null"> - </option>
+        {% for user in users %}
+        <option value="{{ user['id_user'] }}">{{ user["username"] }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="button-box d-flex justify-content-end">
+      <div class="m-1">
+        <a class="btn btn-sm btn-link">Annuler</a>
+      </div>
+      <div class="m-1">
+        <button
+          type="button"
+          class="btn btn-sm btn-primary text-white"
+          onclick="onCreate()"
+        >
+          Crée !
+        </button>
+      </div>
     </div>
   </form>
 </div>

@@ -81,7 +81,7 @@ function editCategory(idCategory, callback) {
   });
 }
 
-// items - edit
+// items - edit (id for know what input need to be changed)
 function toggleEditItem(id) {
   let name = document.getElementById("item-name-" + id);
   let description = document.getElementById("item-description-" + id);
@@ -106,6 +106,7 @@ function toggleEditItem(id) {
   }
 }
 
+// function to edit an item, API
 function editItem(name, description, idItem, callback) {
   const newItem = { item: { name: name, description: description } };
   const newItemJson = JSON.stringify(newItem);
@@ -132,4 +133,17 @@ function editItem(name, description, idItem, callback) {
 
 function displayCreateBox() {
   document.getElementById("item-new-box").classList.add("hide");
+}
+
+// for categories.html
+// function to try if champs is correct on create new category
+function onSubmitCategory() {
+  let title = document.getElementById("name-category-new").value;
+
+  if (title.length < 2 || title.length > 50) {
+    toggleSnackBar("Title need to have between 3 and 49 caractes.", "danger");
+    return;
+  }
+
+  document.getElementById("form-categories").submit();
 }

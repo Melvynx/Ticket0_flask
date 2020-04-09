@@ -5,6 +5,7 @@
   rel="stylesheet"
   href="{{ url_for('static', filename='css/categories.css') }}"
 />
+<script src="{{ url_for('static', filename='js/category.js') }}"></script>
 {% endblock %} {% block setting %}
 <div class="category-list-block">
   <div class="category-list">
@@ -27,45 +28,52 @@
     </div>
     {% endfor %} {% endif %}
   </div>
-  <form method="POST" action="/category" class="mt-4">
+  <form method="POST" action="/category" class="mt-4" id="form-categories">
     <legend>Crée une category !</legend>
-    <div class="input-group flex-nowrap mt-2">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="name">name</span>
+    <div class="input-block">
+      <label class="label" for="category-name">Name</label>
+      <div class="flex-center">
+        <input
+          type="text"
+          id="name-category-new"
+          class="form-control"
+          placeholder="Name you're category "
+          aria-label="name"
+          name="category_name"
+          aria-describedby="addon-wrapping"
+        />
       </div>
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Username"
-        aria-label="Username"
-        name="category_name"
-        aria-describedby="addon-wrapping"
-      />
     </div>
-    <div class="input-group flex-nowrap mt-2">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="message">Description</span>
+    <div class="input-block mt-2">
+      <label class="label" for="category-name">Description</label>
+      <div class="flex-center">
+        <textarea
+          type="text"
+          class="form-control"
+          placeholder="Describe you're category"
+          aria-label="Username"
+          name="category_description"
+          aria-describedby="addon-wrapping"
+          id="description-category-new"
+        ></textarea>
       </div>
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Description"
-        aria-label="Username"
-        name="category_description"
-        aria-describedby="addon-wrapping"
-      />
     </div>
+
     {% with messages = get_flashed_messages(with_categories=true) %} {% if messages
     %} {% for category, message in messages %}
     <div class="alert alert-{{ category }}" role="alert">
       {{ message }}
     </div>
     {% endfor %} {% endif %} {% endwith %}
-    <input
-      type="submit"
-      value="SUBMIT"
-      class="btn btn-sm btn-primary margin-top mt-2"
-    />
+    <div class="mt-2 d-flex justify-content-end">
+      <button
+        type="button"
+        class="btn btn-sm btn-primary margin-top"
+        onclick="onSubmitCategory()"
+      >
+        Submit
+      </button>
+    </div>
   </form>
 </div>
 <!-- end content -->

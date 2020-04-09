@@ -8,6 +8,9 @@
 />
 <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 {% endblock %} {% block content %}
+<!-- flash message -->
+{% include "components/flash.html" %}
+
 <div class="dashboard mt-4">
   {% if states and tiqets %} {% for state in states %} {% if state["display"] %}
   <div class="column border rounded">

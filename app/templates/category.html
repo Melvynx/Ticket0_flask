@@ -1,13 +1,15 @@
-<!-- items = [array of item] category = obj -->
 {% extends "model/settings.html" %}
+<!-- items = [array of item] category = obj -->
 <!-- block content -->
 {% block link %}
 <script>
-  const API_CATEGORY_ID = Number("{{ category[0]['id_category'] }}");
+  const API_CATEGORY_ID = Number("{{ category['id_category'] }}");
 </script>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/category.css') }}" />
 <script src="{{ url_for('static', filename='js/category.js') }}"></script>
-{% endblock %} {% block setting %}
+{% endblock %}
+<!--        body-->
+{% block setting %}
 <a class="btn-link btn-sm p-0 pt-1" href="{{ url_for('categories') }}"><- Back</a>
 <div class="category-block">
   <div class="category">
@@ -19,7 +21,7 @@
         <input
           id="category-name"
           class="form-control form-control-sm"
-          value="{{ category[0]['name'] }}"
+          value="{{ category['name'] }}"
           onfocusout="onFocusOutName()"
           disabled
         />
@@ -43,7 +45,7 @@
           onfocusout="onFocusOutDescription()"
           disabled
         >
-{{ category[0]['description'] }}</textarea
+{{ category['description'] }}</textarea
         >
         <button
           id="category-description-button"
@@ -55,48 +57,21 @@
         </button>
       </div>
     </div>
-    <!-- items map -->
-    <!-- items map -->
+    <!-- items -->
     <h3 class="mt-4">List des items</h3>
+    <!-- flash message -->
+
+    {% include "components/flash.html" %} {% else %} {% endif %}
+    <!-- items map -->
     {% if items %}
     <div class="items my-2">
       {% for item in items %}
-      <div class="item border shadow p-3 mb-2 bg-white rounded item-new mt-2">
-        <div class="input-block mt-1">
-          <label class="label" for="item-name">Name</label>
-          <input
-            id="item-name-{{ item['id_item'] }}"
-            class="form-control form-control-sm"
-            value="{{ item['name'] }}"
-            disabled
-          />
-        </div>
-        <div class="input-block">
-          <label class="label" for="item-description-{{ item['id_item'] }}"
-            >Description</label
-          >
-          <textarea
-            id="item-description-{{ item['id_item'] }}"
-            class="form-control form-control-sm"
-            disabled
-          >
-{{ item['description'] }}</textarea
-          >
-        </div>
-        <div class="item-button">
-          <button
-            id="item-button-{{ item['id_item'] }}"
-            type="button"
-            class="btn btn-link btn-sm"
-            onclick="toggleEditItem(`{{ item['id_item'] }}`)"
-          >
-            Edit
-          </button>
-        </div>
-      </div>
+      <!-- item component -->
+      {% include 'components/item.html' %}
+      <!-- end item component -->
       {% endfor %} {% else %}
-      <div class="border p-1">
-        <span class="text-info">no items with this category</span>
+      <div class="border p-1 rounded bg-light">
+        <span class="text-secondary">no items with this category</span>
       </div>
 
       {% endif%}
@@ -115,7 +90,7 @@
         <form method="POST" action="/items">
           <input
             style="display: none;"
-            value="{{ category[0]['id_category'] }}"
+            value="{{ category['id_category'] }}"
             name="category-id"
           />
           <div class="input-block mt-1">
@@ -147,16 +122,7 @@
         </form>
       </div>
     </div>
-    {% with messages = get_flashed_messages(with_categories=true) %} {% if messages
-    %} {% for category, message in messages %}
-    <div class="alert alert-{{ category }}" role="alert">
-      {{ message }}
-    </div>
-    {% endfor %} {% endif %} {% endwith %} {% else %} {% endif %}
   </div>
-</div>
-<div class="snackbar" id="snackbar">
-  Succes
 </div>
 <!-- end setting -->
 {% endblock setting %}

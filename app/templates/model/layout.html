@@ -16,8 +16,7 @@
     {% endblock %}
     <link
       rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      href="{{ url_for('static', filename='node_modules/bootstrap/dist/css/bootstrap.min.css') }}"
       crossorigin="anonymous"
     />
     <script src="{{ url_for('static', filename='js/index.js') }}"></script>
@@ -43,6 +42,9 @@
       {% block content %}
       <!-- content -->
       {% endblock %}
+    </div>
+    <div class="snackbar" id="snackbar">
+      Succes
     </div>
   </body>
 </html>

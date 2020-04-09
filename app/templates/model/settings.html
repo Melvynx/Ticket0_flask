@@ -60,10 +60,12 @@
     </div>
   </nav>
   <div class="settings col-sm-8 border rounded shadow-sm">
-    <div class="border-bottom mt-2">
+    <div class="border-bottom mt-2 pl-2">
       <h3>{{ title_setting }}</h3>
     </div>
-    {% block setting %} {% endblock %}
+    <div class="pl-2 pr-2">
+      {% block setting %} {% endblock %}
+    </div>
   </div>
 </div>
 <!-- end content -->

@@ -40,6 +40,12 @@ show_item_by_category = "SELECT * FROM `T_Item` WHERE `fk_category` = %(id_categ
 # TIQET  |
 # -----------
 
+# create tiqet
+create_tiqet = """INSERT INTO `T_Tiqet` (`id_tiqet`, `fk_priority`, `fk_reporter`, `fk_assigned`, `fk_item`, `title`, 
+`content`, `fk_state`, `created_at`) VALUES (NULL, %(id_priority)s, %(id_reporter)s, %(id_assigned)s, %(id_item)s, 
+%(title)s, %(content)s, %(id_state)s, CURRENT_TIMESTAMP); """
+
+
 # get index of tiqet, inner join STATE, PRIORITY etc
 index_tiqet = """ SELECT T_Tiqet.id_tiqet, T_Tiqet.title, T_Tiqet.content, T_Tiqet.created_at, 
                   T_Priority.id_priority, T_Priority.name AS "name_priority", 
@@ -65,3 +71,10 @@ index_state = "SELECT * FROM `T_State`"
 
 #  index of priority
 index_priorities = "SELECT * FROM `T_Priority`"
+
+
+# ---
+# users
+
+# index of users
+index_users_admin = "SELECT * FROM `T_User` WHERE `admin` = 1"
