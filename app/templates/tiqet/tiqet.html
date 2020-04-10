@@ -6,8 +6,12 @@
 <script src="{{ url_for('static', filename='js/tiqet.js') }}"></script>
 {% endblock %} {% block content %}
 <div class="bg-light container-tiqet mt-4 p-2 rounded">
-  <h1>{{ tiqet["title"] }}</h1>
+  {% include "tiqet/title.html" %} {% include "tiqet/content.html" %}
 </div>
 
 <!-- end content -->
-{% endblock content %}
+{% endblock content %} {% block script %}
+<script>
+  const TIQET_ID = "{{ tiqet['id_tiqet'] }}";
+</script>
+{% endblock script %}

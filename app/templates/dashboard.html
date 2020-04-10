@@ -36,14 +36,14 @@
         <div class="data-display mt-1">
           {% if tiqet["username"] %}
           <div
-            class="user-data bg-info rounded-circle d-flex justify-content-center mr-2"
+            class="user-data rounded-circle d-flex justify-content-center mr-2"
             title="{{ tiqet['username'] }}"
           >
-            <span class="text-white">{{ tiqet["username"].upper()[0] }}</span>
+            <span>{{ tiqet["username"].upper()[0] }}</span>
           </div>
           {%endif%} {% if tiqet["name_priority"] %}
           <div
-            class="priority-data bg-warning rounded-pill d-flex justify-content-center pl-1 pr-1"
+            class="priority-data rounded-pill d-flex justify-content-center pl-1 pr-1"
             title="{{ tiqet['username'] }}"
           >
             <img

@@ -24,3 +24,28 @@ function toggleSnackBar(text, state) {
       return;
   }
 }
+
+function editTiqet(idTiqet, values, callback) {
+  const newTiqet = { tiqet: values };
+  const newTiqetJson = JSON.stringify(newTiqet);
+  console.log(newTiqet);
+
+  fetch(`${API_URL}/tiqet/${idTiqet}`, {
+    method: "PATCH",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: newTiqetJson,
+  }).then((reponse) => {
+    if (reponse.status !== 200) {
+      console.warn("Tiqeto api has problem.");
+      callback && callback({ state: "danger", status: "error server" });
+      return;
+    }
+
+    reponse.json().then((state) => {
+      callback && callback(state);
+    });
+  });
+}

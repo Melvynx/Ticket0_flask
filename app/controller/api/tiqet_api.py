@@ -5,17 +5,18 @@ from app.db.query import query
 from app.utils import sql_requests
 
 
-# route api for edit tiqet's state
-@app.route("/tiqet/<id_tiqet>/state", methods=["PATCH"])
-def tiqet_state(id_tiqet):
+# edit how many values we want with this function
+@app.route("/tiqet/<id_tiqet>", methods=["PATCH"])
+def edit_tiqet(id_tiqet):
   data = request.get_json()
   tiqet = data["tiqet"]
-  id_state = tiqet["state"]
-  response = query(sql_requests.edit_state_tiqet, {"id_state": id_state, "id_tiqet": id_tiqet})
-
+  request_edit_tiqet = sql_requests.tiqet_edit_request(tiqet, id_tiqet)
+  print("ok")
+  print(request_edit_tiqet)
+  response = query(request_edit_tiqet, tiqet)
   if response:
     status = jsonify(
-      status="tiqet's state update successful",
+      status="tiqet's update successful",
       state="success"
     )
     return make_response(status, 200)

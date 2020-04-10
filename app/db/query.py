@@ -28,7 +28,7 @@ def query(sql, values=False, fetch=False):
   except (Exception, mysql.connector.Error, mysql.connector.InternalError, TypeError) as e:
     # MM 2020 rollback (undo commit) on error
     database.db.rollback()
-    print("Unknown error occurred", e)
+    print("Unknown error occurred : ", e)
     result = False
 
   finally:

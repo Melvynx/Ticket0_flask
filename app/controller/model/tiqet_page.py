@@ -19,4 +19,4 @@ def new():
 @app.route("/tiqet/<id_tiqet>", methods=["GET"])
 def tiqet(id_tiqet):
   tiqet_db = query(sql_requests.show_tiqet, {"id_tiqet": id_tiqet}, fetch="one")
-  return render_template("tiqet.html", tiqet=tiqet_db)
+  return render_template("tiqet/tiqet.html", tiqet=tiqet_db)

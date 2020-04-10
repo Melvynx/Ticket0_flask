@@ -1,0 +1,17 @@
+<div class="title-block d-flex align-items-center">
+  <h1 class="title" id="title" onclick="toggleEditTitle()">{{ tiqet["title"] }}</h1>
+  <img
+    id="image-title"
+    class="title-edit-icon"
+    src="{{ url_for('static', filename='images/edit_icon.svg') }}"
+  />
+
+  <input
+    class="d-none input-title bg-white rounded mr-2 form-control"
+    type="text"
+    id="input-title"
+  />
+  <button class="d-none btn btn-primary" onclick="titleSave()" id="button-title">
+    Save
+  </button>
+</div>

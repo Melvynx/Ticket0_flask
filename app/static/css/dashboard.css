@@ -38,6 +38,8 @@
   width: 32px;
   height: 32px;
   align-items: center;
+  background-color: rgb(23, 162, 184, 0.4);
+  border: 2px solid rgb(23, 162, 184, 0.8);
 }
 
 .tiqet .data-display .user-data span {
@@ -52,6 +54,8 @@
 .tiqet .data-display .priority-data {
   height: 32px;
   align-items: center;
+  background-color: rgb(255, 193, 6, 0.2);
+  border: 2px solid rgb(255, 193, 6, 0.5);
 }
 
 .tiqet .data-display .priority-data span {

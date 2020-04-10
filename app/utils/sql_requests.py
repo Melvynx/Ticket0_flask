@@ -64,6 +64,22 @@ index_tiqet = """ SELECT T_Tiqet.id_tiqet, T_Tiqet.title, T_Tiqet.content, T_Tiq
 edit_state_tiqet = "UPDATE `T_Tiqet` SET `fk_state` = %(id_state)s WHERE `T_Tiqet`.`id_tiqet` = %(id_tiqet)s;"
 
 
+def tiqet_edit_request(values, id_tiqet):
+  request = "UPDATE `T_Tiqet` SET "
+  params = {"title", "content", "state", "fk_priority", "fk_reporter", "fk_assigned", "fk_item", "fk_state"}
+  first = True
+
+  for param in params:
+    if param in values:
+      if not first:
+        request += ", "
+      request += f"`{param}` = %({param})s"
+      first = False
+
+  request += f" WHERE `T_Tiqet`.`id_tiqet` = {id_tiqet}"
+  return request
+
+
 show_tiqet = """ SELECT T_Tiqet.id_tiqet, T_Tiqet.title, T_Tiqet.content, T_Tiqet.created_at, 
                   T_Priority.id_priority, T_Priority.name AS "name_priority", 
                   T_State.id_state, T_State.name as "name_state",

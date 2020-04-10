@@ -3,3 +3,39 @@
   min-width: 512px;
   max-width: 1024px;
 }
+
+/* title style "title.html" */
+
+.title {
+  font-size: 2.5em !important;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-top: 8px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.title:hover + .title-edit-icon {
+  visibility: visible !important;
+}
+
+.title-edit-icon {
+  width: 2.5em;
+  height: 2.5em;
+  visibility: hidden;
+}
+
+.input-title {
+  cursor: text;
+  margin-top: 8px;
+  border: 1px solid rgb(0, 0, 0, 0.2);
+  padding: 0px 8px 0px 8px !important;
+  line-height: 1.2 !important;
+  font-size: 2.5em !important;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-top: 0;
+  width: 100%;
+}
+
+/* content style "content.html" */
