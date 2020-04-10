@@ -16,6 +16,10 @@
   height: 100%;
 }
 
+.tiqet {
+  cursor: pointer;
+}
+
 .tiqet .title {
   font-size: 16px;
   color: black;

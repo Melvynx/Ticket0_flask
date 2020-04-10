@@ -12,7 +12,6 @@ def item_new():
   category_id = request.form.get('category-id')
 
   values = {"id_category": category_id, "name": name, "description": description}
-  
   # todo : catch error on front
   result = query(sql_requests.create_item, values)
   if result:
