@@ -39,3 +39,23 @@
 }
 
 /* content style "content.html" */
+
+.content-icon {
+  width: 2em;
+  height: 2em;
+  background-color: rgb(0, 123, 255, 0.6);
+}
+
+.content {
+  width: 100%;
+}
+
+.content-edit-icon {
+  visibility: hidden;
+  width: 18px;
+  height: 18px;
+}
+
+.content:hover + .content-edit-icon {
+  visibility: visible !important;
+}

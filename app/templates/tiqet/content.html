@@ -1,10 +1,29 @@
-<div>
-  <div>
+<div class="mt-2">
+  <div class="d-flex align-items-center">
     <img
-      class="content-icon"
+      class="content-icon rounded mr-2"
       src="{{ url_for('static', filename='images/subject_icon.svg') }}"
     />
-    <h3 class="content-title">Subject :</h3>
+    <h4 class="content-title m-0">Subject :</h4>
   </div>
-  <p>{{ tiqet["content"] }}</p>
+  <div class="d-flex align-items-center">
+    <!-- prettier-ignore -->
+    <p class="mt-2 content" id="content" onclick="toggleEditContent()">{{ tiqet["content"] }}</p>
+    <img
+      id="image-content"
+      class="content-edit-icon"
+      src="{{ url_for('static', filename='images/edit_icon.svg') }}"
+    />
+    <textarea
+      class="form-control form-control-sm d-none mr-2 mt-2"
+      id="input-content"
+    ></textarea>
+    <button
+      class="d-none btn btn-primary"
+      onclick="contentSave()"
+      id="button-content"
+    >
+      Save
+    </button>
+  </div>
 </div>

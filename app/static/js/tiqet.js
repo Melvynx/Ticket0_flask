@@ -32,3 +32,38 @@ function titleSave() {
     toggleSnackBar(state.status, state.state);
   });
 }
+
+/* content script "content.html" */
+function toggleEditContent() {
+  const content = document.getElementById("content");
+  const img = document.getElementById("image-content");
+  const input = document.getElementById("input-content");
+  const button = document.getElementById("button-content");
+
+  content.classList.add("d-none");
+  img.classList.add("d-none");
+  input.classList.remove("d-none");
+  input.value = content.innerHTML;
+  button.classList.remove("d-none");
+}
+
+function contentSave() {
+  const content = document.getElementById("content");
+  const img = document.getElementById("image-content");
+  const input = document.getElementById("input-content");
+  const button = document.getElementById("button-content");
+
+  if (input.value.length < 2 || input.value.length > 5000) {
+    toggleSnackBar("content need to have between 43and 4999 caractes.");
+    return;
+  }
+
+  content.classList.remove("d-none");
+  img.classList.remove("d-none");
+  input.classList.add("d-none");
+  content.innerHTML = input.value;
+  button.classList.add("d-none");
+  editTiqet(TIQET_ID, { content: input.value }, (state) => {
+    toggleSnackBar(state.status, state.state);
+  });
+}

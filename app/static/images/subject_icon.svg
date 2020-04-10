@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 30" x="0px" y="0px">
   <title>subject</title>
-  <path d="M23,14H1a1,1,0,0,1,0-2H23a1,1,0,0,1,0,2Z" />
-  <path d="M23,8H1A1,1,0,0,1,1,6H23a1,1,0,0,1,0,2Z" />
-  <path d="M13,20H1a1,1,0,0,1,0-2H13a1,1,0,0,1,0,2Z" />
+  <path d="M23,14H1a1,1,0,0,1,0-2H23a1,1,0,0,1,0,2Z" fill="#ffffff" />
+  <path d="M23,8H1A1,1,0,0,1,1,6H23a1,1,0,0,1,0,2Z" fill="#ffffff"/>
+  <path d="M13,20H1a1,1,0,0,1,0-2H13a1,1,0,0,1,0,2Z" fill="#ffffff"/>
 </svg>
