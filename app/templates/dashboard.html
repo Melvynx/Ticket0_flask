@@ -26,6 +26,7 @@
       {% for tiqet in tiqets %} {% if tiqet["id_state"] == state["id_state"] %}
       <div
         class="tiqet border rounded p-2 mr-2 ml-2 mt-1 mb-1 bg-light"
+        onclick="location.href=`{{ url_for('tiqet', id_tiqet=tiqet['id_tiqet']) }}`"
         data-tiqetid="{{ tiqet['id_tiqet'] }}"
       >
         <span class="title text-black">{{ tiqet["title"] }}</span>

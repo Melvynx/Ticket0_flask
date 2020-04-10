@@ -1,0 +1,13 @@
+<!-- tiqet: one tiqet -->
+{% extends "model/layout.html" %}
+<!-- block content -->
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/tiqet.css') }}" />
+<script src="{{ url_for('static', filename='js/tiqet.js') }}"></script>
+{% endblock %} {% block content %}
+<div class="bg-light container-tiqet mt-4 p-2 rounded">
+  <h1>{{ tiqet["title"] }}</h1>
+</div>
+
+<!-- end content -->
+{% endblock content %}

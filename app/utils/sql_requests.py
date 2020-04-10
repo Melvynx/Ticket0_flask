@@ -63,6 +63,19 @@ index_tiqet = """ SELECT T_Tiqet.id_tiqet, T_Tiqet.title, T_Tiqet.content, T_Tiq
 # edit only the state of the tiqet
 edit_state_tiqet = "UPDATE `T_Tiqet` SET `fk_state` = %(id_state)s WHERE `T_Tiqet`.`id_tiqet` = %(id_tiqet)s;"
 
+
+show_tiqet = """ SELECT T_Tiqet.id_tiqet, T_Tiqet.title, T_Tiqet.content, T_Tiqet.created_at, 
+                  T_Priority.id_priority, T_Priority.name AS "name_priority", 
+                  T_State.id_state, T_State.name as "name_state",
+                  T_Item.id_item, T_Item.name as "name_item", T_Item.fk_category as "id_category",
+                  T_User.id_user, T_User.username
+                  FROM T_Tiqet 
+                  LEFT OUTER JOIN T_Priority ON T_Tiqet.fk_priority= T_Priority.id_priority
+                  LEFT OUTER JOIN T_State ON T_Tiqet.fk_state = T_State.id_state
+                  LEFT OUTER JOIN T_Item ON T_Tiqet.fk_item = T_Item.id_item
+                  LEFT OUTER JOIN T_User ON T_Tiqet.fk_assigned = T_User.id_user
+                  WHERE `T_Tiqet`.`id_tiqet` = %(id_tiqet)s  """
+
 # ----------------------------------------------
 # -----------
 # STATE  |
