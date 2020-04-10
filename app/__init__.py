@@ -10,4 +10,4 @@ app = Flask(__name__, template_folder="templates")
 app.secret_key = 'LE_VOGON^^^ÂMIRLA'
 
 from app.controller.model import category_page, dashboard_page, item_page, tiqet_page
-from app.controller.api import category_api, item_api
+from app.controller.api import category_api, item_api, tiqet_api

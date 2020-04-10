@@ -12,8 +12,10 @@ def item_new():
   category_id = request.form.get('category-id')
 
   values = {"id_category": category_id, "name": name, "description": description}
-  if len(name) > 1 and len(description) > 1:
-    query(sql_requests.create_item, values)
+  
+  # todo : catch error on front
+  result = query(sql_requests.create_item, values)
+  if result:
     flash("Item create successful !", "success")
   else:
     flash("Can't create item with empty value.", "danger")
@@ -25,7 +27,6 @@ def items_category(id_category):
   items = query(sql_requests.show_item_by_category, {"id_category": id_category}, 
                 fetch="all")
   itemsJSON = jsonify(items)
-  print(itemsJSON)
   return make_response(itemsJSON, 200)
 
 

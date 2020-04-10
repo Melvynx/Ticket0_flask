@@ -2,6 +2,6 @@
   "python.pythonPath": "venv/bin/python3",
   "python.linting.pylintArgs": [
     "--max-line-length=855",
-    "--disable=W0142,W0403,W0613,W0232,R0903,R0913,C0103,R0914,C0304,F0401,W0402,E1101,W0614,W0311,C0116,missing-module-docstring, bad-continuation"
+    "--disable=W0142,W0403,W0613,W0232,R0903,R0913,C0103,R0914,C0304,F0401,W0402,E1101,W0614,W0311,C0116,missing-module-docstring, bad-continuation, fixme"
   ]
 }

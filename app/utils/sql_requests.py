@@ -2,6 +2,7 @@
 # MM 2020 7 avril
 # module of sql request string
 
+# ----------------------------------------------
 # -----------
 # CATEGORY  |
 # -----------
@@ -21,6 +22,7 @@ create_category = "INSERT INTO `T_Category` (`id_category`, `name`, `description
 update_category = "UPDATE `T_Category` SET `name` = %(name)s, `description` = %(description)s WHERE " \
                   "`T_Category`.`id_category` = %(id)s; "
 
+# ----------------------------------------------
 # -----------
 # ITEM  |
 # -----------
@@ -36,6 +38,7 @@ update_item = "UPDATE `T_Item` SET `name` = %(name)s, `description` = %(descript
 # show item by category NEED ID_CATEGORY
 show_item_by_category = "SELECT * FROM `T_Item` WHERE `fk_category` = %(id_category)s "
 
+# ----------------------------------------------
 # -----------
 # TIQET  |
 # -----------
@@ -44,7 +47,6 @@ show_item_by_category = "SELECT * FROM `T_Item` WHERE `fk_category` = %(id_categ
 create_tiqet = """INSERT INTO `T_Tiqet` (`id_tiqet`, `fk_priority`, `fk_reporter`, `fk_assigned`, `fk_item`, `title`, 
 `content`, `fk_state`, `created_at`) VALUES (NULL, %(id_priority)s, %(id_reporter)s, %(id_assigned)s, %(id_item)s, 
 %(title)s, %(content)s, %(id_state)s, CURRENT_TIMESTAMP); """
-
 
 # get index of tiqet, inner join STATE, PRIORITY etc
 index_tiqet = """ SELECT T_Tiqet.id_tiqet, T_Tiqet.title, T_Tiqet.content, T_Tiqet.created_at, 
@@ -58,6 +60,10 @@ index_tiqet = """ SELECT T_Tiqet.id_tiqet, T_Tiqet.title, T_Tiqet.content, T_Tiq
                   LEFT OUTER JOIN T_Item ON T_Tiqet.fk_item = T_Item.id_item
                   LEFT OUTER JOIN T_User ON T_Tiqet.fk_assigned = T_User.id_user  """
 
+# edit only the state of the tiqet
+edit_state_tiqet = "UPDATE `T_Tiqet` SET `fk_state` = %(id_state)s WHERE `T_Tiqet`.`id_tiqet` = %(id_tiqet)s;"
+
+# ----------------------------------------------
 # -----------
 # STATE  |
 # -----------
@@ -65,6 +71,7 @@ index_tiqet = """ SELECT T_Tiqet.id_tiqet, T_Tiqet.title, T_Tiqet.content, T_Tiq
 #  index of state
 index_state = "SELECT * FROM `T_State`"
 
+# ----------------------------------------------
 # -----------
 # PRIORITY  |
 # -----------
@@ -72,9 +79,10 @@ index_state = "SELECT * FROM `T_State`"
 #  index of priority
 index_priorities = "SELECT * FROM `T_Priority`"
 
-
-# ---
-# users
+# ----------------------------------------------
+# -----------
+# USERS     |
+# -----------
 
 # index of users
 index_users_admin = "SELECT * FROM `T_User` WHERE `admin` = 1"

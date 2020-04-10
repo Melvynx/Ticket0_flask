@@ -6,13 +6,14 @@
 
 .column {
   display: flex;
-  width: 324px;
+  width: 324px !important;
   flex-direction: column;
 }
 
 .column-tiqet {
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .tiqet .title {

@@ -6,7 +6,6 @@
   rel="stylesheet"
   href="{{ url_for('static', filename='css/dashboard.css') }}"
 />
-<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
 {% endblock %} {% block content %}
 <!-- flash message -->
 {% include "components/flash.html" %}
@@ -19,9 +18,16 @@
     >
       <h5 class="text-white mt-1">{{ state["name"] }}</h5>
     </div>
-    <div class="column-tiqet pt-1 pb-1">
+    <div
+      class="column-tiqet pt-1 pb-1"
+      id="{{ state['name'] }}"
+      data-stateid="{{ state['id_state'] }}"
+    >
       {% for tiqet in tiqets %} {% if tiqet["id_state"] == state["id_state"] %}
-      <div class="tiqet border rounded p-2 mr-2 ml-2 mt-1 mb-1 bg-light">
+      <div
+        class="tiqet border rounded p-2 mr-2 ml-2 mt-1 mb-1 bg-light"
+        data-tiqetid="{{ tiqet['id_tiqet'] }}"
+      >
         <span class="title text-black">{{ tiqet["title"] }}</span>
         <span class="info text-black-50"
           >{{ tiqet["name_item"] }} • {{ tiqet["created_at"].strftime("%x") }}</span
@@ -55,4 +61,24 @@
   {% endif %} {% endfor %}{% endif %}
 </div>
 <!-- end content -->
-{% endblock content %}
+{% endblock content %} {% block script %}
+<script src="{{ url_for('static', filename='node_modules/sortablejs/Sortable.min.js') }}"></script>
+
+{% if states and tiqets %} {% for state in states %} {% if state["display"] %}
+<script>
+  Sortable.create(document.getElementById("{{ state['name'] }}"), {
+    animation: 150,
+    group: {
+      name: "shared",
+    },
+    sort: true,
+    onEnd: (event) => {
+      onEnd(event);
+    },
+  });
+</script>
+{% endif %} {% endfor %}{% endif %}
+
+<script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+
+{% endblock script %}
