@@ -9,7 +9,8 @@ from app.utils import sql_requests
 @app.route("/dashboard")
 @app.route("/home")
 def dashboard():
-  tiqets = query(sql_requests.index_tiqet, fetch="all")
-  states = query(sql_requests.index_state, fetch="all")
-  return render_template("dashboard.html", title="Dashboard", tiqets=tiqets,
-                         states=states)
+    tiqets = query(sql_requests.index_tiqet, fetch="all")
+    states = query(sql_requests.index_state, fetch="all")
+    return render_template(
+        "dashboard.html", title="Dashboard", tiqets=tiqets, states=states
+    )

@@ -12,7 +12,7 @@ app = Flask(__name__, template_folder="templates")
 CORS(app)
 
 # Flask va pouvoir crypter les cookies
-app.secret_key = 'LE_VxxO**_GON^^^ÂMIRLA'
+app.secret_key = "LE_VxxO**_GON^^^ÂMIRLA"
 
 
 from app.controller.model import category_page, dashboard_page, item_page, tiqet_page

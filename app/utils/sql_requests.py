@@ -14,13 +14,17 @@ index_category = "SELECT * FROM T_Category"
 show_category = "SELECT * FROM `T_Category` WHERE `id_category` = %(id_category)s "
 
 # create category
-create_category = "INSERT INTO `T_Category` (`id_category`, `name`, `description`, `created_at`) VALUES (NULL, " \
-                  "%(name)s, %(description)s, CURRENT_TIMESTAMP); "
+create_category = (
+    "INSERT INTO `T_Category` (`id_category`, `name`, `description`, `created_at`) VALUES (NULL, "
+    "%(name)s, %(description)s, CURRENT_TIMESTAMP); "
+)
 
 # update category
 
-update_category = "UPDATE `T_Category` SET `name` = %(name)s, `description` = %(description)s WHERE " \
-                  "`T_Category`.`id_category` = %(id)s; "
+update_category = (
+    "UPDATE `T_Category` SET `name` = %(name)s, `description` = %(description)s WHERE "
+    "`T_Category`.`id_category` = %(id)s; "
+)
 
 # ----------------------------------------------
 # -----------
@@ -28,12 +32,16 @@ update_category = "UPDATE `T_Category` SET `name` = %(name)s, `description` = %(
 # -----------
 
 # create item
-create_item = "INSERT INTO `T_Item` (`id_item`, `fk_category`, `name`, `description`, `created_at`) VALUES (NULL, " \
-              "%(id_category)s, %(name)s, %(description)s, CURRENT_TIMESTAMP); "
+create_item = (
+    "INSERT INTO `T_Item` (`id_item`, `fk_category`, `name`, `description`, `created_at`) VALUES (NULL, "
+    "%(id_category)s, %(name)s, %(description)s, CURRENT_TIMESTAMP); "
+)
 
 # update item
-update_item = "UPDATE `T_Item` SET `name` = %(name)s, `description` = %(description)s WHERE `T_Item`.`id_item` = %(" \
-              "id)s; "
+update_item = (
+    "UPDATE `T_Item` SET `name` = %(name)s, `description` = %(description)s WHERE `T_Item`.`id_item` = %("
+    "id)s; "
+)
 
 # show item by category NEED ID_CATEGORY
 show_item_by_category = "SELECT * FROM `T_Item` WHERE `fk_category` = %(id_category)s "
@@ -65,19 +73,28 @@ edit_state_tiqet = "UPDATE `T_Tiqet` SET `fk_state` = %(id_state)s WHERE `T_Tiqe
 
 
 def tiqet_edit_request(values, id_tiqet):
-  request = "UPDATE `T_Tiqet` SET "
-  params = {"title", "content", "state", "fk_priority", "fk_reporter", "fk_assigned", "fk_item", "fk_state"}
-  first = True
+    request = "UPDATE `T_Tiqet` SET "
+    params = {
+        "title",
+        "content",
+        "state",
+        "fk_priority",
+        "fk_reporter",
+        "fk_assigned",
+        "fk_item",
+        "fk_state",
+    }
+    first = True
 
-  for param in params:
-    if param in values:
-      if not first:
-        request += ", "
-      request += f"`{param}` = %({param})s"
-      first = False
+    for param in params:
+        if param in values:
+            if not first:
+                request += ", "
+            request += f"`{param}` = %({param})s"
+            first = False
 
-  request += f" WHERE `T_Tiqet`.`id_tiqet` = {id_tiqet}"
-  return request
+    request += f" WHERE `T_Tiqet`.`id_tiqet` = {id_tiqet}"
+    return request
 
 
 show_tiqet = """ SELECT T_Tiqet.id_tiqet, T_Tiqet.title, T_Tiqet.content, T_Tiqet.created_at, 
@@ -115,3 +132,13 @@ index_priorities = "SELECT * FROM `T_Priority`"
 
 # index of users
 index_users_admin = "SELECT * FROM `T_User` WHERE `admin` = 1"
+
+# ----------------------------------------------
+# -----------
+# COMMENT     |
+# -----------
+
+index_comment = """ SELECT T_Comment.fk_tiqet as "id_tiqet", T_Comment.id_comment, T_Comment.created_at
+                    T_Comment.content, T_Comment.isPrivate,  T_User.id_user,  T_User.username
+                    FROM T_Comment 
+                    LEFT OUTER JOIN T_User ON T_Comment.fk_author = T_User.id_user WHERE fk_tiqet = %(id_tiqet)s"""

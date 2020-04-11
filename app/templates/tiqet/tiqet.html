@@ -6,7 +6,8 @@
 <script src="{{ url_for('static', filename='js/tiqet.js') }}"></script>
 {% endblock %} {% block content %}
 <div class="bg-light container-tiqet mt-4 p-2 rounded">
-  {% include "tiqet/title.html" %} {% include "tiqet/content.html" %}
+  {% include "tiqet/title.html" %} {% include "tiqet/content.html" %} {% include
+  "tiqet/comments.html" %}
 </div>
 
 <!-- end content -->

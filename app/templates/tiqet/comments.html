@@ -1,0 +1,28 @@
+<div>
+  <div class="d-flex align-items-center">
+    <img
+      class="comment-icon rounded mr-2"
+      src="{{ url_for('static', filename='images/comment_icon.svg') }}"
+    />
+    <h4 class="content-title m-0">Comments :</h4>
+  </div>
+  {% if comments %} {% for comment in comments %}
+  <div class="d-flex">
+    <div class="">
+      <div
+        class="usernamme-data rounded-circle d-flex justify-content-center mr-2"
+        title="{{ tiqet['username'] }}"
+      >
+        <span>{{ comment["username"].upper()[0] }}</span>
+      </div>
+    </div>
+    <div>
+      <div class="text-secondary">
+        {{ comment["username"] }} * {{ comment["created_at"].strftime("%x") }}
+      </div>
+      <div>{{ comment["content"] }}</div>
+    </div>
+  </div>
+
+  {% endfor %} {% endif %}
+</div>

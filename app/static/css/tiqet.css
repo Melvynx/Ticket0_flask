@@ -59,3 +59,27 @@
 .content:hover + .content-edit-icon {
   visibility: visible !important;
 }
+
+.input-content {
+  font-size: 1rem !important;
+}
+
+/*  comment style "comments.html" */
+
+.comment-icon {
+  width: 2em;
+  height: 2em;
+  background-color: rgb(255, 193, 7, 0.4);
+}
+
+.usernamme-data {
+  width: 32px;
+  height: 32px;
+  align-items: center;
+  background-color: rgb(23, 162, 184, 0.4);
+  border: 2px solid rgb(23, 162, 184, 0.8);
+}
+
+.usernamme-data span {
+  font-size: 18px;
+}
