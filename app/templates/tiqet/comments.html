@@ -1,4 +1,4 @@
-<div>
+<div class="mt-3">
   <div class="d-flex align-items-center">
     <img
       class="comment-icon rounded mr-2"
@@ -7,7 +7,7 @@
     <h4 class="content-title m-0">Comments :</h4>
   </div>
   {% if comments %} {% for comment in comments %}
-  <div class="d-flex">
+  <div class="d-flex mt-2">
     <div class="">
       <div
         class="usernamme-data rounded-circle d-flex justify-content-center mr-2"
@@ -17,10 +17,12 @@
       </div>
     </div>
     <div>
-      <div class="text-secondary">
-        {{ comment["username"] }} * {{ comment["created_at"].strftime("%x") }}
+      <div class="text-secondary comment-data">
+        {{ comment["username"] }} • {{ comment["created_at"].strftime("%x") }}
       </div>
-      <div>{{ comment["content"] }}</div>
+      <div class="comment bg-white rounded p-1 mt-1 mr-1 mb-1">
+        {{ comment["content"] }}
+      </div>
     </div>
   </div>
 

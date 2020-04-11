@@ -11,8 +11,6 @@ def edit_tiqet(id_tiqet):
     data = request.get_json()
     tiqet = data["tiqet"]
     request_edit_tiqet = sql_requests.tiqet_edit_request(tiqet, id_tiqet)
-    print("ok")
-    print(request_edit_tiqet)
     response = query(request_edit_tiqet, tiqet)
     if response:
         status = jsonify(status="tiqet's update successful", state="success")

@@ -73,6 +73,7 @@
 }
 
 .usernamme-data {
+  margin-top: 26px;
   width: 32px;
   height: 32px;
   align-items: center;
@@ -82,4 +83,12 @@
 
 .usernamme-data span {
   font-size: 18px;
+}
+
+.comment-data {
+  font-size: 14px;
+  font-style: italic;
+}
+
+.comment {
 }

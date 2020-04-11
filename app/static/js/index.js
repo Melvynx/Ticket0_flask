@@ -1,13 +1,10 @@
 const API_URL = "http://127.0.0.1:5000";
 
-console.log("start");
-
 // text: string, state: "danger" | "success"
 function toggleSnackBar(text, state) {
   const snackBar = document.getElementById("snackbar");
   snackBar.innerHTML = text;
   setTimeout(() => snackBar.classList.remove("show"), 5000);
-  console.log("state", state);
   switch (state) {
     case "danger":
       snackBar.classList.remove("sb-success");
@@ -28,7 +25,6 @@ function toggleSnackBar(text, state) {
 function editTiqet(idTiqet, values, callback) {
   const newTiqet = { tiqet: values };
   const newTiqetJson = JSON.stringify(newTiqet);
-  console.log(newTiqet);
 
   fetch(`${API_URL}/tiqet/${idTiqet}`, {
     method: "PATCH",

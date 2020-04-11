@@ -138,7 +138,7 @@ index_users_admin = "SELECT * FROM `T_User` WHERE `admin` = 1"
 # COMMENT     |
 # -----------
 
-index_comment = """ SELECT T_Comment.fk_tiqet as "id_tiqet", T_Comment.id_comment, T_Comment.created_at
+index_comment = """ SELECT T_Comment.fk_tiqet as "id_tiqet", T_Comment.id_comment, T_Comment.created_at,
                     T_Comment.content, T_Comment.isPrivate,  T_User.id_user,  T_User.username
                     FROM T_Comment 
                     LEFT OUTER JOIN T_User ON T_Comment.fk_author = T_User.id_user WHERE fk_tiqet = %(id_tiqet)s"""

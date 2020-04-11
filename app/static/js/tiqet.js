@@ -9,6 +9,7 @@ function toggleEditTitle() {
   img.classList.add("d-none");
   input.classList.remove("d-none");
   input.value = title.innerHTML;
+  input.focus();
   button.classList.remove("d-none");
 }
 
@@ -44,6 +45,7 @@ function toggleEditContent() {
   img.classList.add("d-none");
   input.classList.remove("d-none");
   input.value = content.innerHTML;
+  input.focus();
   button.classList.remove("d-none");
 }
 
