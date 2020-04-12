@@ -1,83 +1,84 @@
-// name input
-let nameFocus = false;
-
 // on click button "edit" on the side of input name
-function toggleEditName() {
-  let inputName = document.getElementById("category-name");
-  if (nameFocus) {
-    return;
-  }
-  inputName.disabled = !inputName.disabled;
-  document.getElementById("category-name-button").innerHTML = "Save";
-  inputName.focus();
-  nameFocus = true;
+function onEditName() {
+  let name = $("#name");
+  name.prop("disabled", false);
+  $("#name-button-edit").hide();
+  $("#name-button-save").show();
+  name.focus();
 }
 
 // event focus out input name
-function onFocusOutName() {
-  let inputName = document.getElementById("category-name");
-  document.getElementById("category-name-button").innerHTML = "Edit";
-  inputName.disabled = !inputName.disabled;
-  setTimeout(() => (nameFocus = false), 100);
+function onSaveName(event) {
+  // if save call by event
+  if (event && event.key !== "Enter") return;
 
-  editCategory(API_CATEGORY_ID, (state) => {
-    toggleSnackBar(state.status, state.state);
-  });
-}
+  let name = $("#name");
 
-// description text-area
-let descriptionFocus = false;
-
-// on click button "edit" on the side of textarea description
-function toggleEditDescription() {
-  let inputDescription = document.getElementById("category-description");
-  if (descriptionFocus) {
+  if (name.val().length <= 2 || name.val().length >= 50) {
+    toggleSnackBar("Name need to have between 2 and 50 caracters.", "danger");
     return;
   }
-  inputDescription.disabled = !inputDescription.disabled;
-  document.getElementById("category-description-button").innerHTML = "Save";
-  inputDescription.focus();
-  descriptionFocus = true;
+
+  name.prop("disabled", true);
+  $("#name-button-edit").show();
+  $("#name-button-save").hide();
+
+  editCategory(API_CATEGORY_ID);
+}
+
+// on click button "edit" on the side of textarea description
+function onEditDescription() {
+  let description = $("#description");
+
+  description.prop("disabled", false);
+  $("#description-button-edit").hide();
+  $("#description-button-save").show();
+  description.focus();
 }
 
 // event focus out textarea description
-function onFocusOutDescription() {
-  let inputDescription = document.getElementById("category-description");
-  document.getElementById("category-description-button").innerHTML = "Edit";
-  inputDescription.disabled = !inputDescription.disabled;
-  setTimeout(() => (descriptionFocus = false), 100);
+function onSaveDescription(event) {
+  // if save call by key event, do only if is enter key
+  if (event && event.key !== "Enter") return;
 
-  editCategory(API_CATEGORY_ID, (state) => {
-    toggleSnackBar(state.status, state.state);
-  });
+  let description = $("#description");
+
+  if (description.val().length < 5 || description.val().length >= 1000) {
+    toggleSnackBar(
+      "Description need to have between 5 and 1000 caracters.",
+      "danger"
+    );
+    return;
+  }
+  description.prop("disabled", true);
+  $("#description-button-edit").show();
+  $("#description-button-save").hide();
+
+  editCategory(API_CATEGORY_ID);
 }
 
 // idCategory: number, callback: Function
-function editCategory(idCategory, callback) {
-  const description = document.getElementById("category-description").value;
-  const name = document.getElementById("category-name").value;
+function editCategory(idCategory) {
+  const description = $("#description").val();
+  const name = $("#name").val();
 
   const newCategory = { category: { name: name, description: description } };
-  console.log("NEWCAT", newCategory);
   const newCategoryJson = JSON.stringify(newCategory);
 
-  fetch(`${API_URL}/categories/${idCategory}`, {
+  $.ajax({
+    url: `${API_URL}/categories/${idCategory}`,
     method: "PATCH",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
+    data: newCategoryJson,
+    dataType: "json",
+    contentType: "application/json",
+    Accept: "application/json",
+    success: (state) => {
+      toggleSnackBar(state.status, state.state);
     },
-    body: newCategoryJson,
-  }).then((reponse) => {
-    if (reponse.status !== 200) {
-      console.warn("Tiqeto api has problem.");
-      callback && callback({ state: "danger", status: "error server" });
-      return;
-    }
-
-    reponse.json().then((state) => {
-      callback && callback(state);
-    });
+    error: (result) => {
+      console.warn(result.status);
+      toggleSnackBar("Database has problem. Try an other time.", "danger");
+    },
   });
 }
 

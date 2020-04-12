@@ -19,19 +19,28 @@
       <label class="label" for="category-name">Name</label>
       <div class="flex-center">
         <input
-          id="category-name"
+          id="name"
           class="form-control form-control-sm"
           value="{{ category['name'] }}"
-          onfocusout="onFocusOutName()"
+          onkeyup="onSaveName(event)"
           disabled
         />
         <button
-          id="category-name-button"
+          id="name-button-edit"
           type="button"
           class="btn btn-link btn-sm"
-          onclick="toggleEditName()"
+          onclick="onEditName()"
         >
           Edit
+        </button>
+        <button
+          id="name-button-save"
+          type="button"
+          class="btn btn-link btn-sm"
+          style="display: none;"
+          onclick="onSaveName()"
+        >
+          Save
         </button>
       </div>
     </div>
@@ -40,20 +49,29 @@
       <label class="label" for="category-description">Description</label>
       <div class="flex-center">
         <textarea
-          id="category-description"
+          id="description"
           class="form-control form-control-sm"
-          onfocusout="onFocusOutDescription()"
+          onkeydown="onSaveDescription(event)"
           disabled
         >
 {{ category['description'] }}</textarea
         >
         <button
-          id="category-description-button"
+          id="description-button-edit"
           type="button"
           class="btn btn-link btn-sm"
-          onclick="toggleEditDescription()"
+          onclick="onEditDescription()"
         >
           Edit
+        </button>
+        <button
+          id="description-button-save"
+          type="button"
+          class="btn btn-link btn-sm"
+          style="display: none;"
+          onclick="onSaveDescription()"
+        >
+          Save
         </button>
       </div>
     </div>
