@@ -15,7 +15,7 @@ def edit_tiqet(id_tiqet):
     if response:
         status = jsonify(status="tiqet's update successful", state="success")
         return make_response(status, 200)
-    status = jsonify(status="sql server has problem !", state="danger")
+    status = jsonify(status="Database server has problem !", state="danger")
     return make_response(status, 201)
 
 

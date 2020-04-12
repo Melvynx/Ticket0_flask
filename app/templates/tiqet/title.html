@@ -1,5 +1,6 @@
 <div class="title-block d-flex align-items-center">
-  <h1 class="title" id="title" onclick="toggleEditTitle()">{{ tiqet["title"] }}</h1>
+  <!-- prettier-ignore -->
+  <h1 class="title" id="title" onclick="toggleEditTitle()">{% if tiqet["title"] %}{{ tiqet["title"] }} {% else %}No title{% endif %}</h1>
   <img
     id="image-title"
     class="title-edit-icon"

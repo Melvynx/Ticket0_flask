@@ -1,12 +1,16 @@
 .dashboard {
   display: flex;
   width: 100%;
+  min-width: 800px;
   justify-content: space-around;
 }
 
 .column {
   display: flex;
-  width: 324px !important;
+  width: 100%;
+  min-width: 234px;
+  margin-right: 16px;
+  margin-left: 16px;
   flex-direction: column;
 }
 

@@ -41,6 +41,6 @@ def category_new():
     if result:
         flash("Category create successful !", "success")
     else:
-        flash("Can't create category with empty value.", "danger")
+        flash("Database server has problem. Try an other time.", "danger")
 
     return redirect(url_for("categories"))

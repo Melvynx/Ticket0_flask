@@ -12,7 +12,6 @@ def query(sql, values=False, fetch=False):
         return False
 
     try:
-
         cursor = database.cursor
         result = []
         # MM 2020 execute request with value

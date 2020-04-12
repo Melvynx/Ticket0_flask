@@ -6,8 +6,17 @@
 <script src="{{ url_for('static', filename='js/tiqet.js') }}"></script>
 {% endblock %} {% block content %}
 <div class="bg-light container-tiqet mt-4 p-2 rounded">
-  {% include "tiqet/title.html" %} {% include "tiqet/content.html" %} {% include
-  "tiqet/comments.html" %}
+  {% if tiqet %} {% include "tiqet/title.html" %} {% include "tiqet/content.html" %}
+  {% include "tiqet/comments.html" %} {% else %}
+
+  <div class="alert alert-danger" role="alert">
+    Database server has problem. Check if all is ready or realod page.
+  </div>
+  <div class="alert alert-info mt-1" role="alert">
+    You're request ID can be undefined, check it out
+    <a class="btn-link btn-sm" href="{{ url_for('dashboard') }}">on dashboard</a>
+  </div>
+  {% endif %}
 </div>
 
 <!-- end content -->

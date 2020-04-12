@@ -9,18 +9,21 @@ function toggleEditTitle() {
   img.classList.add("d-none");
   input.classList.remove("d-none");
   input.value = title.innerHTML;
+  input.addEventListener("keyup", titleSave);
   input.focus();
   button.classList.remove("d-none");
 }
 
-function titleSave() {
+function titleSave(event) {
+  if (event) if (event.key !== "Enter") return;
+
   const title = document.getElementById("title");
   const img = document.getElementById("image-title");
   const input = document.getElementById("input-title");
   const button = document.getElementById("button-title");
 
   if (input.value.length < 3 || input.value.length > 50) {
-    toggleSnackBar("Title need to have between 4 and 49 caractes.");
+    toggleSnackBar("Title need to have between 4 and 49 caractes.", "danger");
     return;
   }
 
@@ -45,18 +48,21 @@ function toggleEditContent() {
   img.classList.add("d-none");
   input.classList.remove("d-none");
   input.value = content.innerHTML;
+  input.addEventListener("keyup", contentSave);
   input.focus();
   button.classList.remove("d-none");
 }
 
-function contentSave() {
+function contentSave(event) {
+  if (event) if (event.key !== "Enter") return;
+
   const content = document.getElementById("content");
   const img = document.getElementById("image-content");
   const input = document.getElementById("input-content");
   const button = document.getElementById("button-content");
 
   if (input.value.length < 2 || input.value.length > 5000) {
-    toggleSnackBar("content need to have between 43and 4999 caractes.");
+    toggleSnackBar("content need to have between 43and 4999 caractes.", "danger");
     return;
   }
 
