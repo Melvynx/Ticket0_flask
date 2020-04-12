@@ -1,4 +1,4 @@
-<div class="item border shadow p-3 mb-2 bg-white rounded item-new mt-2">
+<div class="item border shadow pr-3 pl-3 mb-2 bg-white rounded item-new mt-2">
   <div class="input-block mt-1">
     <label class="label" for="item-name-{{ item['id_item'] }}">Name</label>
     <input
@@ -20,14 +20,23 @@
 {{ item['description'] }}</textarea
     >
   </div>
-  <div class="item-button">
+  <div class="item-button ml-1 mt-1 mb-1">
     <button
-      id="item-button-{{ item['id_item'] }}"
+      id="item-edit-{{ item['id_item'] }}"
       type="button"
       class="btn btn-link btn-sm"
-      onclick="toggleEditItem(`{{ item['id_item'] }}`)"
+      onclick="onEditItem(`{{ item['id_item'] }}`)"
     >
       Edit
+    </button>
+    <button
+      id="item-save-{{ item['id_item'] }}"
+      type="button"
+      style="display: none;"
+      class="btn btn-warning btn-sm"
+      onclick="onSaveItem(`{{ item['id_item'] }}`)"
+    >
+      Save
     </button>
   </div>
 </div>
