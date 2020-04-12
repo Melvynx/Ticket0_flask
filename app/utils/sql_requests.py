@@ -66,7 +66,8 @@ index_tiqet = """ SELECT T_Tiqet.id_tiqet, T_Tiqet.title, T_Tiqet.content, T_Tiq
                   LEFT OUTER JOIN T_Priority ON T_Tiqet.fk_priority= T_Priority.id_priority
                   LEFT OUTER JOIN T_State ON T_Tiqet.fk_state = T_State.id_state
                   LEFT OUTER JOIN T_Item ON T_Tiqet.fk_item = T_Item.id_item
-                  LEFT OUTER JOIN T_User ON T_Tiqet.fk_assigned = T_User.id_user  """
+                  LEFT OUTER JOIN T_User ON T_Tiqet.fk_assigned = T_User.id_user
+                  ORDER BY T_Tiqet.created_at  """
 
 # edit only the state of the tiqet
 edit_state_tiqet = "UPDATE `T_Tiqet` SET `fk_state` = %(id_state)s WHERE `T_Tiqet`.`id_tiqet` = %(id_tiqet)s;"
@@ -141,4 +142,5 @@ index_users_admin = "SELECT * FROM `T_User` WHERE `admin` = 1"
 index_comment = """ SELECT T_Comment.fk_tiqet as "id_tiqet", T_Comment.id_comment, T_Comment.created_at,
                     T_Comment.content, T_Comment.isPrivate,  T_User.id_user,  T_User.username
                     FROM T_Comment 
-                    LEFT OUTER JOIN T_User ON T_Comment.fk_author = T_User.id_user WHERE fk_tiqet = %(id_tiqet)s"""
+                    LEFT OUTER JOIN T_User ON T_Comment.fk_author = T_User.id_user WHERE fk_tiqet = %(id_tiqet)s 
+                    ORDER BY T_Comment.created_at"""
