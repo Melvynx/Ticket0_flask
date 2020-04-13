@@ -39,12 +39,12 @@ function onCreate() {
   submitButton = document.getElementById("submit-form");
 
   if (title.value.length < 2 || title.value.length > 51) {
-    toggleSnackBar("Title need to have between 3 and 50 caracteres", "danger");
+    toggleSnackbar("Title need to have between 3 and 50 caracteres", "danger");
     return;
   }
 
   if (item.value === "null") {
-    toggleSnackBar("Need to have 1 selected item.", "danger");
+    toggleSnackbar("Need to have 1 selected item.", "danger");
     return;
   }
 

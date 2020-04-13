@@ -1,23 +1,23 @@
 const API_URL = "http://127.0.0.1:5000";
 
 // text: string, state: "danger" | "success"
-function toggleSnackBar(text, state) {
-  const snackBar = document.getElementById("snackbar");
-  snackBar.innerHTML = text;
-  setTimeout(() => snackBar.classList.remove("show"), 5000);
+function toggleSnackbar(text, state) {
+  const snackbar = $("#snackbar");
+  snackbar.html(text);
+  setTimeout(() => snackbar.removeClass("show"), 5000);
   switch (state) {
     case "danger":
-      snackBar.classList.remove("sb-success");
-      snackBar.classList.add("sb-danger");
-      snackBar.classList.add("show");
+      snackbar.removeClass("sb-success");
+      snackbar.addClass("sb-danger");
+      snackbar.addClass("show");
       break;
     case "success":
-      snackBar.classList.remove("sb-danger");
-      snackBar.classList.add("sb-success");
-      snackBar.classList.add("show");
+      snackbar.removeClass("sb-danger");
+      snackbar.addClass("sb-success");
+      snackbar.addClass("show");
       break;
     default:
-      console.warn("toggleSnackBar(): state: 'danger' | 'success' != " + state);
+      console.warn("toggleSnackbar(): state: 'danger' | 'success' != " + state);
       return;
   }
 }
@@ -26,22 +26,19 @@ function editTiqet(idTiqet, values, callback) {
   const newTiqet = { tiqet: values };
   const newTiqetJson = JSON.stringify(newTiqet);
 
-  fetch(`${API_URL}/tiqet/${idTiqet}`, {
+  $.ajax({
+    url: `${API_URL}/tiqet/${idTiqet}`,
     method: "PATCH",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
+    data: newTiqetJson,
+    dataType: "json",
+    contentType: "application/json",
+    Accept: "application/json",
+    success: (state) => {
+      callback(state);
     },
-    body: newTiqetJson,
-  }).then((reponse) => {
-    if (reponse.status !== 200) {
-      console.warn("Tiqeto api has problem.");
-      callback && callback({ state: "danger", status: "error server" });
-      return;
-    }
-
-    reponse.json().then((state) => {
-      callback && callback(state);
-    });
+    error: (result) => {
+      console.warn("Request status :", result.status);
+      toggleSnackbar("Database has problem. Try an other time.", "danger");
+    },
   });
 }

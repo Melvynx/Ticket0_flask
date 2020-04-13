@@ -15,7 +15,7 @@ function onSaveName(event) {
   let name = $("#name");
 
   if (name.val().length <= 2 || name.val().length >= 50) {
-    toggleSnackBar("Name need to have between 2 and 50 caracters.", "danger");
+    toggleSnackbar("Name need to have between 2 and 50 caracters.", "danger");
     return;
   }
 
@@ -44,7 +44,7 @@ function onSaveDescription(event) {
   let description = $("#description");
 
   if (description.val().length < 5 || description.val().length >= 1000) {
-    toggleSnackBar(
+    toggleSnackbar(
       "Description need to have between 5 and 1000 caracters.",
       "danger"
     );
@@ -73,11 +73,11 @@ function editCategory(idCategory) {
     contentType: "application/json",
     Accept: "application/json",
     success: (state) => {
-      toggleSnackBar(state.status, state.state);
+      toggleSnackbar(state.status, state.state);
     },
     error: (result) => {
       console.warn(result.status);
-      toggleSnackBar("Database has problem. Try an other time.", "danger");
+      toggleSnackbar("Database has problem. Try an other time.", "danger");
     },
   });
 }
@@ -99,11 +99,11 @@ function onSaveItem(id) {
   description.prop("disabled", true);
 
   if (name.val().length <= 2 || name.val().length >= 50) {
-    toggleSnackBar("Name need to have between 2 and 50 caracters.", "danger");
+    toggleSnackbar("Name need to have between 2 and 50 caracters.", "danger");
     return;
   }
   if (description.val().length < 5 || description.val().length >= 1000) {
-    toggleSnackBar(
+    toggleSnackbar(
       "Description need to have between 5 and 1000 caracters.",
       "danger"
     );
@@ -131,11 +131,11 @@ function updateItem(idItem) {
     contentType: "application/json",
     Accept: "application/json",
     success: (state) => {
-      toggleSnackBar(state.status, state.state);
+      toggleSnackbar(state.status, state.state);
     },
     error: (result) => {
       console.warn("Request status :", result.status);
-      toggleSnackBar("Database has problem. Try an other time.", "danger");
+      toggleSnackbar("Database has problem. Try an other time.", "danger");
     },
   });
 }
@@ -150,7 +150,7 @@ function onSubmitCategory() {
   let title = $("#name-category-new").val();
 
   if (title.length < 2 || title.length > 50) {
-    toggleSnackBar("Title need to have between 3 and 49 caractes.", "danger");
+    toggleSnackbar("Title need to have between 3 and 49 caractes.", "danger");
     return;
   }
 

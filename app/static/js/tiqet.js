@@ -23,7 +23,7 @@ function titleSave(event) {
   const button = document.getElementById("button-title");
 
   if (input.value.length < 3 || input.value.length > 50) {
-    toggleSnackBar("Title need to have between 4 and 49 caractes.", "danger");
+    toggleSnackbar("Title need to have between 4 and 49 caractes.", "danger");
     return;
   }
 
@@ -33,7 +33,7 @@ function titleSave(event) {
   title.innerHTML = input.value;
   button.classList.add("d-none");
   editTiqet(TIQET_ID, { title: input.value }, (state) => {
-    toggleSnackBar(state.status, state.state);
+    toggleSnackbar(state.status, state.state);
   });
 }
 
@@ -62,7 +62,7 @@ function contentSave(event) {
   const button = document.getElementById("button-content");
 
   if (input.value.length < 2 || input.value.length > 5000) {
-    toggleSnackBar("content need to have between 43and 4999 caractes.", "danger");
+    toggleSnackbar("content need to have between 43and 4999 caractes.", "danger");
     return;
   }
 
@@ -72,6 +72,6 @@ function contentSave(event) {
   content.innerHTML = input.value;
   button.classList.add("d-none");
   editTiqet(TIQET_ID, { content: input.value }, (state) => {
-    toggleSnackBar(state.status, state.state);
+    toggleSnackbar(state.status, state.state);
   });
 }
