@@ -1,3 +1,7 @@
+$(document).ready(() => {
+  $("#content").html($("#content").html().replace(/\r?\n/g, "<br>"));
+});
+
 /* title script "title.html" */
 function toggleEditTitle() {
   $("#title").hide();
@@ -29,15 +33,12 @@ function toggleEditContent() {
   $("#image-content").hide();
   $("#input-content")
     .show()
-    .val($("#content").text())
-    .on("keyup", contentSave)
+    .val($("#content").html().replace(/<br>/g, "\n"))
     .focus();
   $("#button-content").show();
 }
 
-function contentSave(event) {
-  if (event) if (event.key !== "Enter") return;
-
+function contentSave() {
   const input = $("#input-content");
 
   if (input.val().length < 2 || input.val().length > 5000) {
@@ -45,10 +46,10 @@ function contentSave(event) {
     return;
   }
   input.hide();
-  $("#content").show().text($("#input-content").val());
+  $("#content").show().html($("#input-content").val().replace(/\r?\n/g, "<br>"));
   $("#image-content").show();
   $("#button-content").hide();
-  editTiqet(TIQET_ID, { content: input.val() }, (state) => {
+  editTiqet(TIQET_ID, { content: input.val().replace(/<br>/g, "\n") }, (state) => {
     toggleSnackbar(state.status, state.state);
   });
 }

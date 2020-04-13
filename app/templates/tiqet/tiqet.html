@@ -3,7 +3,6 @@
 <!-- block content -->
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/tiqet.css') }}" />
-<script src="{{ url_for('static', filename='js/tiqet.js') }}"></script>
 {% endblock %} {% block content %}
 <div class="d-flex rounded border">
   {% if tiqet %}
@@ -40,4 +39,5 @@
 <script>
   const TIQET_ID = "{{ tiqet['id_tiqet'] }}";
 </script>
+<script src="{{ url_for('static', filename='js/tiqet.js') }}"></script>
 {% endblock script %}
