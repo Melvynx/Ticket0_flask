@@ -4,22 +4,20 @@ const API_URL = "http://127.0.0.1:5000";
 function toggleSnackbar(text, state) {
   const snackbar = $("#snackbar");
   snackbar.html(text);
-  setTimeout(() => snackbar.removeClass("show"), 5000);
   switch (state) {
     case "danger":
       snackbar.removeClass("sb-success");
-      snackbar.addClass("sb-danger");
-      snackbar.addClass("show");
+      snackbar.addClass("sb-danger show");
       break;
     case "success":
       snackbar.removeClass("sb-danger");
-      snackbar.addClass("sb-success");
-      snackbar.addClass("show");
+      snackbar.addClass("sb-success show");
       break;
     default:
       console.warn("toggleSnackbar(): state: 'danger' | 'success' != " + state);
       return;
   }
+  setTimeout(() => snackbar.removeClass("show"), 5000);
 }
 
 function editTiqet(idTiqet, values, callback) {
