@@ -15,12 +15,14 @@
       src="{{ url_for('static', filename='images/edit_icon.svg') }}"
     />
     <textarea
-      class="form-control bg-white form-control-sm d-none mr-2 mt-3 input-content"
+      class="form-control bg-white form-control-sm mr-2 mt-3 input-content"
+      style="display: none;"
       id="input-content"
     ></textarea>
     <button
-      class="d-none btn btn-primary align-self-end"
+      class="btn btn-primary align-self-end"
       onclick="contentSave()"
+      style="display: none;"
       id="button-content"
     >
       Save
