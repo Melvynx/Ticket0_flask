@@ -9,7 +9,7 @@ from app.utils import sql_requests
 def categories():
     categories_db = query(sql_requests.index_category, fetch="all")
     return render_template(
-        "categories.html",
+        "categories/categories.html",
         title="Categories index",
         title_setting="Categories",
         categories=categories_db,
@@ -22,7 +22,7 @@ def category(id_category):
     category_db = query(sql_requests.show_category, value, fetch="one")
     items = query(sql_requests.show_item_by_category, value, fetch="all")
     return render_template(
-        "category.html",
+        "category/category.html",
         title="Category",
         title_setting="Category",
         category=category_db,

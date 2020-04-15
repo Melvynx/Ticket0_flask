@@ -14,7 +14,9 @@
       </div>
       {% if "Categories" == title_setting or "Category" == title_setting %}
       <div class="nav-bar mr-4 p-1 rounded bg-primary">
-        <a href="#" class="nav-a text-white d-block">Categories</a>
+        <a href="{{ url_for('categories') }}" class="nav-a text-white d-block"
+          >Categories</a
+        >
       </div>
       {% else %}
       <div class="nav-bar mr-4 p-1 rounded">
@@ -69,4 +71,9 @@
   </div>
 </div>
 <!-- end content -->
-{% endblock content %}
+{% endblock content %} {% block script %}
+<!-- block children script -->
+{% block script_setting %} {% endblock script_setting %}
+<!-- endblock -->
+<script src="{{ url_for('static', filename='js/newTiqet.js') }}"></script>
+{% endblock script%}

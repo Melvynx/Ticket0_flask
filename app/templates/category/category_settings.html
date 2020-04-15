@@ -1,0 +1,61 @@
+<!-- category-name-settings -->
+<div class="input-block">
+  <label class="label" for="name">Name</label>
+  <div class="flex-center">
+    <input
+      id="name"
+      class="form-control form-control-sm"
+      value="{{ category['name'] }}"
+      onkeyup="onSaveName(event)"
+      disabled
+    />
+    <button
+      id="name-button-edit"
+      type="button"
+      class="btn btn-link btn-sm"
+      onclick="onEditName()"
+    >
+      Edit
+    </button>
+    <button
+      id="name-button-save"
+      type="button"
+      class="btn btn-link btn-sm"
+      style="display: none;"
+      onclick="onSaveName()"
+    >
+      Save
+    </button>
+  </div>
+</div>
+<!-- category-description-settings -->
+<div class="input-block">
+  <label class="label" for="description">Description</label>
+  <div class="flex-center">
+    <textarea
+      id="description"
+      class="form-control form-control-sm"
+      onkeydown="onSaveDescription(event)"
+      disabled
+    >
+{{ category['description'] }}</textarea
+    >
+    <button
+      id="description-button-edit"
+      type="button"
+      class="btn btn-link btn-sm"
+      onclick="onEditDescription()"
+    >
+      Edit
+    </button>
+    <button
+      id="description-button-save"
+      type="button"
+      class="btn btn-link btn-sm"
+      style="display: none;"
+      onclick="onSaveDescription()"
+    >
+      Save
+    </button>
+  </div>
+</div>

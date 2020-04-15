@@ -24,38 +24,9 @@
       data-stateid="{{ state['id_state'] }}"
     >
       {% for tiqet in tiqets %} {% if tiqet["id_state"] == state["id_state"] %}
-      <div
-        class="tiqet border rounded p-2 mr-2 ml-2 mt-1 mb-1 bg-light"
-        onclick="location.href=`{{ url_for('tiqet', id_tiqet=tiqet['id_tiqet']) }}`"
-        data-tiqetid="{{ tiqet['id_tiqet'] }}"
-      >
-        <span class="title text-black">{{ tiqet["title"] }}</span>
-        <span class="info text-black-50"
-          >{{ tiqet["name_item"] }} • {{ tiqet["created_at"].strftime("%x") }}</span
-        >
-        <div class="data-display mt-1">
-          {% if tiqet["username"] %}
-          <div
-            class="user-data rounded-circle d-flex justify-content-center mr-2"
-            title="{{ tiqet['username'] }}"
-          >
-            <span>{{ tiqet["username"].upper()[0] }}</span>
-          </div>
-          {%endif%} {% if tiqet["name_priority"] %}
-          <div
-            class="priority-data rounded-pill d-flex justify-content-center pl-1 pr-1"
-            title="{{ tiqet['username'] }}"
-          >
-            <img
-              src="{{ url_for('static', filename='images/flag_icon.svg') }}"
-              alt="flag"
-              class="priority-icon"
-            />
-            <span class="text-black ml-1">{{ tiqet["name_priority"] }}</span>
-          </div>
-          {% endif %}
-        </div>
-      </div>
+      <!-- tiqet -->
+      {% include 'dashboard/tiqet.html' %}
+      <!-- end tiqet -->
       {% endif %} {% endfor %}
     </div>
   </div>

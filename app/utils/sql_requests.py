@@ -43,6 +43,13 @@ update_item = (
     "id)s; "
 )
 
+# delete key contrainte and delete item
+delete_item = (
+    "UPDATE `T_Tiqet` SET `fk_item`= NULL WHERE `T_Tiqet`.`fk_item` = %(id_item)s;"
+)
+
+delete_item_2 = "DELETE FROM `T_Item` WHERE T_Item.id_item = %(id_item)s;"
+
 # show item by category NEED ID_CATEGORY
 show_item_by_category = "SELECT * FROM `T_Item` WHERE `fk_category` = %(id_category)s "
 

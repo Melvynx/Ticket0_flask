@@ -4,7 +4,7 @@ from app.db.connect_db import Database
 
 # fetch for return an Object ("one") or an Array of Object ("all")
 # sql: string sql (utils/sql_requests), values: obj, fetch: False, "one", "all"
-def query(sql, values=False, fetch=False):
+def query(sql, values=False, fetch=False, multi=False):
     database = Database()
     # MM 2020 if  database connection crashed, we directly return false
     if not database.is_connect:
@@ -16,9 +16,9 @@ def query(sql, values=False, fetch=False):
         result = []
         # MM 2020 execute request with value
         if values:
-            cursor.execute(sql, values)
+            cursor.execute(sql, values, multi=multi)
         else:
-            cursor.execute(sql)
+            cursor.execute(sql, multi=multi)
 
         if fetch == "one":
             result = cursor.fetchone()

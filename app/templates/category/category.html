@@ -1,0 +1,86 @@
+{% extends "model/settings.html" %}
+<!-- items = [array of item] category = obj -->
+<!-- block content -->
+{% block link %}
+<script>
+  const API_CATEGORY_ID = Number("{{ category['id_category'] }}");
+</script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/category.css') }}" />
+<script src="{{ url_for('static', filename='js/category.js') }}"></script>
+{% endblock %}
+<!--        body-->
+{% block setting %}
+<a class="btn-link btn-sm p-0 pt-1" href="{{ url_for('categories') }}"><- Back</a>
+<div class="category-block">
+  <div class="category">
+    {% if category %} {% include 'category/category_settings.html' %}
+    <!-- items -->
+    <h3 class="mt-4">Item's list</h3>
+    <!-- flash message -->
+
+    {% include "components/flash.html" %} {% else %} {% endif %}
+    <!-- items map -->
+    {% if items %}
+    <div class="items my-2">
+      {% for item in items %}
+      <!-- item component -->
+      {% include 'category/item.html' %}
+      <!-- end item component -->
+      {% endfor %} {% else %}
+      <div class="alert alert-info" role="alert">
+        No items with this category.
+      </div>
+      {% endif%}
+      <!-- new items -->
+      {% include 'category/new_item.html' %}
+      <!-- end new items-->
+    </div>
+    <div class="mt-2 mb-2 d-flex flex-row-reverse w-100">
+      <button
+        class="btn btn-warning btn-sm"
+        onclick="toggleModalCategory(`{{ category['id_category'] }}`)"
+      >
+        Delete this category
+      </button>
+    </div>
+  </div>
+</div>
+<!-- modal -->
+<div
+  class="modal fade"
+  id="validationDeleteModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="validation delete modal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal-title-delete">
+          Are you sure to delete this item ?
+        </h5>
+      </div>
+      <div class="modal-body" id="modal-delete-body"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          id="modal-delete-button"
+          class="btn btn-danger"
+          onclick="onDelete()"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end setting -->
+{% endblock setting %} {% block script_setting %}
+<script src="{{ url_for('static', filename='js/category.js') }}"></script>
+<script src="{{ url_for('static', filename='node_modules/bootstrap/js/dist/util.js') }}"></script>
+<script src="{{ url_for('static', filename='node_modules/bootstrap/js/dist/modal.js') }}"></script>
+{% endblock script_setting %}

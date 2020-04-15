@@ -34,7 +34,8 @@ function toggleEditContent() {
   $("#input-content")
     .show()
     .val($("#content").html().replace(/<br>/g, "\n"))
-    .focus();
+    .focus()
+    .height($("#content").height());
   $("#button-content").show();
 }
 

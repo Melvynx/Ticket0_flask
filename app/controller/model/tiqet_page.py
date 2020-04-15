@@ -20,7 +20,7 @@ def new():
     priorities_db = query(sql_requests.index_priorities, fetch="all")
     users_db = query(sql_requests.index_users_admin, fetch="all")
     return render_template(
-        "new_tiqet.html",
+        "new_tiqet/new_tiqet.html",
         title="Create TiQet",
         categories=categories_db,
         priorities=priorities_db,

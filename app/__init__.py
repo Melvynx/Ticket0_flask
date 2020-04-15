@@ -3,7 +3,7 @@
 # https://www.studytonight.com/python/_name_-as-main-method-in-python
 # C'est une chaîne de caractère qui permet de savoir si on exécute le code comme script principal
 # appelé directement avec Python et pas importé.
-from flask import Flask
+from flask import Flask, render_template
 from flask_cors import CORS
 
 app = Flask(__name__, template_folder="templates")
@@ -13,6 +13,12 @@ CORS(app)
 
 # Flask va pouvoir crypter les cookies
 app.secret_key = "LE_VxxO**_GON^^^ÂMIRLA"
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    # note that we set the 404 status explicitly
+    return render_template("404.html"), 404
 
 
 from app.controller.model import category_page, dashboard_page, item_page, tiqet_page

@@ -34,3 +34,13 @@ def category_edit(id_category):
     else:
         status = jsonify(status="sql server has problem", state="danger")
         return make_response(status, 201)
+
+
+@app.route("/categories/<id_category>", methods=["DELETE"])
+def delete_category(id_category):
+    if True:
+        status = jsonify(status="item deleted successful", state="success")
+    else:
+        status = jsonify(status="Database has problem.", state="danger")
+
+    return make_response(status, 200)

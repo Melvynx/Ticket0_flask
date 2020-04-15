@@ -90,6 +90,7 @@ function onEditItem(id) {
   $("#item-description-" + id).prop("disabled", false);
   $(`#item-edit-${id}`).hide();
   $(`#item-save-${id}`).show();
+  $(`#item-delete-${id}`).show();
 }
 
 function onSaveItem(id) {
@@ -112,6 +113,7 @@ function onSaveItem(id) {
 
   $(`#item-edit-${id}`).show();
   $(`#item-save-${id}`).hide();
+  $(`#item-delete-${id}`).hide();
   updateItem(id);
 }
 
@@ -129,6 +131,50 @@ function updateItem(idItem) {
     data: newItemJson,
     dataType: "json",
     contentType: "application/json",
+    Accept: "application/json",
+    success: (state) => {
+      toggleSnackbar(state.status, state.state);
+    },
+    error: (result) => {
+      console.warn("Request status :", result.status);
+      toggleSnackbar("Database has problem. Try an other time.", "danger");
+    },
+  });
+}
+
+// function on toggle modal delete item
+
+function toggleModal(itemID) {
+  $("#validationDeleteModal").modal("show");
+  $("#modal-delete-button").data("id", itemID);
+  $("#modal-delete-button").data("link", "items");
+  $("#modal-title-delete").text("Are you sure to delete this item ?");
+  $("#modal-delete-body")
+    .html(`<p class="badge badge-primary mr-4">Item's id :${itemID}</p><p class="badge badge-primary">Item's name :
+    ${$(`#item-name-${itemID}`).val()}</p>
+  <p>If you delete this item, all tickets that are linked will be deleted.</p>
+  <p><b>This action is irreversible.</b></p>`);
+}
+
+function toggleModalCategory(categoryID) {
+  $("#validationDeleteModal").modal("show");
+  $("#modal-delete-button").data("id", categoryID);
+  $("#modal-delete-button").data("link", "categories");
+  $("#modal-title-delete").text("Are you sure to delete this category ?");
+  $("#modal-delete-body")
+    .html(`<p class="badge badge-primary mr-4">Category's id :${categoryID}</p><p class="badge badge-primary">Category's name :
+    ${$(`#name`).val()}</p>
+  <p>If you delete this category, all tickets that are linked will be deleted. All items linked with this category will be deleted too.</p>
+  <p><b>This action is irreversible.</b></p>`);
+}
+
+function onDelete() {
+  id = $("#modal-delete-button").data("id");
+  link = $("#modal-delete-button").data("link");
+
+  $.ajax({
+    url: `${API_URL}/${link}/${id}`,
+    method: "DELETE",
     Accept: "application/json",
     success: (state) => {
       toggleSnackbar(state.status, state.state);
