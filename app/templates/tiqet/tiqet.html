@@ -3,16 +3,41 @@
 <!-- block content -->
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/tiqet.css') }}" />
-<script src="{{ url_for('static', filename='js/tiqet.js') }}"></script>
 {% endblock %} {% block content %}
-<div class="bg-light container-tiqet mt-4 p-2 rounded">
-  {% include "tiqet/title.html" %} {% include "tiqet/content.html" %} {% include
-  "tiqet/comments.html" %}
+<div class="d-flex rounded border">
+  {% if tiqet %}
+  <div class="bg-light container-tiqet rounded w-75">
+    <div class="p-3">
+      <!-- title component -->
+      {% include "tiqet/title.html" %}
+      <!-- content component -->
+      {% include "tiqet/content.html" %}
+      <!-- comments component-->
+      {% include "tiqet/comments.html" %}
+    </div>
+    <!-- make comment component -->
+    {% include "tiqet/inputcomment.html" %}
+  </div>
+  <div class="sidebar w-25 bg-dark rounded">
+    <p>salut</p>
+  </div>
+  <!-- If backend send 0 ticket -->
+  {% else %}
+  <div class="w-100">
+    <div class="alert alert-danger" role="alert">
+      Database server has problem. Check if all is ready or realod page.
+    </div>
+    <div class="alert alert-info mt-1" role="alert">
+      You're request ID can be undefined, check it out
+      <a class="btn-link btn-sm" href="{{ url_for('dashboard') }}">on dashboard</a>
+    </div>
+  </div>
+  {% endif %}
 </div>
-
 <!-- end content -->
 {% endblock content %} {% block script %}
 <script>
   const TIQET_ID = "{{ tiqet['id_tiqet'] }}";
 </script>
+<script src="{{ url_for('static', filename='js/tiqet.js') }}"></script>
 {% endblock script %}

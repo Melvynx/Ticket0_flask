@@ -3,17 +3,11 @@
 <!-- block content -->
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/newtiqet.css') }}" />
-<script src="{{ url_for('static', filename='js/newTiqet.js') }}"></script>
 {% endblock %} {% block content %}
 <div class="bg-light container-new-tiqet mt-4 p-2 rounded">
   {% include "components/flash.html" %}
   <h4>Create a tiqet</h4>
-  <form
-    id="tiqet-form-new"
-    action="{{ url_for('create_tiqet') }}"
-    method="POST"
-    onsubmit="doSubmit()"
-  >
+  <form id="tiqet-form-new" action="{{ url_for('create_tiqet') }}" method="POST">
     <div class="input-block mt-1">
       <label class="label" for="tiqet-title">Title</label>
       <input
@@ -120,4 +114,6 @@
 </div>
 
 <!-- end content -->
-{% endblock content %}
+{% endblock content %} {% block script %}
+<script src="{{ url_for('static', filename='js/newTiqet.js') }}"></script>
+{% endblock script%}

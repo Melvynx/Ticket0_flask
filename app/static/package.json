@@ -7,7 +7,9 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
+    "autosize": "^4.0.2",
     "bootstrap": "^4.4.1",
+    "jquery": "^3.5.0",
     "sortablejs": "^1.10.2"
   }
 }

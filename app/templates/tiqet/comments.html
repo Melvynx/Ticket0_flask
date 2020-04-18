@@ -18,7 +18,8 @@
     </div>
     <div>
       <div class="text-secondary comment-data">
-        {{ comment["username"] }} • {{ comment["created_at"].strftime("%x") }}
+        <span class="font-weight-bold">{{ comment["username"] }}</span> •
+        <span class="font-italic">{{ comment["created_at"].strftime("%x") }}</span>
       </div>
       <div class="comment bg-white rounded p-1 mt-1 mr-1 mb-1">
         {{ comment["content"] }}

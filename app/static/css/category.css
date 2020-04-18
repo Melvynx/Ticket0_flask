@@ -25,12 +25,12 @@
 
 .items {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-wrap: wrap;
 }
 
 .item {
-  width: 232px;
+  width: 216px;
   padding: 8px;
 }
 

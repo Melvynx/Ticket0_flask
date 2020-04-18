@@ -6,7 +6,7 @@
 <!-- start block content -->
 {% block content %}
 
-<div class="row mt-2">
+<div class="row">
   <nav class="col-sm-3">
     <div class="settings-nav border rounded mr-2 pt-2 pl-2 shadow-sm">
       <div class="title mb-1">
@@ -14,7 +14,9 @@
       </div>
       {% if "Categories" == title_setting or "Category" == title_setting %}
       <div class="nav-bar mr-4 p-1 rounded bg-primary">
-        <a href="#" class="nav-a text-white d-block">Categories</a>
+        <a href="{{ url_for('categories') }}" class="nav-a text-white d-block"
+          >Categories</a
+        >
       </div>
       {% else %}
       <div class="nav-bar mr-4 p-1 rounded">
@@ -63,10 +65,15 @@
     <div class="border-bottom mt-2 pl-2">
       <h3>{{ title_setting }}</h3>
     </div>
-    <div class="pl-2 pr-2">
+    <div class="pl-2 pr-2 mt-2">
       {% block setting %} {% endblock %}
     </div>
   </div>
 </div>
 <!-- end content -->
-{% endblock content %}
+{% endblock content %} {% block script %}
+<!-- block children script -->
+{% block script_setting %} {% endblock script_setting %}
+<!-- endblock -->
+<script src="{{ url_for('static', filename='js/newTiqet.js') }}"></script>
+{% endblock script%}

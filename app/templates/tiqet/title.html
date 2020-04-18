@@ -1,5 +1,6 @@
 <div class="title-block d-flex align-items-center">
-  <h1 class="title" id="title" onclick="toggleEditTitle()">{{ tiqet["title"] }}</h1>
+  <!-- prettier-ignore -->
+  <h1 class="title" id="title" onclick="toggleEditTitle()">{% if tiqet["title"] %}{{ tiqet["title"] }} {% else %}No title{% endif %}</h1>
   <img
     id="image-title"
     class="title-edit-icon"
@@ -7,11 +8,17 @@
   />
 
   <input
-    class="d-none input-title bg-white rounded mr-2 form-control"
+    class="input-title bg-white rounded mr-2 form-control"
     type="text"
+    style="display: none;"
     id="input-title"
   />
-  <button class="d-none btn btn-primary" onclick="titleSave()" id="button-title">
+  <button
+    class="btn btn-primary"
+    style="display: none;"
+    onclick="titleSave()"
+    id="button-title"
+  >
     Save
   </button>
 </div>

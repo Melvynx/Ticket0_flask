@@ -13,6 +13,7 @@
   margin-top: 8px;
   width: 100%;
   cursor: pointer;
+  margin-top: 0px !important;
 }
 
 .title:hover + .title-edit-icon {
@@ -43,7 +44,7 @@
 .content-icon {
   width: 2em;
   height: 2em;
-  background-color: rgb(0, 123, 255, 0.6);
+  background-color: rgb(94, 67, 137, 0.6);
 }
 
 .content {
@@ -77,8 +78,8 @@
   width: 32px;
   height: 32px;
   align-items: center;
-  background-color: rgb(23, 162, 184, 0.4);
-  border: 2px solid rgb(23, 162, 184, 0.8);
+  background-color: rgb(94, 67, 137, 0.4);
+  border: 2px solid rgb(94, 67, 137, 0.8);
 }
 
 .usernamme-data span {
@@ -87,8 +88,12 @@
 
 .comment-data {
   font-size: 14px;
-  font-style: italic;
 }
 
-.comment {
+.sidebar {
+  min-width: 224px;
+}
+
+.input-comment button {
+  height: 32px;
 }

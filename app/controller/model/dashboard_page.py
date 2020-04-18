@@ -12,5 +12,5 @@ def dashboard():
     tiqets = query(sql_requests.index_tiqet, fetch="all")
     states = query(sql_requests.index_state, fetch="all")
     return render_template(
-        "dashboard.html", title="Dashboard", tiqets=tiqets, states=states
+        "dashboard/dashboard.html", title="Dashboard", tiqets=tiqets, states=states
     )

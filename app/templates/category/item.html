@@ -1,0 +1,53 @@
+<div class="item border shadow pr-3 pl-3 mb-2 bg-white rounded item-new mt-2">
+  <div class="input-block mt-1">
+    <label class="label" for="item-name-{{ item['id_item'] }}">Name</label>
+    <input
+      id="item-name-{{ item['id_item'] }}"
+      class="form-control form-control-sm"
+      value="{{ item['name'] }}"
+      disabled
+    />
+  </div>
+  <div class="input-block">
+    <label class="label" for="item-description-{{ item['id_item'] }}"
+      >Description</label
+    >
+    <textarea
+      id="item-description-{{ item['id_item'] }}"
+      class="form-control form-control-sm"
+      disabled
+    >
+{{ item['description'] }}</textarea
+    >
+  </div>
+  <div class="item-button mt-1 mb-1">
+    <button
+      id="item-delete-{{ item['id_item'] }}"
+      type="button"
+      style="display: none;"
+      class="btn btn-warning btn-outlined btn-sm"
+      onclick="toggleModalItem(`{{ item['id_item'] }}`)"
+    >
+      <i class="fas fa-trash-alt fa-md"></i>
+    </button>
+    <div class="w-100 d-flex flex-row-reverse">
+      <button
+        id="item-edit-{{ item['id_item'] }}"
+        type="button"
+        class="btn btn-link btn-sm"
+        onclick="onEditItem(`{{ item['id_item'] }}`)"
+      >
+        Edit
+      </button>
+      <button
+        id="item-save-{{ item['id_item'] }}"
+        type="button"
+        style="display: none;"
+        class="btn btn-warning btn-sm"
+        onclick="onSaveItem(`{{ item['id_item'] }}`)"
+      >
+        Save
+      </button>
+    </div>
+  </div>
+</div>

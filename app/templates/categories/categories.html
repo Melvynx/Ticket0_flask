@@ -8,7 +8,7 @@
 <script src="{{ url_for('static', filename='js/category.js') }}"></script>
 {% endblock %} {% block setting %}
 <div class="category-list-block">
-  <div class="category-list">
+  <div class="category-list p-2">
     {% if categories %}
     <!-- if categories-->
     {% for category in categories %}
@@ -58,13 +58,9 @@
         ></textarea>
       </div>
     </div>
-
-    {% with messages = get_flashed_messages(with_categories=true) %} {% if messages
-    %} {% for category, message in messages %}
-    <div class="alert alert-{{ category }}" role="alert">
-      {{ message }}
+    <div class="mt-2">
+      {% include 'components/flash.html' %}
     </div>
-    {% endfor %} {% endif %} {% endwith %}
     <div class="mt-2 d-flex justify-content-end">
       <button
         type="button"
@@ -77,4 +73,9 @@
   </form>
 </div>
 <!-- end content -->
-{% endblock setting %}
+{% endblock setting %} {% block script_setting %}
+<script>
+  const category_item = `{{ items }}`;
+</script>
+<script src="{{ url_for('static', filename='js/category.js') }}"></script>
+{% endblock script_setting %}

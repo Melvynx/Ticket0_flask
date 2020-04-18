@@ -1,12 +1,16 @@
 .dashboard {
   display: flex;
   width: 100%;
+  min-width: 800px;
   justify-content: space-around;
 }
 
 .column {
   display: flex;
-  width: 324px !important;
+  width: 100%;
+  min-width: 234px;
+  margin-right: 16px;
+  margin-left: 16px;
   flex-direction: column;
 }
 
@@ -38,8 +42,8 @@
   width: 32px;
   height: 32px;
   align-items: center;
-  background-color: rgb(23, 162, 184, 0.4);
-  border: 2px solid rgb(23, 162, 184, 0.8);
+  background-color: rgb(94, 67, 137, 0.4);
+  border: 2px solid rgb(94, 67, 137, 0.8);
 }
 
 .tiqet .data-display .user-data span {
@@ -54,8 +58,8 @@
 .tiqet .data-display .priority-data {
   height: 32px;
   align-items: center;
-  background-color: rgb(255, 193, 6, 0.2);
-  border: 2px solid rgb(255, 193, 6, 0.5);
+  background-color: rgb(255, 193, 7, 0.2);
+  border: 2px solid rgb(255, 193, 7, 0.5);
 }
 
 .tiqet .data-display .priority-data span {

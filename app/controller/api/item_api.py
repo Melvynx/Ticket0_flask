@@ -21,6 +21,18 @@ def item_new():
     return redirect(url_for("category", id_category=category_id))
 
 
+@app.route("/items/<id_item>", methods=["DELETE"])
+def delete_item(id_item):
+    result = query(sql_requests.delete_item, {"id_item": id_item})
+    result = query(sql_requests.delete_item_2, {"id_item": id_item})
+
+    if result:
+        status = jsonify(status="item deleted successful", state="success")
+    else:
+        status = jsonify(status="Database has problem.", state="danger")
+    return make_response(status, 200)
+
+
 @app.route("/items/<id_category>", methods=["GET"])
 def items_category(id_category):
     items = query(

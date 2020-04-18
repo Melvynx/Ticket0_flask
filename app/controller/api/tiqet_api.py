@@ -9,13 +9,14 @@ from app.utils import sql_requests
 @app.route("/tiqet/<id_tiqet>", methods=["PATCH"])
 def edit_tiqet(id_tiqet):
     data = request.get_json()
+    print(data)
     tiqet = data["tiqet"]
     request_edit_tiqet = sql_requests.tiqet_edit_request(tiqet, id_tiqet)
     response = query(request_edit_tiqet, tiqet)
     if response:
         status = jsonify(status="tiqet's update successful", state="success")
         return make_response(status, 200)
-    status = jsonify(status="sql server has problem !", state="danger")
+    status = jsonify(status="Database server has problem !", state="danger")
     return make_response(status, 201)
 
 
