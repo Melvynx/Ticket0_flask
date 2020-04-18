@@ -26,6 +26,10 @@ update_category = (
     "`T_Category`.`id_category` = %(id)s; "
 )
 
+# delete category
+
+delete_category = "DELETE FROM `T_Category` WHERE T_Category.id_category = %(id_category)s;"
+
 # ----------------------------------------------
 # -----------
 # ITEM  |

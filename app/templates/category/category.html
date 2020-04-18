@@ -6,7 +6,6 @@
   const API_CATEGORY_ID = Number("{{ category['id_category'] }}");
 </script>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/category.css') }}" />
-<script src="{{ url_for('static', filename='js/category.js') }}"></script>
 {% endblock %}
 <!--        body-->
 {% block setting %}
@@ -18,7 +17,7 @@
     <h3 class="mt-4">Item's list</h3>
     <!-- flash message -->
 
-    {% include "components/flash.html" %} {% else %} {% endif %}
+    {% include "components/flash.html" %}
     <!-- items map -->
     {% if items %}
     <div class="items my-2">
@@ -43,6 +42,11 @@
         Delete this category
       </button>
     </div>
+    {% else %}
+    <div class="alert alert-warning">
+      This category no longer exists.
+    </div>
+    {% endif %}
   </div>
 </div>
 <!-- modal -->
@@ -80,6 +84,9 @@
 </div>
 <!-- end setting -->
 {% endblock setting %} {% block script_setting %}
+<script>
+  const category_item = `{{ items }}`;
+</script>
 <script src="{{ url_for('static', filename='js/category.js') }}"></script>
 <script src="{{ url_for('static', filename='node_modules/bootstrap/js/dist/util.js') }}"></script>
 <script src="{{ url_for('static', filename='node_modules/bootstrap/js/dist/modal.js') }}"></script>

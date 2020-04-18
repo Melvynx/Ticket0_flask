@@ -23,12 +23,6 @@ def item_new():
 
 @app.route("/items/<id_item>", methods=["DELETE"])
 def delete_item(id_item):
-    print("bonsoir")
-    print("bonsoir")
-    print("bonsoir")
-    print("bonsoir")
-    print("ID item", id_item)
-
     result = query(sql_requests.delete_item, {"id_item": id_item})
     result = query(sql_requests.delete_item_2, {"id_item": id_item})
 
