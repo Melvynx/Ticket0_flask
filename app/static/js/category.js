@@ -7,6 +7,9 @@ function onEditName() {
   name.focus();
 }
 
+autosize($("#description-category-new"));
+autosize($("#description"));
+
 // event focus out input name
 function onSaveName(event) {
   // if save call by event
@@ -144,7 +147,7 @@ function updateItem(idItem) {
 
 // function on toggle modal delete item
 
-function toggleModal(itemID) {
+function toggleModalItem(itemID) {
   $("#validationDeleteModal").modal("show");
   $("#modal-delete-button").data("id", itemID);
   $("#modal-delete-button").data("link", "items");
@@ -157,6 +160,10 @@ function toggleModal(itemID) {
 }
 
 function toggleModalCategory(categoryID) {
+  if (category_item.length > 6) {
+    toggleSnackbar("I can't delete the category if there's an item left.", "danger");
+    return;
+  }
   $("#validationDeleteModal").modal("show");
   $("#modal-delete-button").data("id", categoryID);
   $("#modal-delete-button").data("link", "categories");
@@ -178,6 +185,7 @@ function onDelete() {
     Accept: "application/json",
     success: (state) => {
       toggleSnackbar(state.status, state.state);
+      window.location.reload();
     },
     error: (result) => {
       console.warn("Request status :", result.status);

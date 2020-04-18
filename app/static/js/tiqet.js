@@ -2,11 +2,13 @@ $(document).ready(() => {
   $("#content").html($("#content").html().replace(/\r?\n/g, "<br>"));
 });
 
+autosize($("#input-content"));
+
 /* title script "title.html" */
 function toggleEditTitle() {
   $("#title").hide();
   $("#image-title").hide();
-  $("#input-title").show().val($("#title").val()).on("keyup", titleSave).focus();
+  $("#input-title").show().val($("#title").html()).on("keyup", titleSave).focus();
   $("#button-title").show();
 }
 
