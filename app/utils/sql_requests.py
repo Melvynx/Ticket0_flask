@@ -156,6 +156,6 @@ index_comment = """ SELECT T_Comment.fk_tiqet as "id_tiqet", T_Comment.id_commen
 # USER     |
 # -----------
 
-auth_login = """ SELECT * FROM `T_User` WHERE lower(username) = lower(%(username)s) OR lower(email) = lower(%(username)s) AND password = %(password)s """
+auth_login = """ SELECT * FROM `T_User` WHERE (lower(username) = lower(%(username)s) OR lower(email) = lower(%(username)s) ) AND password = %(password)s """
 
 auth_create = """ INSERT INTO `T_User` (`id_user`, `username`, `firstname`, `lastname`, `email`, `password`, `created_at`) VALUES (NULL, %(username)s, %(firstname)s, %(password)s, %(email)s, %(password)s, CURRENT_TIMESTAMP); """

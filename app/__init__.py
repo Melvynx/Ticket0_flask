@@ -4,15 +4,17 @@
 # C'est une chaîne de caractère qui permet de savoir si on exécute le code comme script principal
 # appelé directement avec Python et pas importé.
 from flask import Flask, render_template
+from flask_bcrypt import Bcrypt
 from flask_cors import CORS
 
 app = Flask(__name__, template_folder="templates")
+
+bcrypt = Bcrypt(app)
 # cors permet de généré automatiquement les droits "allow-origin" etc... Qui permette de répondre
 # à la méthod OPTION et donc de pouvoir excectuer la tache !
 CORS(app)
-
 # Flask va pouvoir crypter les cookies
-app.secret_key = "LE_VxxO**_GON^^^ÂMIRLA"
+app.secret_key = "MGC@@VdpdJr@c/Kp7(H#BO"
 
 
 @app.errorhandler(404)
