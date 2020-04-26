@@ -2,7 +2,6 @@
 # MM 2020 7 avril
 # module of sql request string
 
-# ----------------------------------------------
 # -----------
 # CATEGORY  |
 # -----------
@@ -28,9 +27,10 @@ update_category = (
 
 # delete category
 
-delete_category = "DELETE FROM `T_Category` WHERE T_Category.id_category = %(id_category)s;"
+delete_category = (
+    "DELETE FROM `T_Category` WHERE T_Category.id_category = %(id_category)s;"
+)
 
-# ----------------------------------------------
 # -----------
 # ITEM  |
 # -----------
@@ -57,7 +57,6 @@ delete_item_2 = "DELETE FROM `T_Item` WHERE T_Item.id_item = %(id_item)s;"
 # show item by category NEED ID_CATEGORY
 show_item_by_category = "SELECT * FROM `T_Item` WHERE `fk_category` = %(id_category)s "
 
-# ----------------------------------------------
 # -----------
 # TIQET  |
 # -----------
@@ -121,7 +120,6 @@ show_tiqet = """ SELECT T_Tiqet.id_tiqet, T_Tiqet.title, T_Tiqet.content, T_Tiqe
                   LEFT OUTER JOIN T_User ON T_Tiqet.fk_assigned = T_User.id_user
                   WHERE `T_Tiqet`.`id_tiqet` = %(id_tiqet)s  """
 
-# ----------------------------------------------
 # -----------
 # STATE  |
 # -----------
@@ -129,7 +127,6 @@ show_tiqet = """ SELECT T_Tiqet.id_tiqet, T_Tiqet.title, T_Tiqet.content, T_Tiqe
 #  index of state
 index_state = "SELECT * FROM `T_State`"
 
-# ----------------------------------------------
 # -----------
 # PRIORITY  |
 # -----------
@@ -137,7 +134,6 @@ index_state = "SELECT * FROM `T_State`"
 #  index of priority
 index_priorities = "SELECT * FROM `T_Priority`"
 
-# ----------------------------------------------
 # -----------
 # USERS     |
 # -----------
@@ -145,7 +141,6 @@ index_priorities = "SELECT * FROM `T_Priority`"
 # index of users
 index_users_admin = "SELECT * FROM `T_User` WHERE `admin` = 1"
 
-# ----------------------------------------------
 # -----------
 # COMMENT     |
 # -----------
@@ -155,3 +150,12 @@ index_comment = """ SELECT T_Comment.fk_tiqet as "id_tiqet", T_Comment.id_commen
                     FROM T_Comment 
                     LEFT OUTER JOIN T_User ON T_Comment.fk_author = T_User.id_user WHERE fk_tiqet = %(id_tiqet)s 
                     ORDER BY T_Comment.created_at"""
+
+
+# -----------
+# USER     |
+# -----------
+
+auth_login = """ SELECT * FROM `T_User` WHERE lower(username) = lower(%(username)s) OR lower(email) = lower(%(username)s) AND password = %(password)s """
+
+auth_create = """ INSERT INTO `T_User` (`id_user`, `username`, `firstname`, `lastname`, `email`, `password`, `created_at`) VALUES (NULL, %(username)s, %(firstname)s, %(password)s, %(email)s, %(password)s, CURRENT_TIMESTAMP); """

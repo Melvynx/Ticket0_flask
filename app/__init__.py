@@ -21,5 +21,11 @@ def page_not_found(e):
     return render_template("404.html"), 404
 
 
-from app.controller.model import category_page, dashboard_page, item_page, tiqet_page
-from app.controller.api import category_api, item_api, tiqet_api
+from app.controller.model import (
+    category_page,
+    dashboard_page,
+    item_page,
+    tiqet_page,
+    auth_page,
+)
+from app.controller.api import category_api, item_api, tiqet_api, auth_api

@@ -1,0 +1,14 @@
+.container-auth {
+  width: 540px;
+  margin: auto;
+}
+
+.label {
+  font-size: 12px;
+  margin-bottom: 2px;
+}
+
+.checkbox-priority {
+  border: 1px solid black;
+  border-radius: 0px;
+}

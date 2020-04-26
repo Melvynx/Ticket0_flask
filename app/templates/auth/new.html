@@ -1,0 +1,74 @@
+<!-- categories: array of category, priorities: array of priority, users: array of user admin -->
+{% extends "model/layout.html" %}
+<!-- block content -->
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}" />
+{% endblock %} {% block content %}
+
+<div class="bg-light container-auth mt-4 p-2 rounded">
+  {% include "components/flash.html" %}
+  <h4>Create an account</h4>
+  <form id="auth-form-new" action="{{ url_for('login_account') }}" method="POST">
+    <div class="input-block mt-1">
+      <label class="label" for="auth-username">Username</label>
+      <input
+        id="auth-username"
+        name="auth-username"
+        class="form-control form-control-sm"
+      />
+    </div>
+    <div class="input-block mt-1">
+      <label class="label" for="auth-email">Email</label>
+      <input
+        id="auth-email"
+        name="auth-email"
+        class="form-control form-control-sm"
+      />
+    </div>
+    <div class="d-flex w-100">
+      <div class="input-block mt-1 mr-1 w-100">
+        <label class="label" for="auth-firstname">Firstname</label>
+        <input
+          id="auth-firstname"
+          name="auth-firstname"
+          class="form-control form-control-sm"
+        />
+      </div>
+      <div class="input-block mt-1 ml-1 w-100">
+        <label class="label" for="auth-lastname">Lastname</label>
+        <input
+          id="auth-lastname"
+          name="auth-lastname"
+          class="form-control form-control-sm"
+        />
+      </div>
+    </div>
+    <div class="d-flex w-100">
+      <div class="input-block mt-1 mr-1 w-100">
+        <label class="label" for="auth-password">Password</label>
+        <input
+          id="auth-password"
+          name="auth-password"
+          class="form-control form-control-sm"
+        />
+      </div>
+      <div class="input-block mt-1 ml-1 w-100">
+        <label class="label" for="auth-conf-password">Confirm password</label>
+        <input
+          id="auth-conf-password"
+          name="auth-conf-password"
+          class="form-control form-control-sm"
+        />
+      </div>
+    </div>
+    <div class="d-flex justify-content-between align-items-center mt-2">
+      <a class="link" href="{{ url_for('login') }}">Login</a>
+      <button class="btn btn-primary">Submit</button>
+    </div>
+  </form>
+</div>
+
+<!-- end content -->
+{% endblock content %} {% block script %}
+<script src="{{ url_for('static', filename='js/auth_new.js') }}"></script>
+{% endblock script%}
