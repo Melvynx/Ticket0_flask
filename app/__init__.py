@@ -34,7 +34,7 @@ def inject_user():
     user = User()
 
     if not user.find_by_token(token):
-        print("no match user token")
+        print("no match with user token")
         return dict()
 
     return dict(user=user.user)

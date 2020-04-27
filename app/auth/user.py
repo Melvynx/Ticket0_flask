@@ -25,6 +25,7 @@ class User:
     def find_by_username(self, username=None):
         """
         find user by his username
+        !important : username need to be once time in DB
 
         @username = string of username
         @return = boolean

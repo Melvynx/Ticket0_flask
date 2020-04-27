@@ -8,7 +8,13 @@
 <div class="bg-light container-auth mt-4 p-2 rounded">
   {% include "components/flash.html" %}
   <h4>Create an account</h4>
-  <form id="auth-form-new" action="{{ url_for('login_account') }}" method="POST">
+  <form id="auth-form-new" action="{{ url_for('create_account') }}" method="POST">
+    <div
+      class="alert alert-danger"
+      style="display: none;"
+      role="alert"
+      id="auth-helper"
+    ></div>
     <div class="input-block mt-1">
       <label class="label" for="auth-username">Username</label>
       <input
@@ -63,7 +69,9 @@
     </div>
     <div class="d-flex justify-content-between align-items-center mt-2">
       <a class="link" href="{{ url_for('login') }}">Login</a>
-      <button class="btn btn-primary">Submit</button>
+      <button id="submit-form-login" type="button" class="btn btn-primary">
+        Submit
+      </button>
     </div>
   </form>
 </div>

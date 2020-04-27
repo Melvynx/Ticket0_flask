@@ -56,3 +56,53 @@ def login_account():
         "current-user-token", token, samesite=None, max_age=60 * 60 * 24 * 365 * 2
     )
     return response, 200
+
+
+@app.route("/auth/new", methods=["POST"])
+def create_account():
+    username = request.form.get("auth-username")
+    email = request.form.get("auth-email")
+    firstname = request.form.get("auth-firstname")
+    lastname = request.form.get("auth-lastname")
+    password = request.form.get("auth-password")
+
+    return make_response("create_account")
+
+
+@app.route("/auth/check_credential", methods=["POST"])
+def check_credential():
+    data = request.get_json()
+
+    if not "auth" in data:
+        status = jsonify(status="need auth", state="danger",)
+        return make_response(status, 400)
+
+    auth = data["auth"]
+
+    if not "username" in auth or not "email" in auth:
+        status = jsonify(status="need email and username object", state="danger",)
+        return make_response(status, 400)
+
+    username = query(
+        sql_requests.auth_check_username, {"username": auth["username"]}, fetch="one"
+    )
+
+    if username:
+        status = jsonify(
+            status="Username is alredy take.",
+            username=False,
+            email=False,
+            state="success",
+        )
+        return make_response(status, 200)
+    print(auth["email"])
+    email = query(sql_requests.auth_check_email, {"email": auth["email"]}, fetch="one")
+    print(email)
+    if email:
+        status = jsonify(
+            status="Email is alredy take.", username=True, email=False, state="success",
+        )
+    else:
+        status = jsonify(status="All ok", username=True, email=True, state="success",)
+
+    return make_response(status, 200)
