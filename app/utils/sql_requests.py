@@ -139,7 +139,7 @@ index_priorities = "SELECT * FROM `T_Priority`"
 # -----------
 
 # index of users
-index_users_admin = "SELECT * FROM `T_User` WHERE `admin` = 1"
+index_users = "SELECT * FROM `T_User`"
 
 # -----------
 # COMMENT     |
@@ -160,7 +160,7 @@ auth_login = """ SELECT * FROM `T_User` WHERE lower(username) = lower(%(username
 
 auth_token_login = """ SELECT * FROM `T_User` WHERE `id_user` = %(id_user)s """
 
-auth_create = """ INSERT INTO `T_User` (`id_user`, `username`, `firstname`, `lastname`, `email`, `password`, `created_at`) VALUES (NULL, %(username)s, %(firstname)s, %(password)s, %(email)s, %(password)s, CURRENT_TIMESTAMP); """
+auth_create = """ INSERT INTO `T_User` (`id_user`, `username`, `firstname`, `lastname`, `email`, `password`, `created_at`) VALUES (NULL, %(username)s, %(firstname)s, %(lastname)s, %(email)s, %(password)s, CURRENT_TIMESTAMP); """
 
 auth_check_username = """ SELECT * FROM `T_User` WHERE `username` = %(username)s """
 

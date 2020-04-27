@@ -43,7 +43,7 @@ async function onSubmit() {
       $("#auth-helper").text(state.status).show();
       return;
     }
-    console.log("user ok");
+    $("#auth-form-new").submit();
   });
 }
 

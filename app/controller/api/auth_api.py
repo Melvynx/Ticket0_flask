@@ -12,6 +12,7 @@ from app import app
 from app.auth.user import User
 from app.db.query import query
 from app.utils import sql_requests
+from werkzeug.security import generate_password_hash
 
 
 @app.route("/login", methods=["POST"])
@@ -65,8 +66,16 @@ def create_account():
     firstname = request.form.get("auth-firstname")
     lastname = request.form.get("auth-lastname")
     password = request.form.get("auth-password")
-
-    return make_response("create_account")
+    values = {
+        "username": username,
+        "email": email,
+        "firstname": firstname,
+        "lastname": lastname,
+        "password": generate_password_hash(password),
+    }
+    query(sql_requests.auth_create, values)
+    flash("Account create successful! Login.", "success")
+    return redirect(url_for("login"))
 
 
 @app.route("/auth/check_credential", methods=["POST"])
