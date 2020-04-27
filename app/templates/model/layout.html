@@ -38,7 +38,7 @@
     {% endblock %}
   </head>
   <body>
-    <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-primary navbar-app">
       <a class="navbar-brand" href="#">TiQeto</a>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
@@ -49,9 +49,6 @@
             <a class="nav-link" href="{{ url_for('categories') }}">Settings</a>
           </li>
         </ul>
-        <a class="btn btn-outline-warning btn-sm" href="{{ url_for('new')}}"
-          >Create TiQet</a
-        >
         <div class="ml-2 d-flex align-items-center">
           {% if user %}
           <a class="btn btn-outline-warning" href="{{ url_for('login')}}"
@@ -63,6 +60,17 @@
           >
           {% endif %}
         </div>
+      </div>
+      <!-- <a
+        class="text-warning"
+        style="text-align: center;"
+        id="create-tiqet-button"
+        href="{{ url_for('new')}}"
+      ></a> -->
+      <div class="semiCircle">
+        <a class="semiCircleInter btn btn-outline-warning" href="{{ url_for('new')}}"
+          >New TiQet</a
+        >
       </div>
     </nav>
     <div class="container-md mt-4">
