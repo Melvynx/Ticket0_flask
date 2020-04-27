@@ -8,7 +8,7 @@
 <div class="bg-light container-auth mt-4 p-2 rounded">
   {% include "components/flash.html" %}
   <h4>Login</h4>
-  <form id="auth-form-logion" action="{{ url_for('create_tiqet') }}" method="POST">
+  <form id="auth-form-login" action="{{ url_for('login_account') }}" method="POST">
     <div class="input-block mt-1">
       <label class="label" for="auth-username">Username</label>
       <input
