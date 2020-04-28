@@ -1,0 +1,21 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="{{ url_for('static', filename='node_modules/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/404.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/404.css') }}" />
+    <title>TiQeto - 404</title>
+  </head>
+  <body>
+    <div class="d-flex flex-column align-items-center">
+      {% include '404/anim.html' %}
+      <p style="font-size: 14px; font-family: Arial, Helvetica, sans-serif;">
+        made by <b>Daniel Wolf</b>
+        <a href="https://codepen.io/daniel_wolf/pen/RZNdBz"
+          >https://codepen.io/daniel_wolf/pen/RZNdBz</a
+        >
+      </p>
+    </div>
+  </body>
+</html>

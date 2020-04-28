@@ -1,0 +1,67 @@
+{% extends "model/settings.html" %}
+<!-- items = [array of item] category = obj -->
+<!-- block content -->
+{% block link %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='css/auth_profile.css') }}"
+/>
+{% endblock %}
+<!--        body-->
+{% block setting %} {% if user %}
+<div>
+  <div>
+    <label class="label" for="auth-username">Username</label>
+    <input
+      id="auth-username"
+      class="form-control form-control-sm"
+      value="{{ user['username'] }}"
+      disabled
+    />
+  </div>
+  <div class="d-flex">
+    <div class="w-100 mr-1">
+      <label class="label" for="auth-firstname">Firstname</label>
+      <input
+        id="auth-firstname"
+        class="form-control form-control-sm"
+        value="{{ user['firstname'] }}"
+        disabled
+      />
+    </div>
+    <div class="w-100 ml-1">
+      <label class="label" for="auth-firstname">Lastname</label>
+      <input
+        id="auth-lastname"
+        class="form-control form-control-sm"
+        value="{{ user['lastname'] }}"
+        disabled
+      />
+    </div>
+  </div>
+  <div>
+    <label class="label" for="auth-username">Email</label>
+    <input
+      id="auth-email"
+      class="form-control form-control-sm"
+      value="{{ user['email'] }}"
+      disabled
+    />
+  </div>
+  <div class="d-flex justify-content-between mt-2 mb-2 flex-row-reverse">
+    <button id="edit-button" class="btn btn-sm btn-info">
+      Edit
+    </button>
+    <button style="display: none;" id="save-button" class="btn btn-sm btn-success">
+      Save
+    </button>
+    <a class="btn btn-danger btn-sm text-white" href="{{ url_for('logout') }}">
+      Logout
+    </a>
+  </div>
+</div>
+{% endif %}
+<!-- end setting -->
+{% endblock setting %} {% block script_setting %}
+<script src="{{ url_for('static', filename='js/auth_profile.js') }}"></script>
+{% endblock script_setting %} >

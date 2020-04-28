@@ -17,21 +17,6 @@ from werkzeug.security import generate_password_hash
 
 @app.route("/login", methods=["POST"])
 def login_account():
-    # data = request.get_json()
-
-    # if not "auth" in data:
-    #     status = jsonify(status="error syntaxe json. Need 'auth'", state="danger")
-    #     return make_response(status, 400)
-
-    # auth = data["auth"]
-
-    # if not "username" in auth or not "password" in auth:
-    #     status = jsonify(
-    #         status="error syntaxe json. Auth need 'username' and 'password'",
-    #         state="danger",
-    #     )
-    #     return make_response(status, 400)
-
     username = request.form.get("auth-username")
     password = request.form.get("auth-password")
 
@@ -52,7 +37,7 @@ def login_account():
         return redirect(url_for("login"))
 
     flash("login successful", "success")
-    response = make_response(redirect("dashboard"))
+    response = make_response(redirect(url_for("dashboard")))
     response.set_cookie(
         "current-user-token", token, samesite=None, max_age=60 * 60 * 24 * 365 * 2
     )
@@ -61,6 +46,7 @@ def login_account():
 
 @app.route("/auth/new", methods=["POST"])
 def create_account():
+    # nothing to test because all is try in front web
     username = request.form.get("auth-username")
     email = request.form.get("auth-email")
     firstname = request.form.get("auth-firstname")
@@ -104,9 +90,8 @@ def check_credential():
             state="success",
         )
         return make_response(status, 200)
-    print(auth["email"])
+
     email = query(sql_requests.auth_check_email, {"email": auth["email"]}, fetch="one")
-    print(email)
     if email:
         status = jsonify(
             status="Email is alredy take.", username=True, email=False, state="success",
@@ -115,3 +100,80 @@ def check_credential():
         status = jsonify(status="All ok", username=True, email=True, state="success",)
 
     return make_response(status, 200)
+
+
+@app.route("/auth/<id_user>", methods=["PATCH"])
+def edit_user(id_user):
+    data = request.get_json()
+
+    if not "auth" in data:
+        status = jsonify(status="need auth object", state="danger",)
+        return make_response(status, 400)
+
+    auth = data["auth"]
+
+    if not "email" in auth:
+        status = jsonify(status="need email object in auth", state="danger",)
+        return make_response(status, 400)
+
+    values = {
+        "email": auth["email"],
+        "firstname": auth["firstname"],
+        "lastname": auth["lastname"],
+        "id_user": id_user,
+    }
+
+    result = query(sql_requests.auth_safe_edit, values)
+
+    if result:
+        status = jsonify(status="user edit successful", state="success")
+    else:
+        status = jsonify(status="Database has problem.", state="danger")
+
+    return make_response(status, 200)
+
+
+@app.route("/auth/password/<id_user>", methods=["PATCH"])
+def edit_user_password(id_user):
+    data = request.get_json()
+
+    if not "auth" in data:
+        status = jsonify(status="need auth object", state="danger",)
+        return make_response(status, 400)
+
+    auth = data["auth"]
+
+    if (
+        not "old_password" in auth
+        and not "new_password" in auth
+        or not "user_cookie" in auth
+    ):
+        status = jsonify(status="need old_password and new_password", state="danger",)
+        return make_response(status, 400)
+
+    if not auth["user_cookie"]:
+        status = jsonify(status="invalid user token, are you lost ?", state="danger",)
+        return make_response(status, 200)
+
+    user = User()
+
+    if not user.find_by_token(auth["user_cookie"]):
+        status = jsonify(status="inccorect user token, are you lost?", state="danger",)
+        return make_response(status, 400)
+    print("s pa")
+    if not user.edit_password(auth["old_password"], auth["new_password"]):
+        status = jsonify(status="invalid old password", state="danger",)
+        return make_response(status, 200)
+    print("e pa")
+    status = jsonify(
+        status="the password has been changed successfully", state="success",
+    )
+    return make_response(status, 200)
+
+
+@app.route("/auth/logout", methods=["GET"])
+def logout():
+    flash("logout successful", "success")
+    response = make_response(redirect(url_for("dashboard")))
+    response.set_cookie("current-user-token", "", samesite=None, max_age=1)
+    return response, 200

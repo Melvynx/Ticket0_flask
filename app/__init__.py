@@ -19,7 +19,7 @@ app.secret_key = "MGC@@VdpdJr@c/Kp7(H#BO"
 @app.errorhandler(404)
 def page_not_found(e):
     # note that we set the 404 status explicitly
-    return render_template("404.html"), 404
+    return render_template("404/404.html"), 404
 
 
 @app.context_processor
@@ -41,7 +41,6 @@ def inject_user():
 from app.controller.model import (
     category_page,
     dashboard_page,
-    item_page,
     tiqet_page,
     auth_page,
 )

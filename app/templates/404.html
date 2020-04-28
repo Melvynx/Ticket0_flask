@@ -2,12 +2,28 @@
 {% extends "model/layout.html" %}
 <!-- block content -->
 {% block head %}
-<link
-  rel="stylesheet"
-  href="{{ url_for('static', filename='css/dashboard.css') }}"
-/>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/404.css') }}" />
 {% endblock %} {% block content %}
-<h1>error 404</h1>
-{% endblock content %} {% block script %}
-<!-- script -->
-{% endblock script %}
+<div class="d-flex flex-column align-items-center">
+  <h2>Error 404</h2>
+  <div class="errorPageRap">
+    <div class="holoContainer">
+      <img src="http://danielwolf.cc/codepen/errorpage/userNotFoundBanner.png" />
+      <img
+        src="http://danielwolf.cc/codepen/errorpage/userNotFoundBanner_green.png"
+      />
+      <img src="http://danielwolf.cc/codepen/errorpage/userNotFoundBanner_red.png" />
+      <img src="{{ url_for('static', filename='images/404.svg') }}" />
+    </div>
+    <h1>
+      It seems this player doesn't exist...
+      <span><img src="http://danielwolf.cc/codepen/errorpage/sadFace.png" /></span>
+      <br />
+      You might try and search for them on <a href="#">this page</a>
+    </h1>
+  </div>
+  <a href="{{ url_for('dashboard')}}" class="btn btn-link">return to dashboard</a>
+  {% endblock content %} {% block script %}
+  <!-- script -->
+  {% endblock script %}
+</div>
