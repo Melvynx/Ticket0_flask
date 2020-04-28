@@ -4,7 +4,6 @@ $(document).ready(() => {
 
 function categorySelectChange(event) {
   showItems(event.target.value, (items) => {
-    console.log("sal");
     select = $("#select-item").html('<option value="null" selected> - </option>');
     items.map((item) => {
       select.append(`<option value="${item.id_item}">${item.name}</option>`);

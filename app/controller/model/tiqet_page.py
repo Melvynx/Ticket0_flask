@@ -18,7 +18,7 @@ from app.utils import sql_requests
 def new():
     categories_db = query(sql_requests.index_category, fetch="all")
     priorities_db = query(sql_requests.index_priorities, fetch="all")
-    users_db = query(sql_requests.index_users_admin, fetch="all")
+    users_db = query(sql_requests.index_users, fetch="all")
     return render_template(
         "new_tiqet/new_tiqet.html",
         title="Create TiQet",

@@ -38,27 +38,31 @@
       <div class="nav-bar mr-4 p-1 rounded">
         <a href="#" class="nav-a d-block">Users</a>
       </div>
-      {% endif %}
+      {% endif %} {% if user %}
       <div class="title mb-1 mt-2">
         <h6 class="title-h6">Account</h6>
       </div>
       {% if "Profile" == title_setting %}
       <div class="nav-bar mr-4 p-1 rounded bg-primary">
-        <a href="#" class="nav-a text-white d-block">Profile</a>
+        <a href="{{ url_for('auth_profile') }}" class="nav-a text-white d-block"
+          >Profile</a
+        >
       </div>
       {% else %}
       <div class="nav-bar mr-4 p-1 rounded">
-        <a href="#" class="nav-a d-block">Profile</a>
+        <a href="{{ url_for('auth_profile') }}" class="nav-a d-block">Profile</a>
       </div>
       {% endif %} {% if "Security" == title_setting %}
       <div class="nav-bar mr-4 p-1 rounded bg-primary">
-        <a href="#" class="nav-a text-white d-block">Security</a>
+        <a href="{{ url_for('auth_security') }}" class="nav-a text-white d-block"
+          >Security</a
+        >
       </div>
       {% else %}
       <div class="nav-bar mr-4 p-1 rounded">
-        <a href="#" class="nav-a d-block">Security</a>
+        <a href="{{ url_for('auth_security') }}" class="nav-a d-block">Security</a>
       </div>
-      {% endif %}
+      {% endif %} {% endif %}
     </div>
   </nav>
   <div class="settings col-sm-8 border rounded shadow-sm">

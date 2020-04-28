@@ -7,6 +7,56 @@ h1 {
   font-size: 24px;
 }
 
+.navbar-app {
+  margin-bottom: 48px;
+}
+
+.label {
+  font-size: 12px;
+  margin-bottom: 2px;
+}
+
+#create-tiqet-button {
+  position: relative;
+  z-index: 10;
+  right: 50%;
+  width: 96px;
+  height: 32px;
+  top: 24px;
+  transform: translateX(50%);
+}
+
+.semiCircle {
+  position: relative;
+  background: inherit;
+  height: 40px;
+  z-index: 8;
+  right: 50%;
+}
+
+.semiCircleInter {
+  position: absolute !important;
+  content: "" !important;
+  width: 128px !important;
+  height: 64px !important;
+  border-radius: 50% !important;
+  background: inherit !important;
+  transform: translateX(-50%) !important;
+  top: 16px !important;
+  border-width: 2px !important;
+  color: #ffc107 !important;
+
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  display: inline-flex !important;
+}
+
+.semiCircleInter:hover {
+  background-color: #ffc107 !important;
+  color: #000 !important;
+}
+
 .snackbar {
   visibility: hidden;
   min-width: 250px;

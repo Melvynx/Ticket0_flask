@@ -1,1 +1,4 @@
+cryptography
+werkzeug
 flask
+pycrypto

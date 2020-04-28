@@ -40,7 +40,7 @@ def query(sql, values=False, fetch=False, multi=False):
     ) as e:
         # MM 2020 rollback (undo commit) on error
         database.db.rollback()
-        print("Unknown error occurred : ", e)
+        print("[query] error occurred : ", e)
         result = False
 
     finally:

@@ -38,8 +38,8 @@
     {% endblock %}
   </head>
   <body>
-    <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
-      <a class="navbar-brand" href="#">TiQeto</a>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-primary navbar-app">
+      <a class="navbar-brand" href="{{ url_for('dashboard') }}">TiQeto</a>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
@@ -49,8 +49,21 @@
             <a class="nav-link" href="{{ url_for('categories') }}">Settings</a>
           </li>
         </ul>
-        <a class="btn btn-outline-warning btn-sm" href="{{ url_for('new')}}"
-          >Create TiQet</a
+        <div class="ml-2 d-flex align-items-center">
+          {% if user %}
+          <a class="btn btn-outline-warning" href="{{ url_for('auth_profile')}}"
+            >Hi {{ user['username'] }}</a
+          >
+          {% else %}
+          <a class="btn btn-outline-warning btn-sm" href="{{ url_for('login')}}"
+            >Login</a
+          >
+          {% endif %}
+        </div>
+      </div>
+      <div class="semiCircle">
+        <a class="semiCircleInter btn btn-outline-warning" href="{{ url_for('new')}}"
+          >New TiQet</a
         >
       </div>
     </nav>
@@ -62,7 +75,13 @@
     <div class="snackbar" id="snackbar">
       Succes
     </div>
-    {% block script %}
+    {% if user %}
+    <script>
+      const USER_ID = '{{ user["id_user"] }}';
+      const USER_USERNAME = '{{ user["username"] }}';
+      const USER_EMAIL = '{{ user["email"] }}';
+    </script>
+    {% endif %} {% block script %}
     <!-- head -->
     {% endblock %}
   </body>

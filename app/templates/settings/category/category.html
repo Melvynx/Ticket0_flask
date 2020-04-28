@@ -12,7 +12,7 @@
 <a class="btn-link btn-sm p-0 pt-1" href="{{ url_for('categories') }}"><- Back</a>
 <div class="category-block">
   <div class="category">
-    {% if category %} {% include 'category/category_settings.html' %}
+    {% if category %} {% include 'settings/category/category_settings.html' %}
     <!-- items -->
     <h3 class="mt-4">Item's list</h3>
     <!-- flash message -->
@@ -23,7 +23,7 @@
     <div class="items my-2">
       {% for item in items %}
       <!-- item component -->
-      {% include 'category/item.html' %}
+      {% include 'settings/category/item.html' %}
       <!-- end item component -->
       {% endfor %} {% else %}
       <div class="alert alert-info" role="alert">
@@ -31,7 +31,7 @@
       </div>
       {% endif%}
       <!-- new items -->
-      {% include 'category/new_item.html' %}
+      {% include 'settings/category/new_item.html' %}
       <!-- end new items-->
     </div>
     <div class="mt-2 mb-2 d-flex flex-row-reverse w-100">
@@ -90,4 +90,4 @@
 <script src="{{ url_for('static', filename='js/category.js') }}"></script>
 <script src="{{ url_for('static', filename='node_modules/bootstrap/js/dist/util.js') }}"></script>
 <script src="{{ url_for('static', filename='node_modules/bootstrap/js/dist/modal.js') }}"></script>
-{% endblock script_setting %}
+{% endblock script_setting %} >
