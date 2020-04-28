@@ -11,6 +11,11 @@ h1 {
   margin-bottom: 40px;
 }
 
+.label {
+  font-size: 12px;
+  margin-bottom: 2px;
+}
+
 #create-tiqet-button {
   position: relative;
   z-index: 10;

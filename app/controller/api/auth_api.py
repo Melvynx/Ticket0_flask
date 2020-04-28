@@ -17,21 +17,6 @@ from werkzeug.security import generate_password_hash
 
 @app.route("/login", methods=["POST"])
 def login_account():
-    # data = request.get_json()
-
-    # if not "auth" in data:
-    #     status = jsonify(status="error syntaxe json. Need 'auth'", state="danger")
-    #     return make_response(status, 400)
-
-    # auth = data["auth"]
-
-    # if not "username" in auth or not "password" in auth:
-    #     status = jsonify(
-    #         status="error syntaxe json. Auth need 'username' and 'password'",
-    #         state="danger",
-    #     )
-    #     return make_response(status, 400)
-
     username = request.form.get("auth-username")
     password = request.form.get("auth-password")
 
@@ -61,6 +46,7 @@ def login_account():
 
 @app.route("/auth/new", methods=["POST"])
 def create_account():
+    # nothing to test because all is try in front web
     username = request.form.get("auth-username")
     email = request.form.get("auth-email")
     firstname = request.form.get("auth-firstname")
@@ -104,9 +90,8 @@ def check_credential():
             state="success",
         )
         return make_response(status, 200)
-    print(auth["email"])
+
     email = query(sql_requests.auth_check_email, {"email": auth["email"]}, fetch="one")
-    print(email)
     if email:
         status = jsonify(
             status="Email is alredy take.", username=True, email=False, state="success",
@@ -115,3 +100,19 @@ def check_credential():
         status = jsonify(status="All ok", username=True, email=True, state="success",)
 
     return make_response(status, 200)
+
+
+@app.route("auth/<id_user>", methods=["PATCH"])
+def edit_user(id_user):
+    data = request.get_json()
+
+    if not "auth" in data:
+        status = jsonify(status="need auth object", state="danger",)
+        return make_response(status, 400)
+
+    auth = data["auth"]
+
+    if "email" in data:
+        status = jsonify(status="need email object in auth", state="danger",)
+        return make_response(status, 400)
+

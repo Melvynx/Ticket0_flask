@@ -165,3 +165,5 @@ auth_create = """ INSERT INTO `T_User` (`id_user`, `username`, `firstname`, `las
 auth_check_username = """ SELECT * FROM `T_User` WHERE `username` = %(username)s """
 
 auth_check_email = """ SELECT * FROM `T_User` WHERE `email` = %(email)s """
+
+auth_safe_edit = """ UPDATE `T_User` SET `firstname` = %(firstname)s, `lastname` = %(lastname)s, `email` = %(email)s WHERE `T_User`.`id_user` = %(id_user)s;  """

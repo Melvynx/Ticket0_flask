@@ -44,11 +44,11 @@
       </div>
       {% if "Profile" == title_setting %}
       <div class="nav-bar mr-4 p-1 rounded bg-primary">
-        <a href="#" class="nav-a text-white d-block">Profile</a>
+        <a href="{{ url_for('auth_profile') }}" class="nav-a text-white d-block">Profile</a>
       </div>
       {% else %}
       <div class="nav-bar mr-4 p-1 rounded">
-        <a href="#" class="nav-a d-block">Profile</a>
+        <a href="{{ url_for('auth_profile') }}" class="nav-a d-block">Profile</a>
       </div>
       {% endif %} {% if "Security" == title_setting %}
       <div class="nav-bar mr-4 p-1 rounded bg-primary">

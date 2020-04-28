@@ -41,7 +41,6 @@ def inject_user():
 from app.controller.model import (
     category_page,
     dashboard_page,
-    item_page,
     tiqet_page,
     auth_page,
 )

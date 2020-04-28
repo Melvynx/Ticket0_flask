@@ -1,4 +1,4 @@
-from flask import request, jsonify, make_response
+from flask import request, jsonify, make_response, flash, redirect, url_for
 
 from app import app
 from app.db.query import query
@@ -46,3 +46,19 @@ def delete_category(id_category):
     else:
         status = jsonify(status="Database has problem.", state="danger")
     return make_response(status, 200)
+
+
+@app.route("/category", methods=["POST"])
+def category_new():
+    name = request.form.get("category_name")
+    description = request.form.get("category_description")
+    # todo -> meilleur verification
+    values = {"name": name, "description": description}
+
+    result = query(sql_requests.create_category, values)
+    if result:
+        flash("Category create successful !", "success")
+    else:
+        flash("Database server has problem. Try an other time.", "danger")
+
+    return redirect(url_for("categories"))
