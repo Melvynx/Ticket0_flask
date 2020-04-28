@@ -39,7 +39,7 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-sm navbar-dark bg-primary navbar-app">
-      <a class="navbar-brand" href="#">TiQeto</a>
+      <a class="navbar-brand" href="{{ url_for('dashboard') }}">TiQeto</a>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
@@ -51,7 +51,7 @@
         </ul>
         <div class="ml-2 d-flex align-items-center">
           {% if user %}
-          <a class="btn btn-outline-warning" href="{{ url_for('login')}}"
+          <a class="btn btn-outline-warning" href="{{ url_for('auth_profile')}}"
             >Hi {{ user['username'] }}</a
           >
           {% else %}

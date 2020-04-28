@@ -6,8 +6,8 @@ from app.utils import sql_requests
 
 
 @app.route("/")
-@app.route("/dashboard")
 @app.route("/home")
+@app.route("/dashboard")
 def dashboard():
     tiqets = query(sql_requests.index_tiqet, fetch="all")
     states = query(sql_requests.index_state, fetch="all")

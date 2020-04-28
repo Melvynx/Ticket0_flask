@@ -48,13 +48,16 @@
       disabled
     />
   </div>
-  <div class="d-flex justify-between mt-2 mb-2 flex-row-reverse">
+  <div class="d-flex justify-content-between mt-2 mb-2 flex-row-reverse">
     <button id="edit-button" class="btn btn-sm btn-info">
       Edit
     </button>
     <button style="display: none;" id="save-button" class="btn btn-sm btn-success">
       Save
     </button>
+    <a class="btn btn-danger btn-sm text-white" href="{{ url_for('logout') }}">
+      Logout
+    </a>
   </div>
 </div>
 {% endif %}

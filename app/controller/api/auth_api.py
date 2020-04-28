@@ -37,7 +37,7 @@ def login_account():
         return redirect(url_for("login"))
 
     flash("login successful", "success")
-    response = make_response(redirect("dashboard"))
+    response = make_response(redirect(url_for("dashboard")))
     response.set_cookie(
         "current-user-token", token, samesite=None, max_age=60 * 60 * 24 * 365 * 2
     )
@@ -169,3 +169,11 @@ def edit_user_password(id_user):
         status="the password has been changed successfully", state="success",
     )
     return make_response(status, 200)
+
+
+@app.route("/auth/logout", methods=["GET"])
+def logout():
+    flash("logout successful", "success")
+    response = make_response(redirect(url_for("dashboard")))
+    response.set_cookie("current-user-token", "", samesite=None, max_age=1)
+    return response, 200
