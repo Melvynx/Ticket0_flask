@@ -8,7 +8,7 @@ h1 {
 }
 
 .navbar-app {
-  margin-bottom: 40px;
+  margin-bottom: 48px;
 }
 
 .label {
@@ -37,7 +37,7 @@ h1 {
 .semiCircleInter {
   position: absolute !important;
   content: "" !important;
-  width: 160px !important;
+  width: 128px !important;
   height: 64px !important;
   border-radius: 50% !important;
   background: inherit !important;

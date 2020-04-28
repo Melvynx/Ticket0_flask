@@ -12,30 +12,41 @@ function onEdit() {
 }
 
 function onSave() {
-  $("#auth-lastname").prop("disabled", true).val();
-  $("#auth-firstname").prop("disabled", true).val();
-  const email = $("#auth-email").prop("disabled", true).val();
-
+  const email = $("#auth-email").val();
   const emailHelper = checkEmail(email);
-
   if (!emailHelper.state) {
     toggleSnackbar(emailHelper.helper, "danger");
     return;
   }
 
+  const newValues = {
+    auth: {
+      firstname: $("#auth-firstname").val(),
+      lastname: $("#auth-lastname").val(),
+      email: email,
+    },
+  };
+
+  const newValuesJson = JSON.stringify(newValues);
+
   $.ajax({
     url: `${API_URL}/auth/${USER_ID}`,
-    method: "POST",
-    data: credentialJson,
+    method: "PATCH",
+    data: newValuesJson,
     dataType: "json",
     contentType: "application/json",
     Accept: "application/json",
     success: (state) => {
-      resolve(state);
+      toggleSnackbar(state.status, state.state);
+      if (state.state === "success") {
+        $("#auth-lastname").prop("disabled", true);
+        $("#auth-firstname").prop("disabled", true);
+        $("#auth-email").prop("disabled", true);
+        $("#edit-button").show();
+        $("#save-button").hide();
+      }
     },
     error: (result) => {
-      resolve(false);
-      console.warn(result.responseJSON);
       toggleSnackbar("Database has problem. Try an other time.", "danger");
     },
   });

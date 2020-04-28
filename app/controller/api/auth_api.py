@@ -102,7 +102,7 @@ def check_credential():
     return make_response(status, 200)
 
 
-@app.route("auth/<id_user>", methods=["PATCH"])
+@app.route("/auth/<id_user>", methods=["PATCH"])
 def edit_user(id_user):
     data = request.get_json()
 
@@ -116,3 +116,18 @@ def edit_user(id_user):
         status = jsonify(status="need email object in auth", state="danger",)
         return make_response(status, 400)
 
+    values = {
+        "email": auth["email"],
+        "firstname": auth["firstname"],
+        "lastname": auth["lastname"],
+        "id_user": id_user,
+    }
+
+    result = query(sql_requests.auth_safe_edit, values)
+
+    if result:
+        status = jsonify(status="user edit successful", state="success")
+    else:
+        status = jsonify(status="Database has problem.", state="danger")
+
+    return make_response(status, 200)
