@@ -20,3 +20,10 @@ def auth_profile():
     return render_template(
         "settings/auth/auth_profile.html", title_setting="Profile", title="Profile"
     )
+
+
+@app.route("/auth/security", methods=["GET"])
+def auth_security():
+    return render_template(
+        "settings/auth/auth_security.html", title_setting="Security", title="Profile"
+    )

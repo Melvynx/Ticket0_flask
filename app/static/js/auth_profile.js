@@ -47,6 +47,7 @@ function onSave() {
       }
     },
     error: (result) => {
+      console.warn(result.responseJSON);
       toggleSnackbar("Database has problem. Try an other time.", "danger");
     },
   });

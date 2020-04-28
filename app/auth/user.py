@@ -49,13 +49,8 @@ class User:
         @password = plain text of password
         @return = boolean if user authentificate
         """
-        print("start func")
-
         if not self.user:
             return False
-
-        test_hash = generate_password_hash(password)
-        print(test_hash)
 
         if check_password_hash(self.user["password"], password):
             self.authenticate = True
@@ -99,6 +94,34 @@ class User:
         self.authenticate = True
 
         return True
+
+    def edit_password(self, old_password, new_password):
+        """
+        edit user password
+
+        @old_password = string
+        @new_password = string
+
+        @return = boolean
+        """
+        if not new_password or not old_password or not self.user:
+            print("Warning -> need to have self.user, new_password and old_password")
+            return False
+
+        if not self.check_password(old_password):
+            return False
+
+        new_password_hash = generate_password_hash(new_password)
+
+        result = query(
+            sql_requests.auth_edit_password,
+            {"id_user": self.user["id_user", new_password:new_password_hash]},
+        )
+
+        if result:
+            return True
+
+        return False
 
     # create new account
     def create_account(self):

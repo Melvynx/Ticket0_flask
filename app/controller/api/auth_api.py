@@ -112,7 +112,7 @@ def edit_user(id_user):
 
     auth = data["auth"]
 
-    if "email" in data:
+    if not "email" in auth:
         status = jsonify(status="need email object in auth", state="danger",)
         return make_response(status, 400)
 
@@ -130,4 +130,39 @@ def edit_user(id_user):
     else:
         status = jsonify(status="Database has problem.", state="danger")
 
+    return make_response(status, 200)
+
+
+@app.route("/auth/password/<id_user>", methods=["PATCH"])
+def edit_user_password(id_user):
+    data = request.get_json()
+
+    if not "auth" in data:
+        status = jsonify(status="need auth object", state="danger",)
+        return make_response(status, 400)
+
+    auth = data["auth"]
+
+    if not "old_password" in auth and not "new_password" in auth:
+        status = jsonify(status="need old_password and new_password", state="danger",)
+        return make_response(status, 400)
+
+    if not request.cookies.get("current-user-token"):
+        status = jsonify(status="invalid user token, are you lost?", state="danger",)
+        return make_response(status, 400)
+
+    token = request.cookies.get("current-user-token")
+    user = User()
+
+    if not user.find_by_token(token):
+        status = jsonify(status="invalid user token, are you lost?", state="danger",)
+        return make_response(status, 400)
+
+    if not user.edit_password(auth["old_password"], auth["new_password"]):
+        status = jsonify(status="invalid old password", state="danger",)
+        return make_response(status, 200)
+
+    status = jsonify(
+        status="the password has been changed successfully", state="danger",
+    )
     return make_response(status, 200)
