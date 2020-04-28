@@ -143,26 +143,29 @@ def edit_user_password(id_user):
 
     auth = data["auth"]
 
-    if not "old_password" in auth and not "new_password" in auth:
+    if (
+        not "old_password" in auth
+        and not "new_password" in auth
+        or not "user_cookie" in auth
+    ):
         status = jsonify(status="need old_password and new_password", state="danger",)
         return make_response(status, 400)
 
-    if not request.cookies.get("current-user-token"):
-        status = jsonify(status="invalid user token, are you lost?", state="danger",)
-        return make_response(status, 400)
+    if not auth["user_cookie"]:
+        status = jsonify(status="invalid user token, are you lost ?", state="danger",)
+        return make_response(status, 200)
 
-    token = request.cookies.get("current-user-token")
     user = User()
 
-    if not user.find_by_token(token):
-        status = jsonify(status="invalid user token, are you lost?", state="danger",)
+    if not user.find_by_token(auth["user_cookie"]):
+        status = jsonify(status="inccorect user token, are you lost?", state="danger",)
         return make_response(status, 400)
-
+    print("s pa")
     if not user.edit_password(auth["old_password"], auth["new_password"]):
         status = jsonify(status="invalid old password", state="danger",)
         return make_response(status, 200)
-
+    print("e pa")
     status = jsonify(
-        status="the password has been changed successfully", state="danger",
+        status="the password has been changed successfully", state="success",
     )
     return make_response(status, 200)

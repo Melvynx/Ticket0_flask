@@ -6,7 +6,6 @@ function onSave() {
   const newPassword = $("#new-password").val();
   const newPasswordConfirm = $("#new-password-confirm").val();
   const newPasswordHelper = checkPassword(newPassword);
-  console.log(newPassword, newPasswordConfirm);
   const newPasswordConfirmHelper = checkConfirmPassword(
     newPassword,
     newPasswordConfirm
@@ -22,12 +21,17 @@ function onSave() {
     return;
   }
 
+  const token = getCookie("current-user-token");
+
   const newValues = {
-    auth: { old_password: $("#old-password").val(), new_password: newPassword },
+    auth: {
+      old_password: $("#old-password").val(),
+      new_password: newPassword,
+      user_cookie: token ? token : null,
+    },
   };
 
   const newValuesJson = JSON.stringify(newValues);
-  console.log("send enw values");
   $.ajax({
     url: `${API_URL}/auth/password/${USER_ID}`,
     method: "PATCH",
@@ -41,6 +45,7 @@ function onSave() {
       }
     },
     error: (result) => {
+      console.warn(result.responseJSON);
       toggleSnackbar("Database has problem. Try an other time.", "danger");
     },
   });

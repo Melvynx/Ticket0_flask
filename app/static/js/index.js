@@ -40,3 +40,9 @@ function editTiqet(idTiqet, values, callback) {
     },
   });
 }
+
+// by https://stackoverflow.com/a/21125098/12472736
+function getCookie(name) {
+  var match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
+  if (match) return match[2];
+}

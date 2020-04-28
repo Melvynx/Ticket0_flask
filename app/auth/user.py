@@ -104,22 +104,28 @@ class User:
 
         @return = boolean
         """
+        print("start")
         if not new_password or not old_password or not self.user:
             print("Warning -> need to have self.user, new_password and old_password")
             return False
+        print("check")
 
         if not self.check_password(old_password):
             return False
+        print("generate")
 
         new_password_hash = generate_password_hash(new_password)
+        print("query")
 
         result = query(
             sql_requests.auth_edit_password,
-            {"id_user": self.user["id_user", new_password:new_password_hash]},
+            {"id_user": self.user["id_user"], "new_password": new_password_hash},
         )
+        print("try")
 
         if result:
             return True
+        print("return")
 
         return False
 
