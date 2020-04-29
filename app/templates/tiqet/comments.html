@@ -6,26 +6,29 @@
     />
     <h4 class="content-title m-0">Comments :</h4>
   </div>
-  {% if comments %} {% for comment in comments %}
-  <div class="d-flex mt-2">
-    <div class="">
-      <div
-        class="usernamme-data rounded-circle d-flex justify-content-center mr-2"
-        title="{{ tiqet['username'] }}"
-      >
-        <span>{{ comment["username"].upper()[0] }}</span>
+  <div id="comments">
+    {% if comments %} {% for comment in comments %}
+    <div class="d-flex mt-2">
+      <div class="">
+        <div
+          class="usernamme-data rounded-circle d-flex justify-content-center mr-2"
+          title="{{ tiqet['username'] }}"
+        >
+          <span>{{ comment["username"].upper()[0] }}</span>
+        </div>
+      </div>
+      <div>
+        <div class="text-secondary comment-data">
+          <span class="font-weight-bold">{{ comment["username"] }}</span> •
+          <span class="font-italic"
+            >{{ comment["created_at"].strftime("%d/%m/%Y, %H:%M:%S") }}</span
+          >
+        </div>
+        <div class="comment bg-white rounded p-1 mt-1 mr-1 mb-1 d-inline-block">
+          {{ comment["content"] }}
+        </div>
       </div>
     </div>
-    <div>
-      <div class="text-secondary comment-data">
-        <span class="font-weight-bold">{{ comment["username"] }}</span> •
-        <span class="font-italic">{{ comment["created_at"].strftime("%x") }}</span>
-      </div>
-      <div class="comment bg-white rounded p-1 mt-1 mr-1 mb-1">
-        {{ comment["content"] }}
-      </div>
-    </div>
+    {% endfor %} {% endif %}
   </div>
-
-  {% endfor %} {% endif %}
 </div>

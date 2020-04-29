@@ -31,5 +31,5 @@ def new():
 @app.route("/tiqet/<id_tiqet>", methods=["GET"])
 def tiqet(id_tiqet):
     tiqet_db = query(sql_requests.show_tiqet, {"id_tiqet": id_tiqet}, fetch="one")
-    comments_db = query(sql_requests.index_comment, {"id_tiqet": id_tiqet}, fetch="all")
+    comments_db = query(sql_requests.index_comments, {"id_tiqet": id_tiqet}, fetch="all")
     return render_template("tiqet/tiqet.html", tiqet=tiqet_db, comments=comments_db)

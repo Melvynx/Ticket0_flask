@@ -106,6 +106,8 @@ def check_credential():
 def edit_user(id_user):
     data = request.get_json()
 
+    # todo : check if user is really a good user
+
     if not "auth" in data:
         status = jsonify(status="need auth object", state="danger",)
         return make_response(status, 400)

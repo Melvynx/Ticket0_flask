@@ -1,5 +1,13 @@
 $(document).ready(() => {
   $("#content").html($("#content").html().replace(/\r?\n/g, "<br>"));
+  // for each
+  // $(".comment").html($(".comment").html().replace(/\r?\n/g, "<br>"));
+  $("#title").on("click", toggleEditTitle);
+  $("#button-title").on("click", titleSave);
+  $("#button-content").on("click", contentSave);
+  $("#content").on("click", toggleEditContent);
+  $("#button-comment").on("click", sendComment);
+  $("#comment").on("keyup", removeShadow);
 });
 
 autosize($("#input-content"));
@@ -14,16 +22,16 @@ function toggleEditTitle() {
 
 function titleSave(event) {
   if (event) if (event.key !== "Enter") return;
-  const input = $("#input-title");
+  const title = $("#input-title");
 
-  if (input.val().length < 3 || input.val().length > 50) {
-    toggleSnackbar("Title need to have between 4 and 49 caractes.", "danger");
+  if (title.val().length <= 2 || title.val().length >= 100) {
+    toggleSnackbar("Title need to have between 2 and 100 caractes.", "danger");
   } else {
     $("#image-title").show();
-    input.hide();
-    $("#title").html(input.val()).show();
+    title.hide();
+    $("#title").html(title.val()).show();
     $("#button-title").hide();
-    editTiqet(TIQET_ID, { title: input.val() }, (state) => {
+    editTiqet(TIQET_ID, { title: title.val() }, (state) => {
       toggleSnackbar(state.status, state.state);
     });
   }
@@ -44,8 +52,8 @@ function toggleEditContent() {
 function contentSave() {
   const input = $("#input-content");
 
-  if (input.val().length < 2 || input.val().length > 5000) {
-    toggleSnackbar("content need to have between 43and 4999 caractes.", "danger");
+  if (input.val().length <= 2 || input.val().length >= 5000) {
+    toggleSnackbar("content need to have between 2 and 5000 caractes.", "danger");
     return;
   }
   input.hide();
@@ -55,4 +63,97 @@ function contentSave() {
   editTiqet(TIQET_ID, { content: input.val().replace(/<br>/g, "\n") }, (state) => {
     toggleSnackbar(state.status, state.state);
   });
+}
+
+function sendComment() {
+  if ($("#comment").val().length <= 1) {
+    comment.css("box-shadow", "0 0 0 0.2rem rgb(220,53,69,0.5)");
+    return;
+  }
+
+  const token = getCookie("current-user-token");
+
+  const values = {
+    comment: {
+      user_hash: token ? token : null,
+      content: $("#comment").val(),
+    },
+  };
+
+  const valuesJson = JSON.stringify(values);
+
+  $.ajax({
+    url: `${API_URL}/comments/${TIQET_ID}`,
+    method: "POST",
+    data: valuesJson,
+    dataType: "json",
+    contentType: "application/json",
+    Accept: "application/json",
+    success: (status) => {
+      if (status.state === "danger") {
+        console.warn("Error for post comment : ", status.status);
+        return;
+      }
+      updateComments();
+    },
+    error: (result) => {
+      console.warn("Request status :", result.status);
+      console.warn(result.responseJSON);
+      toggleSnackbar("Database has problem. Try an other time.", "danger");
+    },
+  });
+}
+
+function updateComments() {
+  getComments((comments) => {
+    const commentBox = $("#comments");
+    commentBox.html("");
+    console.log(commentBox);
+    comments.map((comment) => {
+      console.log(comment);
+      const created_at = new Date(comment.created_at);
+      const date =
+        created_at.toLocaleDateString() + " ," + created_at.toLocaleTimeString();
+      // debugger;
+      commentBox.append(`<div class="d-flex mt-2">
+      <div class="">
+        <div
+          class="usernamme-data rounded-circle d-flex justify-content-center mr-2"
+          title="${comment.username}"
+        >
+          <span>${comment.username.toUpperCase()[0]}</span>
+        </div>
+      </div>
+      <div>
+        <div class="text-secondary comment-data">
+          <span class="font-weight-bold">${comment.username}</span> •
+          <span class="font-italic">${date}</span>
+        </div>
+        <div class="comment bg-white rounded p-1 mt-1 mr-1 mb-1 d-inline-block">
+          ${comment.content}
+        </div>
+      </div>
+    </div>`);
+    });
+  });
+}
+
+function getComments(callback) {
+  $.ajax({
+    url: `${API_URL}/comments/${TIQET_ID}`,
+    method: "GET",
+    dataType: "json",
+    Accept: "application/json",
+    success: (comments) => {
+      callback(comments);
+    },
+    error: (result) => {
+      console.warn("Request status :", result.status);
+      toggleSnackbar("Database has problem. Try an other time.", "danger");
+    },
+  });
+}
+
+function removeShadow() {
+  $("#comment").removeAttr("style");
 }

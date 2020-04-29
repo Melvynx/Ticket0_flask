@@ -97,3 +97,8 @@
 .input-comment button {
   height: 32px;
 }
+
+#comments {
+  max-height: 500px;
+  overflow-y: scroll;
+}
