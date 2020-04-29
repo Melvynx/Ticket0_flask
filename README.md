@@ -67,7 +67,7 @@ Puis tout simplement faire
 # with yarn
 mac@/dev/python/Tiqeto/app/static$ yarn init
 
-#with npm
+# with npm
 mac@/dev/python/Tiqeto/app/static$ npm i
 ```
 
