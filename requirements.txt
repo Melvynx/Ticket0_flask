@@ -1,4 +1,5 @@
 cryptography
 werkzeug
 flask
-pycrypto0
+pycrypto
+mysql-connector-python
