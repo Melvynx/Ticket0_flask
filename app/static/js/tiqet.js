@@ -74,6 +74,11 @@ function sendComment() {
 
   const token = getCookie("current-user-token");
 
+  if (!token) {
+    toggleSnackbar("You need to be login to post comment.", "danger");
+    return;
+  }
+
   const values = {
     comment: {
       user_hash: token ? token : null,
