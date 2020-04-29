@@ -1,7 +1,8 @@
 $(document).ready(() => {
   $("#content").html($("#content").html().replace(/\r?\n/g, "<br>"));
-  // for each
-  // $(".comment").html($(".comment").html().replace(/\r?\n/g, "<br>"));
+  $(".comment-content").each((index, element) => {
+    element.innerHTML = element.innerHTML.replace(/\r?\n/g, "<br>");
+  });
   $("#title").on("click", toggleEditTitle);
   $("#button-title").on("click", titleSave);
   $("#button-content").on("click", contentSave);
@@ -108,13 +109,11 @@ function updateComments() {
   getComments((comments) => {
     const commentBox = $("#comments");
     commentBox.html("");
-    console.log(commentBox);
+    $("#comment").val("");
     comments.map((comment) => {
-      console.log(comment);
       const created_at = new Date(comment.created_at);
       const date =
         created_at.toLocaleDateString() + " ," + created_at.toLocaleTimeString();
-      // debugger;
       commentBox.append(`<div class="d-flex mt-2">
       <div class="">
         <div
@@ -130,10 +129,13 @@ function updateComments() {
           <span class="font-italic">${date}</span>
         </div>
         <div class="comment bg-white rounded p-1 mt-1 mr-1 mb-1 d-inline-block">
-          ${comment.content}
+          <p class="comment-content">${comment.content}</p>  
         </div>
       </div>
     </div>`);
+    });
+    $(".comment-content").each((index, element) => {
+      element.innerHTML = element.innerHTML.replace(/\r?\n/g, "<br>");
     });
   });
 }

@@ -1,4 +1,4 @@
 cryptography
 werkzeug
 flask
-pycrypto
+pycrypto0
