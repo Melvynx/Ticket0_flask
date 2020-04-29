@@ -65,10 +65,10 @@ Ici, si vous ne possédé pas `npm` ou `yarn` il vous faudra l'installer.
 Puis tout simplement faire
 ```bash
 # with yarn
-mac@/dev/python/Tiqeto/app/static$ cd yarn init
+mac@/dev/python/Tiqeto/app/static$ yarn init
 
 #with npm
-mac@/dev/python/Tiqeto/app/static$ cd npm i
+mac@/dev/python/Tiqeto/app/static$ npm i
 ```
 
 Et voilà, vous pouvez maintenant lancer l'application sur le fichier `run.py` en utilisant **pycharm**.
