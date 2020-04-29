@@ -1,13 +1,13 @@
 # TiQeto Epsic with Python - Flask
 
-## Installer un repo github avec ses dépendance
+> Installer un repo github avec ses dépendance
 
 *Module 104 - Epsic*
 
 Tuto pour que n'importe quelle personne puisse installer mon projet.
 
 
-### Git - cloner le repository
+## Git - cloner le repository
 
 Pour cloner le repository, il vous suiffira d'ouvrir un terminal.
 
@@ -33,7 +33,7 @@ Resolving deltas: 100% (102/102), done.
 Voilà 🤩 vous êtes en possession du projet sur votre machine !
 
 
-### Installer les dépendences Python
+## Installer les dépendences Python
 
 Pour ceci, il vous suffira dans l'éditeur `PyCharm` d'aller dans le section `settings`.
 
@@ -45,7 +45,7 @@ Aller en haut à droite sur le `+` cliquer sur `add`.
 
 Ici, vous n'avez plus qu'à choisir le dossier `venv` et télécharger les dépendences.
 
-### Installer les dépendences package.json
+## Installer les dépendences package.json
 *Pour le javascript et css.*
 
 Ici, il faudra ouvrir un terminal.
