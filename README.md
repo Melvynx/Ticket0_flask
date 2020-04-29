@@ -75,4 +75,4 @@ Et voilà, vous pouvez maintenant lancer l'application sur le fichier `run.py` e
 
 *Melvyn Malherbe*
 
-> [time=Thu, Apr 9, 2020 10:33 PM]
+> 29 avril 2020
