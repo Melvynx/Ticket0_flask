@@ -145,11 +145,13 @@ index_users = "SELECT * FROM `T_User`"
 # COMMENT     |
 # -----------
 
-index_comment = """ SELECT T_Comment.fk_tiqet as "id_tiqet", T_Comment.id_comment, T_Comment.created_at,
-                    T_Comment.content, T_Comment.isPrivate,  T_User.id_user,  T_User.username
+index_comments = """ SELECT T_Comment.fk_tiqet as "id_tiqet", T_Comment.id_comment, T_Comment.created_at,
+                    T_Comment.content,  T_User.id_user,  T_User.username
                     FROM T_Comment 
                     LEFT OUTER JOIN T_User ON T_Comment.fk_author = T_User.id_user WHERE fk_tiqet = %(id_tiqet)s 
-                    ORDER BY T_Comment.created_at"""
+                    ORDER BY T_Comment.created_at """
+
+create_comment = """ INSERT INTO `T_Comment` (`id_comment`, `fk_author`, `fk_tiqet`, `content`, `created_at`) VALUES (NULL, %(id_user)s, %(id_tiqet)s, %(content)s, CURRENT_TIMESTAMP); """
 
 
 # -----------
