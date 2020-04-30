@@ -1,5 +1,6 @@
 $(document).ready(() => {
   categorySelectChange({ target: { value: $("#tiqet-category").val() } });
+  $("#tiqet-category").niceSelect();
 });
 
 function categorySelectChange(event) {

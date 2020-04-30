@@ -1,3 +1,4 @@
+// todo : use font awrsomes
 $(document).ready(() => {
   $("#content").html($("#content").html().replace(/\r?\n/g, "<br>"));
   $(".comment-content").each((index, element) => {
@@ -9,7 +10,17 @@ $(document).ready(() => {
   $("#content").on("click", toggleEditContent);
   $("#button-comment").on("click", sendComment);
   $("#comment").on("keyup", removeShadow);
+
+  initPopper();
 });
+
+function initPopper() {
+  const ref = document.getElementById("comment");
+  const popper = document.getElementById("comment-popper");
+
+  // create the popper
+  Popper.createPopper(ref, popper, { placement: "bottom" });
+}
 
 autosize($("#input-content"));
 
@@ -68,7 +79,11 @@ function contentSave() {
 
 function sendComment() {
   if ($("#comment").val().length <= 1) {
-    comment.css("box-shadow", "0 0 0 0.2rem rgb(220,53,69,0.5)");
+    $("#comment").css("box-shadow", "0 0 0 0.2rem rgb(220,53,69,0.5)");
+    $("#comment-popper").show();
+    setTimeout(() => {
+      $("#comment-popper").hide();
+    }, 2000);
     return;
   }
 
