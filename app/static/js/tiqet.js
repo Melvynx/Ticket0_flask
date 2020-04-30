@@ -10,6 +10,7 @@ $(document).ready(() => {
   $("#content").on("click", toggleEditContent);
   $("#button-comment").on("click", sendComment);
   $("#comment").on("keyup", removeShadow);
+  $("select").niceSelect();
 
   initPopper();
 });
