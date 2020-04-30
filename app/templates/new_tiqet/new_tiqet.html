@@ -3,6 +3,12 @@
 <!-- block content -->
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/newtiqet.css') }}" />
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='node_modules/jquery-nice-select/css/nice-select.css') }}"
+/>
+
+<script src="{{ url_for('static', filename='node_modules/jquery-nice-select/js/jquery.nice-select.js') }}"></script>
 {% endblock %} {% block content %}
 <div class="bg-light container-new-tiqet mt-4 p-2 rounded">
   {% include "components/flash.html" %}
@@ -27,15 +33,15 @@
       ></textarea>
     </div>
     <div class="d-flex mt-1">
-      <div class="input-block w-100 mr-1">
+      <div class="input-block w-100 mr-1 d-flex flex-column">
         <label class="label" for="tiqet-category">Category</label>
         <select
-          class="form-control form-control-sm"
+          class="wide small"
           id="tiqet-category"
           onchange="categorySelectChange(event)"
           name="tiqet-category"
         >
-          <option value="null" selected> - </option>
+          <option value="null" selected data-display="- select category"> - </option>
           {% for category in categories %}
           <option value="{{ category['id_category'] }}"
             >{{ category["name"] }}</option
@@ -43,14 +49,10 @@
           {% endfor %}
         </select>
       </div>
-      <div class="input-block w-100 ml-1">
+      <div class="input-block w-100 ml-1 d-flex flex-column">
         <label class="label" for="item-description-new">Item</label>
-        <select
-          class="form-control form-control-sm"
-          id="select-item"
-          name="tiqet-item"
-        >
-          <option value="null" selected> - </option>
+        <select class="wide small" id="select-item" name="tiqet-item">
+          <option value="null" selected data-display="- select item"> - </option>
         </select>
       </div>
     </div>
@@ -83,14 +85,10 @@
       </div>
       {% endfor %}
     </div>
-    <div class="input-block w-100 mr-1">
+    <div class="input-block w-100 mr-1 d-flex flex-column">
       <label class="label" for="item-description-new">Assigned</label>
-      <select
-        class="form-control form-control-sm"
-        id="select_user"
-        name="tiqet-user"
-      >
-        <option selected value="null"> - </option>
+      <select class="wide small" id="select_user" name="tiqet-user">
+        <option selected value="null" data-display="- select assigned"> - </option>
         {% for user in users %}
         <option value="{{ user['id_user'] }}">{{ user["username"] }}</option>
         {% endfor %}
@@ -116,4 +114,5 @@
 <!-- end content -->
 {% endblock content %} {% block script %}
 <script src="{{ url_for('static', filename='js/newTiqet.js') }}"></script>
+<script src="{{ url_for('static', filename='node_modules/jquery-nice-select/js/jquery.nice-select.js') }}"></script>
 {% endblock script%}

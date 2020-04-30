@@ -1,0 +1,14 @@
+<div class="sidebar-setting d-flex justify-content-between p-2">
+  <div class="sidebar-label d-flex align-items-center">
+    <i class="fas fa-ticket-alt fa-md text-white"></i>
+    <p class="text-white m-0 ml-1">Label</p>
+  </div>
+  <div class="sidebar-select">
+    <select class="wide small" id="select_user" name="tiqet-user">
+      <option selected value="null" data-display="- select assigned"> - </option>
+      {% for user in users %}
+      <option value="{{ user['id_user'] }}">{{ user["username"] }}</option>
+      {% endfor %}
+    </select>
+  </div>
+</div>

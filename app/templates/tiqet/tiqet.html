@@ -3,6 +3,10 @@
 <!-- block content -->
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/tiqet.css') }}" />
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='node_modules/jquery-nice-select/css/nice-select.css') }}"
+/>
 {% endblock %} {% block content %}
 <div class="d-flex rounded border">
   {% if tiqet %}
@@ -19,7 +23,7 @@
     {% include "tiqet/make_comment.html" %}
   </div>
   <div class="sidebar w-25 bg-dark rounded">
-    <p>salut</p>
+    {% include "tiqet/sidebar.html" %}
   </div>
   <!-- If backend send 0 ticket -->
   {% else %}
@@ -39,5 +43,7 @@
 <script>
   const TIQET_ID = "{{ tiqet['id_tiqet'] }}";
 </script>
-<script src="{{ url_for('static', filename='js/tiqet.js') }}"></script>
+<script src="{{ url_for('static', filename='node_modules/jquery-nice-select/js/jquery.nice-select.js') }}"></script>
+<script type="module" src="{{ url_for('static', filename='js/tiqet.js') }}"></script>
+<script src="{{ url_for('static', filename='node_modules/@popperjs/core/dist/umd/popper.js') }}"></script>
 {% endblock script %}

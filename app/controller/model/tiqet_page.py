@@ -30,6 +30,20 @@ def new():
 
 @app.route("/tiqet/<id_tiqet>", methods=["GET"])
 def tiqet(id_tiqet):
+    categories_db = query(sql_requests.index_category, fetch="all")
+    states_db = query(sql_requests.index_state, fetch="all")
+    priorities_db = query(sql_requests.index_priorities, fetch="all")
+    users_db = query(sql_requests.index_users, fetch="all")
     tiqet_db = query(sql_requests.show_tiqet, {"id_tiqet": id_tiqet}, fetch="one")
-    comments_db = query(sql_requests.index_comments, {"id_tiqet": id_tiqet}, fetch="all")
-    return render_template("tiqet/tiqet.html", tiqet=tiqet_db, comments=comments_db)
+    comments_db = query(
+        sql_requests.index_comments, {"id_tiqet": id_tiqet}, fetch="all"
+    )
+    return render_template(
+        "tiqet/tiqet.html",
+        tiqet=tiqet_db,
+        comments=comments_db,
+        states=states_db,
+        priorities=priorities_db,
+        users=users_db,
+        categories=categories_db,
+    )

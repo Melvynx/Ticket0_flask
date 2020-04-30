@@ -16,16 +16,6 @@
       type="image/png"
       href="{{ url_for('static', filename='images/favicon.png') }}"
     />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='node_modules/bootstrap/dist/css/bootstrap.min.css') }}"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/bootstraptheme.css') }}"
-      crossorigin="anonymous"
-    />
     <script
       src="https://kit.fontawesome.com/951eddeeb3.js"
       crossorigin="anonymous"
@@ -36,6 +26,16 @@
     {% block head %}
     <!-- head -->
     {% endblock %}
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='node_modules/bootstrap/dist/css/bootstrap.min.css') }}"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/bootstraptheme.css') }}"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
     <nav class="navbar navbar-expand-sm navbar-dark bg-primary navbar-app">
