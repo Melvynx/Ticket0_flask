@@ -5,11 +5,13 @@ $(document).ready(() => {
 
 function categorySelectChange(event) {
   showItems(event.target.value, (items) => {
-    select = $("#select-item").html(
+    $("#select-item").html(
       '<option value="null" selected data-display="- select item"> - </option>'
     );
     items.map((item) => {
-      select.append(`<option value="${item.id_item}">${item.name}</option>`);
+      $("#select-item").append(
+        `<option value="${item.id_item}">${item.name}</option>`
+      );
     });
     $("#select-item").niceSelect("update");
   });

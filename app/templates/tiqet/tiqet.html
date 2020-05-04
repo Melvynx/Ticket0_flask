@@ -22,7 +22,7 @@
     <!-- make comment component -->
     {% include "tiqet/make_comment.html" %}
   </div>
-  <div class="sidebar w-25 bg-dark rounded">
+  <div class="sidebar w-25 bg-dark rounded position-relative">
     {% include "tiqet/sidebar.html" %}
   </div>
   <!-- If backend send 0 ticket -->
@@ -42,8 +42,13 @@
 {% endblock content %} {% block script %}
 <script>
   const TIQET_ID = "{{ tiqet['id_tiqet'] }}";
+  const ITEM_ID = "{{ tiqet['id_item'] }}";
 </script>
 <script src="{{ url_for('static', filename='node_modules/jquery-nice-select/js/jquery.nice-select.js') }}"></script>
 <script type="module" src="{{ url_for('static', filename='js/tiqet.js') }}"></script>
+<script
+  type="module"
+  src="{{ url_for('static', filename='js/tiqetSidebar.js') }}"
+></script>
 <script src="{{ url_for('static', filename='node_modules/@popperjs/core/dist/umd/popper.js') }}"></script>
 {% endblock script %}

@@ -114,3 +114,8 @@
   border-radius: 4px;
   color: rgb(0, 0, 0, 0.6);
 }
+
+.spinner-load {
+  bottom: 8px;
+  right: 8px;
+}
