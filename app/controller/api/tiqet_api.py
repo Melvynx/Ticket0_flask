@@ -9,14 +9,22 @@ from app.utils import sql_requests
 @app.route("/tiqet/<id_tiqet>", methods=["PATCH"])
 def edit_tiqet(id_tiqet):
     data = request.get_json()
-    print(data)
+
+    if not "tiqet" in data:
+        status = jsonify(status="need tiqet object", state="danger",)
+        return make_response(status, 400)
+
     tiqet = data["tiqet"]
+
     request_edit_tiqet = sql_requests.tiqet_edit_request(tiqet, id_tiqet)
-    response = query(request_edit_tiqet, tiqet)
-    if response:
+
+    result = query(request_edit_tiqet, tiqet)
+
+    if result:
         status = jsonify(status="tiqet's update successful", state="success")
-        return make_response(status, 200)
-    status = jsonify(status="Database server has problem !", state="danger")
+    else:
+        status = jsonify(status="Database server has problem !", state="danger")
+
     return make_response(status, 201)
 
 
@@ -27,6 +35,7 @@ def create_tiqet():
     id_item = request.form.get("tiqet-item")
     id_priority = request.form.get("tiqet-priority")
     id_user = request.form.get("tiqet-user")
+
     if id_user == "null":
         id_user = None
 
@@ -44,6 +53,6 @@ def create_tiqet():
     if result:
         flash("Tiqet create successful !", "success")
         return redirect(url_for("dashboard"))
-
-    flash("Database server has problem.", "danger")
-    return redirect(url_for("new"))
+    else:
+        flash("Database server has problem.", "danger")
+        return redirect(url_for("new"))

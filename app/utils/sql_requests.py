@@ -134,6 +134,10 @@ index_state = "SELECT * FROM `T_State`"
 #  index of priority
 index_priorities = "SELECT * FROM `T_Priority`"
 
+edit_priority = """ UPDATE `T_Priority` SET `name` = %(name)s, `level` = %(level)s, `description` = %(description)s WHERE `T_Priority`.`id_priority` = %(id_priority)s;  """
+
+create_priority = """ INSERT INTO `T_Priority` (`id_priority`, `name`, `level`, `description`, `created_at`) VALUES (NULL, %(name)s, %(level)s, %(description)s, CURRENT_TIMESTAMP);  """
+
 # -----------
 # USERS     |
 # -----------

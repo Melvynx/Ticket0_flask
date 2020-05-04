@@ -1,0 +1,57 @@
+<div class="priority mb-4 border shadow p-2 rounded">
+  <div class="d-flex">
+    <div class="input-block mr-2">
+      <label class="label" for="priority-name-{{ priority['id_priority'] }}"
+        >Name</label
+      >
+      <input
+        id="priority-name-{{ priority['id_priority'] }}"
+        class="form-control form-control-sm"
+        value="{{ priority['name'] }}"
+        disabled
+      />
+    </div>
+    <div class="input-block ml-2">
+      <label class="label" for="priority-level-{{ priority['id_priority'] }}"
+        >Level</label
+      >
+      <input
+        id="priority-level-{{ priority['id_priority'] }}"
+        class="form-control form-control-sm"
+        value="{{ priority['level'] }}"
+        disabled
+      />
+    </div>
+  </div>
+  <div class="input-block">
+    <label class="label" for="priority-description-{{ priority['id_priority'] }}"
+      >Description</label
+    >
+    <textarea
+      id="priority-description-{{ priority['id_priority'] }}"
+      class="form-control form-control-sm"
+      disabled
+    >
+{{ priority['description'] }}</textarea
+    >
+  </div>
+  <div class="w-100 d-flex flex-row-reverse mt-1">
+    <button
+      id="priority-edit-{{ priority['id_priority'] }}"
+      type="button"
+      class="btn btn-link btn-sm"
+      onclick="onEditPriority(`{{ priority['id_priority'] }}`)"
+    >
+      Edit
+    </button>
+    <button
+      id="priority-save-{{ priority['id_priority'] }}"
+      type="button"
+      style="display: none;"
+      class="btn btn-warning btn-sm"
+      onclick="onSavePriority(`{{ priority['id_priority'] }}`)"
+    >
+      Save
+    </button>
+  </div>
+</div>

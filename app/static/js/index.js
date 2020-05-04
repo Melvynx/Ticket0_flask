@@ -32,7 +32,7 @@ function editTiqet(idTiqet, values, callback) {
     contentType: "application/json",
     Accept: "application/json",
     success: (state) => {
-      callback(state);
+      callback && callback(state);
     },
     error: (result) => {
       console.warn("Request status :", result.status);

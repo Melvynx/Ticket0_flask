@@ -25,40 +25,31 @@ def index_comments(id_tiqet):
 
 @app.route("/comments/<id_tiqet>", methods=["POST"])
 def create_comment(id_tiqet):
-    print("start")
     data = request.get_json()
-    print(data)
 
     if not "comment" in data:
         status = jsonify(status="need comment object", state="danger",)
         return make_response(status, 400)
 
     comment = data["comment"]
-    print("content")
-    print(comment)
     if not "content" in comment or not "user_hash" in comment:
         status = jsonify(
             status="need comment content and user_hash object", state="danger",
         )
         return make_response(status, 400)
-    print("user")
 
     user = User()
-    print("user1")
     if not user.find_by_token(comment["user_hash"]):
         status = jsonify(status="invalid user hash", state="danger",)
         return make_response(status, 200)
-    print("user2")
     values = {
         "id_user": user.user["id_user"],
         "id_tiqet": id_tiqet,
         "content": comment["content"],
     }
 
-    print("query")
 
     result = query(sql_requests.create_comment, values)
-    print("result")
 
     if result:
         status = jsonify(status="comment create successful", state="success")

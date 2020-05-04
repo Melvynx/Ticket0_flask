@@ -24,11 +24,13 @@
       </div>
       {% endif %} {% if "Priority" == title_setting %}
       <div class="nav-bar mr-4 p-1 rounded bg-primary">
-        <a href="#" class="nav-a text-white d-block">Priority</a>
+        <a href="{{ url_for('priorities') }}" class="nav-a text-white d-block"
+          >Priority</a
+        >
       </div>
       {% else %}
       <div class="nav-bar mr-4 p-1 rounded">
-        <a href="#" class="nav-a d-block">Priority</a>
+        <a href="{{ url_for('priorities') }}" class="nav-a d-block">Priority</a>
       </div>
       {% endif %} {% if "Users" == title_setting %}
       <div class="nav-bar mr-4 p-1 rounded bg-primary">
