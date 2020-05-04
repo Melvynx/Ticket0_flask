@@ -3,7 +3,7 @@ $(document).ready(() => {
   $("select").niceSelect();
 });
 
-function categorySelectChange(event) {
+const categorySelectChange = function (event) {
   showItems(event.target.value, (items) => {
     $("#select-item").html(
       '<option value="null" selected data-display="- select item"> - </option>'
@@ -15,9 +15,9 @@ function categorySelectChange(event) {
     });
     $("#select-item").niceSelect("update");
   });
-}
+};
 
-function showItems(idCategory, callback) {
+const showItems = function (idCategory, callback) {
   $.ajax({
     url: `${API_URL}/items/${idCategory}`,
     method: "GET",
@@ -34,9 +34,9 @@ function showItems(idCategory, callback) {
       toggleSnackbar("Database has problem. Try an other time.", "danger");
     },
   });
-}
+};
 
-function onCreate() {
+const onCreate = function () {
   title = $("#tiqet-title").val();
   item = $("#select-item").val();
 
@@ -51,4 +51,4 @@ function onCreate() {
   }
 
   $("#tiqet-form-new").submit();
-}
+};

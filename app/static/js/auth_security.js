@@ -2,7 +2,7 @@ $(document).ready(() => {
   $("#save-button").on("click", onSave);
 });
 
-function onSave() {
+const onSave = function () {
   const newPassword = $("#new-password").val();
   const newPasswordConfirm = $("#new-password-confirm").val();
   const newPasswordHelper = checkPassword(newPassword);
@@ -52,9 +52,9 @@ function onSave() {
       toggleSnackbar("Database has problem. Try an other time.", "danger");
     },
   });
-}
+};
 
-function checkPassword(password) {
+const checkPassword = function (password) {
   const reggex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
   const isValidate = reggex.test(password);
 
@@ -66,16 +66,16 @@ function checkPassword(password) {
     };
   }
   return { helper: "", state: true };
-}
+};
 
-function checkConfirmPassword(password, confirmPassword) {
+const checkConfirmPassword = function (password, confirmPassword) {
   if (password !== confirmPassword) {
     return { helper: "Confirm password doesn't match with password.", state: false };
   }
   return { helper: "", state: true };
-}
+};
 
-function checkUsername(username) {
+const checkUsername = function (username) {
   if (username.length > 20 || username.length < 3) {
     return {
       helper: "Username need to have between 3 and 20 caracteres.",
@@ -83,4 +83,4 @@ function checkUsername(username) {
     };
   }
   return { helper: "", state: true };
-}
+};

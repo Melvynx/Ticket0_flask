@@ -1,5 +1,5 @@
 // on click button "edit" on the side of input name
-function onEditName() {
+const onEditName = function() {
   let name = $("#name");
   name.prop("disabled", false);
   $("#name-button-edit").hide();
@@ -11,7 +11,7 @@ autosize($("#description-category-new"));
 autosize($("#description"));
 
 // event focus out input name
-function onSaveName(event) {
+const onSaveName = function(event) {
   // if save call by event
   if (event && event.key !== "Enter") return;
 
@@ -30,7 +30,7 @@ function onSaveName(event) {
 }
 
 // on click button "edit" on the side of textarea description
-function onEditDescription() {
+const onEditDescription = function() {
   let description = $("#description");
 
   description.prop("disabled", false);
@@ -40,7 +40,7 @@ function onEditDescription() {
 }
 
 // event focus out textarea description
-function onSaveDescription(event) {
+const onSaveDescription = function(event) {
   // if save call by key event, do only if is enter key
   if (event && event.key !== "Enter") return;
 
@@ -61,7 +61,7 @@ function onSaveDescription(event) {
 }
 
 // idCategory: number, callback: Function
-function editCategory(idCategory) {
+const editCategory = function(idCategory) {
   const description = $("#description").val();
   const name = $("#name").val();
 
@@ -88,7 +88,7 @@ function editCategory(idCategory) {
 }
 
 // items - edit (id for know what input need to be changed)
-function onEditItem(id) {
+const onEditItem = function(id) {
   $("#item-name-" + id)
     .prop("disabled", false)
     .focus();
@@ -98,7 +98,7 @@ function onEditItem(id) {
   $(`#item-delete-${id}`).show();
 }
 
-function onSaveItem(id) {
+const onSaveItem = function(id) {
   const name = $("#item-name-" + id);
   name.prop("disabled", true);
   const description = $("#item-description-" + id);
@@ -123,7 +123,7 @@ function onSaveItem(id) {
 }
 
 // function to edit an item, API
-function updateItem(idItem) {
+const updateItem = function(idItem) {
   const name = $("#item-name-" + idItem).val();
   const description = $("#item-description-" + idItem).val();
 
@@ -152,7 +152,7 @@ function updateItem(idItem) {
 
 // function on toggle modal delete item
 
-function toggleModalItem(itemID) {
+const toggleModalItem = function(itemID) {
   $("#validationDeleteModal").modal("show");
   $("#modal-delete-button").data("id", itemID);
   $("#modal-delete-button").data("link", "items");
@@ -164,7 +164,7 @@ function toggleModalItem(itemID) {
   <p><b>This action is irreversible.</b></p>`);
 }
 
-function toggleModalCategory(categoryID) {
+const toggleModalCategory = function(categoryID) {
   if (category_item.length > 6) {
     toggleSnackbar("I can't delete the category if there's an item left.", "danger");
     return;
@@ -180,7 +180,7 @@ function toggleModalCategory(categoryID) {
   <p><b>This action is irreversible.</b></p>`);
 }
 
-function onDelete() {
+const onDelete = function() {
   id = $("#modal-delete-button").data("id");
   link = $("#modal-delete-button").data("link");
 
@@ -202,13 +202,13 @@ function onDelete() {
   });
 }
 
-function displayCreateBox() {
+const displayCreateBox = function() {
   $("#box-hide-item").hide();
 }
 
 // for categories.html
 // function to try if champs is correct on create new category
-function onSubmitCategory() {
+const onSubmitCategory = function() {
   let title = $("#name-category-new").val();
 
   if (title.length < 2 || title.length > 50) {

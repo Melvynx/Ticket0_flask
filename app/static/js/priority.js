@@ -4,17 +4,17 @@ $(document).ready(() => {
     $("#new-comment-icon").hide();
     $("#new-comment").show();
   });
-  $("#new-create").on("click", onCreate())
+  $("#new-create").on("click", onCreate());
 });
 
-function onEditPriority(idPriority) {
+const onEditPriority = function (idPriority) {
   handleDisabled(idPriority, false);
   $(`#priority-edit-${idPriority}`).hide();
   $(`#priority-save-${idPriority}`).show();
   $(`#priority-save-${idPriority}`).show();
-}
+};
 
-function onSavePriority(idPriority) {
+const onSavePriority = function (idPriority) {
   const name = $(`#priority-name-${idPriority}`).val();
   const level = $(`#priority-level-${idPriority}`).val();
 
@@ -61,10 +61,10 @@ function onSavePriority(idPriority) {
       toggleSnackbar("Database has problem. Try an other time.", "danger");
     },
   });
-}
+};
 
-function handleDisabled(id, state) {
+const handleDisabled = function (id, state) {
   $(`#priority-name-${id}`).attr("disabled", state);
   $(`#priority-description-${id}`).attr("disabled", state);
   $(`#priority-level-${id}`).attr("disabled", state);
-}
+};

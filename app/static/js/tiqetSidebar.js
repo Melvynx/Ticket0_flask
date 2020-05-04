@@ -8,16 +8,16 @@ $(document).ready(() => {
   handleCategory({ target: { value: $("#select-category").val() } });
 });
 
-function handleState(event) {
+const handleState = function (event) {
   const newState = checkNullValue(event.target.value);
 
   handleLoad(true);
   editTiqet(TIQET_ID, { fk_state: newState }, (state) => {
     handleLoad(false);
   });
-}
+};
 
-function handleCategory(event) {
+const handleCategory = function (event) {
   handleLoad(true);
   showItems(event.target.value, (items) => {
     handleLoad(false);
@@ -33,18 +33,18 @@ function handleCategory(event) {
     });
     $("#select-item").niceSelect("update");
   });
-}
+};
 
-function handleAssigned(event) {
+const handleAssigned = function (event) {
   const newAssigned = checkNullValue(event.target.value);
 
   handleLoad(true);
   editTiqet(TIQET_ID, { fk_assigned: newAssigned }, (state) => {
     handleLoad(false);
   });
-}
+};
 
-function handlePriority(event) {
+const handlePriority = function (event) {
   const newPriority = checkNullValue(event.target.value);
 
   handleLoad(true);
@@ -52,25 +52,25 @@ function handlePriority(event) {
     handleLoad(false);
     console.log(state);
   });
-}
+};
 
-function handleItem(event) {
+const handleItem = function (event) {
   const newItem = checkNullValue(event.target.value);
 
   handleLoad(true);
   editTiqet(TIQET_ID, { fk_item: newItem }, (state) => {
     handleLoad(false);
   });
-}
+};
 
-function checkNullValue(value) {
+const checkNullValue = function (value) {
   if (String(value).length === 0) {
     return null;
   }
   return value;
-}
+};
 
-function showItems(idCategory, callback) {
+const showItems = function (idCategory, callback) {
   $.ajax({
     url: `${API_URL}/items/${idCategory}`,
     method: "GET",
@@ -88,9 +88,9 @@ function showItems(idCategory, callback) {
       toggleSnackbar("Database has problem. Try an other time.", "danger");
     },
   });
-}
+};
 
-function handleLoad(state) {
+const handleLoad = function (state) {
   if (state) {
     $("#spinner").show();
     $("#done-icon").hide();
@@ -100,4 +100,4 @@ function handleLoad(state) {
     $("#done-icon").show();
     setTimeout(() => $("#spinner-load").hide(), 1000);
   }
-}
+};

@@ -16,7 +16,7 @@ $(document).ready(() => {
   initPopper();
 });
 
-function initPopper() {
+const initPopper = function() {
   const ref = document.getElementById("comment");
   const popper = document.getElementById("comment-popper");
 
@@ -25,14 +25,14 @@ function initPopper() {
 }
 
 /* title script "title.html" */
-function toggleEditTitle() {
+const toggleEditTitle= function() {
   $("#title").hide();
   $("#image-title").hide();
   $("#input-title").show().val($("#title").html()).on("keyup", titleSave).focus();
   $("#button-title").show();
 }
 
-function titleSave(event) {
+const titleSave= function(event) {
   if (event) if (event.key !== ("Enter" | undefined)) return;
 
   const title = $("#input-title");
@@ -52,7 +52,7 @@ function titleSave(event) {
 }
 
 /* content script "content.html" */
-function toggleEditContent() {
+const toggleEditContent= function() {
   $("#content").hide();
   $("#image-content").hide();
   $("#input-content")
@@ -63,7 +63,7 @@ function toggleEditContent() {
   $("#button-content").show();
 }
 
-function contentSave() {
+const contentSave= function() {
   const input = $("#input-content");
 
   if (input.val().length <= 2 || input.val().length >= 5000) {
@@ -79,7 +79,7 @@ function contentSave() {
   });
 }
 
-function sendComment() {
+const sendComment= function() {
   if ($("#comment").val().length <= 1) {
     $("#comment").css("box-shadow", "0 0 0 0.2rem rgb(220,53,69,0.5)");
     $("#comment-popper").show();
@@ -129,7 +129,7 @@ function sendComment() {
   });
 }
 
-function updateComments() {
+const updateComments = function() {
   getComments((comments) => {
     const commentBox = $("#comments");
     commentBox.html("");
@@ -164,7 +164,7 @@ function updateComments() {
   });
 }
 
-function getComments(callback) {
+const getComments = function(callback) {
   $.ajax({
     url: `${API_URL}/comments/${TIQET_ID}`,
     method: "GET",
@@ -183,6 +183,6 @@ function getComments(callback) {
   });
 }
 
-function removeShadow() {
+const removeShadow = function() {
   $("#comment").removeAttr("style");
 }

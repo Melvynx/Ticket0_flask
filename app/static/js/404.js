@@ -1,5 +1,5 @@
 // scale on resize
-function fontResize() {
+const fontResize = function() {
   var resolution = 1440;
   var font = 10;
 
