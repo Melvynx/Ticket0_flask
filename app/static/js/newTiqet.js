@@ -27,7 +27,10 @@ function showItems(idCategory, callback) {
       callback && callback(items);
     },
     error: (result) => {
-      console.warn("Request status :", result.status);
+      console.warn(
+        `Request status : ${result.status}, request state:`,
+        result.responseJSON
+      );
       toggleSnackbar("Database has problem. Try an other time.", "danger");
     },
   });

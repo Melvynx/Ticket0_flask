@@ -79,7 +79,9 @@ function editCategory(idCategory) {
       toggleSnackbar(state.status, state.state);
     },
     error: (result) => {
-      console.warn(result.status);
+      console.warn(
+        `Request status : ${result.status}, request state: ${result.responseJSON}`
+      );
       toggleSnackbar("Database has problem. Try an other time.", "danger");
     },
   });
@@ -139,7 +141,10 @@ function updateItem(idItem) {
       toggleSnackbar(state.status, state.state);
     },
     error: (result) => {
-      console.warn("Request status :", result.status);
+      console.warn(
+        `Request status : ${result.status}, request state:`,
+        result.responseJSON
+      );
       toggleSnackbar("Database has problem. Try an other time.", "danger");
     },
   });
@@ -188,7 +193,10 @@ function onDelete() {
       window.location.reload();
     },
     error: (result) => {
-      console.warn("Request status :", result.status);
+      console.warn(
+        `Request status : ${result.status}, request state:`,
+        result.responseJSON
+      );
       toggleSnackbar("Database has problem. Try an other time.", "danger");
     },
   });

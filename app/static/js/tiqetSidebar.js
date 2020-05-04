@@ -78,9 +78,13 @@ function showItems(idCategory, callback) {
     Accept: "application/json",
     success: (items) => {
       callback && callback(items);
+      pr;
     },
     error: (result) => {
-      console.warn("Request status :", result.status);
+      console.warn(
+        `Request status : ${result.status}, request state:`,
+        result.responseJSON
+      );
       toggleSnackbar("Database has problem. Try an other time.", "danger");
     },
   });

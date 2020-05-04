@@ -35,7 +35,10 @@ function editTiqet(idTiqet, values, callback) {
       callback && callback(state);
     },
     error: (result) => {
-      console.warn("Request status :", result.status);
+      console.warn(
+        `Request status : ${result.status}, request state:`,
+        result.responseJSON
+      );
       toggleSnackbar("Database has problem. Try an other time.", "danger");
     },
   });

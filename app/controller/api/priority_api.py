@@ -25,7 +25,11 @@ def edit_priority(id_priority):
 
     priority = data["priority"]
 
-    if not "name" in data and not "level" in data and not "description" in data:
+    if (
+        not "name" in priority
+        and not "level" in priority
+        and not "description" in priority
+    ):
         status = jsonify(
             status="need name, level and description object", state="danger",
         )
@@ -62,7 +66,11 @@ def create_priority(id_priority):
 
     priority = data["priority"]
 
-    if not "name" in data and not "level" in data and not "description" in data:
+    if (
+        not "name" in priority
+        and not "level" in priority
+        and not "description" in priority
+    ):
         status = jsonify(
             status="need name, level and description object", state="danger",
         )

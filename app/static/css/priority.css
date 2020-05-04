@@ -2,3 +2,12 @@
   padding: 8px 0 8px 0;
   width: 100%;
 }
+
+#new-comment-icon {
+  height: 128px;
+  cursor: pointer;
+}
+
+#new-comment-icon:hover > div > i {
+  color: rgb(0, 0, 0, 0.4) !important;
+}

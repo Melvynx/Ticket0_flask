@@ -120,8 +120,10 @@ function sendComment() {
       updateComments();
     },
     error: (result) => {
-      console.warn("Request status :", result.status);
-      console.warn(result.responseJSON);
+      console.warn(
+        `Request status : ${result.status}, request state:`,
+        result.responseJSON
+      );
       toggleSnackbar("Database has problem. Try an other time.", "danger");
     },
   });
@@ -172,7 +174,10 @@ function getComments(callback) {
       callback(comments);
     },
     error: (result) => {
-      console.warn("Request status :", result.status);
+      console.warn(
+        `Request status : ${result.status}, request state:`,
+        result.responseJSON
+      );
       toggleSnackbar("Database has problem. Try an other time.", "danger");
     },
   });

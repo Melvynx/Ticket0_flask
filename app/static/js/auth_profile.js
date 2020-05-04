@@ -47,7 +47,10 @@ function onSave() {
       }
     },
     error: (result) => {
-      console.warn(result.responseJSON);
+      console.warn(
+        `Request status : ${result.status}, request state:`,
+        result.responseJSON
+      );
       toggleSnackbar("Database has problem. Try an other time.", "danger");
     },
   });

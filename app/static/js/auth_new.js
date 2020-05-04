@@ -64,7 +64,9 @@ async function checkCredential(username, email) {
       },
       error: (result) => {
         resolve(false);
-        console.warn(result.responseJSON);
+        console.warn(
+          `Request status : ${result.status}, request state: ${result.responseJSON}`
+        );
         toggleSnackbar("Database has problem. Try an other time.", "danger");
       },
     });
