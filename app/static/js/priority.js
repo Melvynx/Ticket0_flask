@@ -62,3 +62,53 @@ const onSavePriority = function (idPriority) {
     },
   });
 };
+
+const handleDisabled = function (id, state) {
+  $(`#priority-name-${id}`).attr("disabled", state);
+  $(`#priority-description-${id}`).attr("disabled", state);
+  $(`#priority-level-${id}`).attr("disabled", state);
+};
+
+const onCreate = function () {
+  const name = $("#new-name").val();
+  const level = $("#new-level").val();
+
+  if (name.length <= 2 || name.length >= 50) {
+    toggleSnackbar("Name need to be between 2 and 50 caracteres.", "danger");
+    return;
+  }
+
+  if (isNaN(Number(level))) {
+    toggleSnackbar("Level isn't a number.", "danger");
+    return;
+  }
+
+  const newPriority = {
+    priority: {
+      name: name,
+      description: $(`#priority-description-${idPriority}`).val(),
+      level: Number(level),
+    },
+  };
+
+  const newPriorityJson = JSON.parse(newPriority);
+
+  $.ajax({
+    url: `${API_URL}/priorities/${idPriority}`,
+    method: "POST",
+    data: newPriorityJson,
+    dataType: "json",
+    contentType: "application/json",
+    Accept: "application/json",
+    success: (state) => {
+      toggleSnackbar(state.status, state.state);
+    },
+    error: (result) => {
+      console.warn(
+        `Request status : ${result.status}, request state:`,
+        result.responseJSON
+      );
+      toggleSnackbar("Database has problem. Try an other time.", "danger");
+    },
+  });
+};
