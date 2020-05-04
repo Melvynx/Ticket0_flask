@@ -4,7 +4,7 @@ $(document).ready(() => {
     $("#new-comment-icon").hide();
     $("#new-comment").show();
   });
-  $("#new-create").on("click", onCreate());
+  $("#new-create").on("click", onCreate);
 });
 
 const onEditPriority = function (idPriority) {
@@ -61,10 +61,4 @@ const onSavePriority = function (idPriority) {
       toggleSnackbar("Database has problem. Try an other time.", "danger");
     },
   });
-};
-
-const handleDisabled = function (id, state) {
-  $(`#priority-name-${id}`).attr("disabled", state);
-  $(`#priority-description-${id}`).attr("disabled", state);
-  $(`#priority-level-${id}`).attr("disabled", state);
 };
