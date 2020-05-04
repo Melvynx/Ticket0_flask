@@ -1,6 +1,7 @@
 .container-tiqet {
   width: 100%;
   min-width: 512px;
+  min-height: 544px;
   max-width: 1024px;
 }
 

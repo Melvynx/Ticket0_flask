@@ -5,12 +5,13 @@ $(document).ready(() => {
     element.innerHTML = element.innerHTML.replace(/\r?\n/g, "<br>");
   });
   $("#title").on("click", toggleEditTitle);
-  $("#button-title").on("click", titleSave);
+  $("#button-title").on("click", () => titleSave());
   $("#button-content").on("click", contentSave);
   $("#content").on("click", toggleEditContent);
   $("#button-comment").on("click", sendComment);
   $("#comment").on("keyup", removeShadow);
   $("select").niceSelect();
+  autosize($("#input-content"));
 
   initPopper();
 });
@@ -23,8 +24,6 @@ function initPopper() {
   Popper.createPopper(ref, popper, { placement: "bottom" });
 }
 
-autosize($("#input-content"));
-
 /* title script "title.html" */
 function toggleEditTitle() {
   $("#title").hide();
@@ -34,8 +33,10 @@ function toggleEditTitle() {
 }
 
 function titleSave(event) {
-  if (event) if (event.key !== "Enter") return;
+  if (event) if (event.key !== ("Enter" | undefined)) return;
+
   const title = $("#input-title");
+  console.log("SAVE");
 
   if (title.val().length <= 2 || title.val().length >= 100) {
     toggleSnackbar("Title need to have between 2 and 100 caractes.", "danger");

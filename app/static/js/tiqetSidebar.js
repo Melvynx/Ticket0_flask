@@ -88,8 +88,12 @@ function showItems(idCategory, callback) {
 
 function handleLoad(state) {
   if (state) {
+    $("#spinner").show();
+    $("#done-icon").hide();
     $("#spinner-load").show();
   } else {
-    $("#spinner-load").hide();
+    $("#spinner").hide();
+    $("#done-icon").show();
+    setTimeout(() => $("#spinner-load").hide(), 1000);
   }
 }
