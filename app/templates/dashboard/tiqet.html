@@ -22,11 +22,7 @@
       class="priority-data rounded-pill d-flex justify-content-center pl-1 pr-1"
       title="{{ tiqet['username'] }}"
     >
-      <img
-        src="{{ url_for('static', filename='images/flag_icon.svg') }}"
-        alt="flag"
-        class="priority-icon"
-      />
+      <i class="far fa-flag fa-md"></i>
       <span class="text-black ml-1">{{ tiqet["name_priority"] }}</span>
     </div>
     {% endif %}

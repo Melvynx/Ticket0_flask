@@ -1,13 +1,19 @@
 $(document).ready(() => {
   categorySelectChange({ target: { value: $("#tiqet-category").val() } });
+  $("select").niceSelect();
 });
 
 function categorySelectChange(event) {
   showItems(event.target.value, (items) => {
-    select = $("#select-item").html('<option value="null" selected> - </option>');
+    $("#select-item").html(
+      '<option value="null" selected data-display="- select item"> - </option>'
+    );
     items.map((item) => {
-      select.append(`<option value="${item.id_item}">${item.name}</option>`);
+      $("#select-item").append(
+        `<option value="${item.id_item}">${item.name}</option>`
+      );
     });
+    $("#select-item").niceSelect("update");
   });
 }
 

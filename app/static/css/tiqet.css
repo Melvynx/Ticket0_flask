@@ -1,6 +1,7 @@
 .container-tiqet {
   width: 100%;
   min-width: 512px;
+  min-height: 544px;
   max-width: 1024px;
 }
 
@@ -105,4 +106,17 @@
 
 .comment-content {
   margin: 0;
+}
+
+.comment-popper {
+  padding: 8px;
+  border: 1px solid rgb(220, 63, 69, 0.4);
+  background: rgb(220, 63, 69, 0.2);
+  border-radius: 4px;
+  color: rgb(0, 0, 0, 0.6);
+}
+
+.spinner-load {
+  bottom: 8px;
+  right: 8px;
 }

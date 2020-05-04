@@ -1,17 +1,28 @@
+// todo : use font awrsomes
 $(document).ready(() => {
   $("#content").html($("#content").html().replace(/\r?\n/g, "<br>"));
   $(".comment-content").each((index, element) => {
     element.innerHTML = element.innerHTML.replace(/\r?\n/g, "<br>");
   });
   $("#title").on("click", toggleEditTitle);
-  $("#button-title").on("click", titleSave);
+  $("#button-title").on("click", () => titleSave());
   $("#button-content").on("click", contentSave);
   $("#content").on("click", toggleEditContent);
   $("#button-comment").on("click", sendComment);
   $("#comment").on("keyup", removeShadow);
+  $("select").niceSelect();
+  autosize($("#input-content"));
+
+  initPopper();
 });
 
-autosize($("#input-content"));
+function initPopper() {
+  const ref = document.getElementById("comment");
+  const popper = document.getElementById("comment-popper");
+
+  // create the popper
+  Popper.createPopper(ref, popper, { placement: "bottom" });
+}
 
 /* title script "title.html" */
 function toggleEditTitle() {
@@ -22,8 +33,10 @@ function toggleEditTitle() {
 }
 
 function titleSave(event) {
-  if (event) if (event.key !== "Enter") return;
+  if (event) if (event.key !== ("Enter" | undefined)) return;
+
   const title = $("#input-title");
+  console.log("SAVE");
 
   if (title.val().length <= 2 || title.val().length >= 100) {
     toggleSnackbar("Title need to have between 2 and 100 caractes.", "danger");
@@ -68,7 +81,11 @@ function contentSave() {
 
 function sendComment() {
   if ($("#comment").val().length <= 1) {
-    comment.css("box-shadow", "0 0 0 0.2rem rgb(220,53,69,0.5)");
+    $("#comment").css("box-shadow", "0 0 0 0.2rem rgb(220,53,69,0.5)");
+    $("#comment-popper").show();
+    setTimeout(() => {
+      $("#comment-popper").hide();
+    }, 2000);
     return;
   }
 

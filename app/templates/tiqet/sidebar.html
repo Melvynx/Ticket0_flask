@@ -1,0 +1,129 @@
+<!-- state -->
+<div class="d-flex justify-content-between p-2">
+  <div class="d-flex align-items-center text-white">
+    <i class="fas fa-ticket-alt fa-md"></i>
+    <p class="m-0 ml-1">State</p>
+  </div>
+  <div class="sidebar-data">
+    <select
+      id="select-state"
+      class="sidebar-select wide small"
+      id="select_state"
+      name="tiqet-user"
+    >
+      <option value="null" data-display="- select state"> - </option>
+      {% if states %} %{% for state in states %} {% if state['id_state'] ==
+      tiqet['id_state'] %}
+      <option value="{{ state['id_state'] }}" selected="selected"
+        >{{ state["name"] }}</option
+      >
+      {% else %}
+      <option value="{{ state['id_state'] }}">{{ state["name"] }}</option>
+      {% endif %} {% endfor %}{% endif %}
+    </select>
+  </div>
+</div>
+<!-- priority -->
+<div class="d-flex justify-content-between p-2">
+  <div class="d-flex align-items-center text-white">
+    <i class="far fa-flag fa-md"></i>
+    <p class="m-0 ml-1">Priority</p>
+  </div>
+  <div class="sidebar-data">
+    <select
+      id="select-priority"
+      class="sidebar-select wide small"
+      id="select_state"
+      name="tiqet-user"
+    >
+      <option value="null" data-display="- select priority"> - </option>
+      {% if priorities %} %{% for priority in priorities %} {% if
+      priority['id_priority'] == tiqet['id_priority'] %}
+      <option value="{{ priority['id_priority'] }}" selected="selected"
+        >{{ priority["name"] }}</option
+      >
+      {% else %}
+      <option value="{{ priority['id_priority'] }}">{{ priority["name"] }}</option>
+      {% endif %} {% endfor %}{% endif %}
+    </select>
+  </div>
+</div>
+<!-- assigned -->
+<div class="d-flex justify-content-between p-2">
+  <div class="d-flex align-items-center text-white">
+    <i class="fas fa-user fa-md"></i>
+    <p class="m-0 ml-1">Assigned</p>
+  </div>
+  <div class="sidebar-data">
+    <select
+      id="select-assigned"
+      class="sidebar-select wide small"
+      id="select_state"
+      name="tiqet-user"
+    >
+      <option value="null" data-display="- select assigned"> - </option>
+      {% if priorities %} %{% for user in users %} {% if user['id_user'] ==
+      tiqet['id_user'] %}
+      <option value="{{ user['id_user'] }}" selected="selected"
+        >{{ user["username"] }}</option
+      >
+      {% else %}
+      <option value="{{ user['id_user'] }}">{{ user["username"] }}</option>
+      {% endif %} {% endfor %}{% endif %}
+    </select>
+  </div>
+</div>
+
+<!-- category -->
+<div class="d-flex justify-content-between p-2">
+  <div class="d-flex align-items-center text-white">
+    <i class="fas fa-th-large fa-md"></i>
+    <p class="m-0 ml-1">Category</p>
+  </div>
+  <div class="sidebar-data">
+    <select
+      id="select-category"
+      class="sidebar-select wide small"
+      id="select_state"
+      name="tiqet-user"
+    >
+      <option value="null" data-display="- select category"> - </option>
+      {% if priorities %} %{% for category in categories %} {% if
+      category['id_category'] == tiqet['id_category'] %}
+      <option value="{{ category['id_category'] }}" selected="selected"
+        >{{ category["name"] }}</option
+      >
+      {% else %}
+      <option value="{{ category['id_category'] }}">{{ category["name"] }}</option>
+      {% endif %} {% endfor %}{% endif %}
+    </select>
+  </div>
+</div>
+
+<!-- item -->
+<div class="d-flex justify-content-between p-2">
+  <div class="d-flex align-items-center text-white">
+    <i class="fas fa-th-large fa-md"></i>
+    <p class="m-0 ml-1">Item</p>
+  </div>
+  <div class="sidebar-data">
+    <select
+      id="select-item"
+      class="sidebar-select wide small"
+      id="select_state"
+      name="tiqet-user"
+    >
+      <option value="null" data-display="- select item"> - </option>
+    </select>
+  </div>
+</div>
+<div class="spinner-load position-absolute" style="display: none;" id="spinner-load">
+  <div class="spinner-border text-light" role="status" id="spinner">
+    <span class="sr-only">Loading...</span>
+  </div>
+  <i
+    style="display: none;"
+    class="fas fa-check text-success fa-lg"
+    id="done-icon"
+  ></i>
+</div>

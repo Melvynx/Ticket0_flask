@@ -12,3 +12,10 @@
   border: 1px solid black;
   border-radius: 0px;
 }
+
+.nice-select-custom ul li {
+  /* height: 48px;
+  font-size: 14px;
+  padding: 4px; */
+  width: 100% !important;
+}

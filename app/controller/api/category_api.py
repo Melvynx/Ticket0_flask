@@ -8,12 +8,12 @@ from app.utils import sql_requests
 @app.route("/categories/<id_category>", methods=["PATCH"])
 def category_edit(id_category):
     data = request.get_json()
-    # try of object category is on data
+
     if not "category" in data:
         status = jsonify(status="error syntaxe json. Need 'category'", state="danger")
         return make_response(status, 400)
     category_data = data["category"]
-    # try if category have name and description
+
     if not "name" in category_data or not "description" in category_data:
         status = jsonify(
             status="error syntaxe json. Category need 'name' and 'description'",
@@ -36,7 +36,6 @@ def category_edit(id_category):
         return make_response(status, 201)
 
 
-# delete category
 @app.route("/categories/<id_category>", methods=["DELETE"])
 def delete_category(id_category):
     result = query(sql_requests.delete_category, {"id_category": id_category})
