@@ -15,10 +15,10 @@
       {% if states %} %{% for state in states %} {% if state['id_state'] ==
       tiqet['id_state'] %}
       <option value="{{ state['id_state'] }}" selected="selected"
-        >{{ state["name"] }}</option
+        >{{ state["name"]|replace("<", "</") }}</option
       >
       {% else %}
-      <option value="{{ state['id_state'] }}">{{ state["name"] }}</option>
+      <option value="{{ state['id_state'] }}">{{ state["name"]|replace("<", "</") }}</option>
       {% endif %} {% endfor %}{% endif %}
     </select>
   </div>
@@ -40,10 +40,10 @@
       {% if priorities %} %{% for priority in priorities %} {% if
       priority['id_priority'] == tiqet['id_priority'] %}
       <option value="{{ priority['id_priority'] }}" selected="selected"
-        >{{ priority["name"] }}</option
+        >{{ priority["name"]|replace("<", "|") }}</option
       >
       {% else %}
-      <option value="{{ priority['id_priority'] }}">{{ priority["name"] }}</option>
+      <option value="{{ priority['id_priority'] }}">{{ priority["name"]|replace("<", "</") }}</option>
       {% endif %} {% endfor %}{% endif %}
     </select>
   </div>
@@ -65,10 +65,10 @@
       {% if priorities %} %{% for user in users %} {% if user['id_user'] ==
       tiqet['id_user'] %}
       <option value="{{ user['id_user'] }}" selected="selected"
-        >{{ user["username"] }}</option
+        >{{ user["username"]|replace("<", "</") }}</option
       >
       {% else %}
-      <option value="{{ user['id_user'] }}">{{ user["username"] }}</option>
+      <option value="{{ user['id_user'] }}">{{ user["username"]|replace("<", "</") }}</option>
       {% endif %} {% endfor %}{% endif %}
     </select>
   </div>
@@ -91,10 +91,12 @@
       {% if priorities %} %{% for category in categories %} {% if
       category['id_category'] == tiqet['id_category'] %}
       <option value="{{ category['id_category'] }}" selected="selected"
-        >{{ category["name"] }}</option
+        >{{ category["name"]|replace("<", "</") }}</option
       >
       {% else %}
-      <option value="{{ category['id_category'] }}">{{ category["name"] }}</option>
+      <option value="{{ category['id_category'] }}"
+        >{{ category["name"]|replace("<", "</") }}</option
+      >
       {% endif %} {% endfor %}{% endif %}
     </select>
   </div>

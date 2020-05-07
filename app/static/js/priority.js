@@ -5,6 +5,7 @@ $(document).ready(() => {
     $("#new-comment").show();
   });
   $("#new-create").on("click", onCreate);
+  $("#modal-delete-button").on("click", onDelete);
 });
 
 const onEditPriority = function (idPriority) {
@@ -12,6 +13,7 @@ const onEditPriority = function (idPriority) {
   $(`#priority-edit-${idPriority}`).hide();
   $(`#priority-save-${idPriority}`).show();
   $(`#priority-save-${idPriority}`).show();
+  $(`#priority-delete-${idPriority}`).show();
 };
 
 const onSavePriority = function (idPriority) {
@@ -30,6 +32,7 @@ const onSavePriority = function (idPriority) {
 
   $(`#priority-edit-${idPriority}`).show();
   $(`#priority-save-${idPriority}`).hide();
+  $(`#priority-delete-${idPriority}`).hide();
   $(`#priority-save-${idPriority}`).hide();
   handleDisabled(idPriority, true);
 
@@ -86,15 +89,15 @@ const onCreate = function () {
   const newPriority = {
     priority: {
       name: name,
-      description: $(`#priority-description-${idPriority}`).val(),
+      description: $("#new-description").val(),
       level: Number(level),
     },
   };
 
-  const newPriorityJson = JSON.parse(newPriority);
+  const newPriorityJson = JSON.stringify(newPriority);
 
   $.ajax({
-    url: `${API_URL}/priorities/${idPriority}`,
+    url: `${API_URL}/priorities`,
     method: "POST",
     data: newPriorityJson,
     dataType: "json",
@@ -102,6 +105,7 @@ const onCreate = function () {
     Accept: "application/json",
     success: (state) => {
       toggleSnackbar(state.status, state.state);
+      window.location.reload();
     },
     error: (result) => {
       console.warn(
@@ -111,4 +115,58 @@ const onCreate = function () {
       toggleSnackbar("Database has problem. Try an other time.", "danger");
     },
   });
+};
+
+const togglePriorityModal = function (id) {
+  $("#validationDeleteModal").modal("show");
+  $("#modal-delete-button").data("priorityid", id);
+  $("#modal-delete-body").html(
+    generateModalText(
+      "priority",
+      id,
+      $(`#priority-name-${id}`).val(),
+      "all tickets linked to this priority will no longer have it."
+    )
+  );
+};
+
+const onDelete = function (event) {
+  const priorityId = $(event.target).data("priorityid");
+
+  $.ajax({
+    url: `${API_URL}/priorities/${priorityId}`,
+    method: "DELETE",
+    Accept: "application/json",
+    success: (state) => {
+      toggleSnackbar(state.status, state.state);
+      window.location.reload();
+    },
+    error: (result) => {
+      console.warn(
+        `Request status : ${result.status}, request state:`,
+        result.responseJSON
+      );
+      toggleSnackbar("Database has problem. Try an other time.", "danger");
+    },
+  });
+};
+
+const generateModalText = function (name, id, value, text) {
+  const component = $(document.createElement("div"));
+  const idBadge = $(document.createElement("p"));
+  idBadge.text(`${name}'s id :${id}`);
+  idBadge.addClass("badge badge-primary mr-4");
+  const nameBadge = $(document.createElement("p"));
+  nameBadge.text(`${name}'s name : ${value}`);
+  nameBadge.addClass("badge badge-primary mr-4");
+  const information = $(document.createElement("p"));
+  information.text(`If you delete this ${name}, ${text}`);
+  const irreversible = $(document.createElement("p"));
+  irreversible.html("<b>This action is irreversible.</b>");
+  component.append(idBadge);
+  component.append(nameBadge);
+  component.append(information);
+  component.append(irreversible);
+
+  return component;
 };

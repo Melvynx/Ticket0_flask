@@ -57,7 +57,7 @@ def edit_priority(id_priority):
 
 
 @app.route("/priorities", methods=["POST"])
-def create_priority(id_priority):
+def create_priority():
     data = request.get_json()
 
     if not "priority" in data:
@@ -89,4 +89,16 @@ def create_priority(id_priority):
     else:
         status = jsonify(status="Database has problem.", state="danger")
 
+    return make_response(status, 200)
+
+
+@app.route("/priorities/<id_priority>", methods=["DELETE"])
+def delete_priority(id_priority):
+    result = query(sql_requests.delete_key_item, {"id_priority": id_priority})
+    result = query(sql_requests.delete_item, {"id_priority": id_priority})
+
+    if result:
+        status = jsonify(status="priority deleted successful", state="success")
+    else:
+        status = jsonify(status="Database has problem.", state="danger")
     return make_response(status, 200)

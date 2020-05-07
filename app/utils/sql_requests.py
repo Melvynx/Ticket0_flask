@@ -132,18 +132,21 @@ index_state = "SELECT * FROM `T_State`"
 # -----------
 
 #  index of priority
-index_priorities = "SELECT * FROM `T_Priority`"
+index_priorities = "SELECT * FROM `T_Priority` ORDER BY `T_Priority`.`level` DESC "
 
 edit_priority = """ UPDATE `T_Priority` SET `name` = %(name)s, `level` = %(level)s, `description` = %(description)s WHERE `T_Priority`.`id_priority` = %(id_priority)s;  """
 
 create_priority = """ INSERT INTO `T_Priority` (`id_priority`, `name`, `level`, `description`, `created_at`) VALUES (NULL, %(name)s, %(level)s, %(description)s, CURRENT_TIMESTAMP);  """
 
+delete_key_item = "UPDATE `T_Tiqet` SET `fk_priority` = NULL WHERE `T_Tiqet`.`fk_priority` = %(id_priority)s;"
+
+delete_item = "DELETE FROM `T_Priority` WHERE T_Priority.id_priority = %(id_priority)s;"
 # -----------
 # USERS     |
 # -----------
 
 # index of users
-index_users = "SELECT * FROM `T_User`"
+index_users = "SELECT * FROM `T_User` "
 
 # -----------
 # COMMENT     |

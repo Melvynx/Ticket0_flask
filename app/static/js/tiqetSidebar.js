@@ -25,11 +25,12 @@ const handleCategory = function (event) {
       '<option value="null" selected data-display="- select item"> - </option>'
     );
     items.map((item) => {
-      $("#select-item").append(
-        `<option value="${item.id_item}" ${
-          ITEM_ID === String(item.id_item) ? "selected" : ""
-        }>${item.name}</option>`
-      );
+      const option = $(document.createElement("option"));
+      option.val(item.id_item);
+      option.attr("selected", ITEM_ID === String(item.id_item));
+      // niceSelect run script
+      option.text(item.name.replace(/<|>/g, "|"));
+      $("#select-item").append(option);
     });
     $("#select-item").niceSelect("update");
   });
@@ -78,7 +79,6 @@ const showItems = function (idCategory, callback) {
     Accept: "application/json",
     success: (items) => {
       callback && callback(items);
-      pr;
     },
     error: (result) => {
       console.warn(

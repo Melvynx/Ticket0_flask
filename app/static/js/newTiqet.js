@@ -9,9 +9,11 @@ const categorySelectChange = function (event) {
       '<option value="null" selected data-display="- select item"> - </option>'
     );
     items.map((item) => {
-      $("#select-item").append(
-        `<option value="${item.id_item}">${item.name}</option>`
-      );
+      const option = $(document.createElement("option"));
+      option.val(item.id_item);
+      // niceSelect run script
+      option.text(item.name.replace(/<|>/g, "|"));
+      $("#select-item").append(option);
     });
     $("#select-item").niceSelect("update");
   });
