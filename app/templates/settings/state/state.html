@@ -1,10 +1,25 @@
-<div class="border d-flex justify-content-between">
+<div class="border-top d-flex justify-content-between p-1">
   <div>
-    <p id="name-{{ state['id'] }}">{{state["name"]}}</p>
-    <input type="text" name="" id="name-i-{{ state['id'] }}" />
+    <p
+      id="name-{{ state['id_state'] }}"
+      onclick="onEditName(`{{ state['id_state'] }}`)"
+    >
+      {{ state["name"] }}
+    </p>
+    <input
+      type="text"
+      name=""
+      id="name-i-{{ state['id_state'] }}"
+      value="{{ state['name'] }}"
+      class="form-control form-control-sm"
+      style="display: none;"
+      onblur="onSaveName(`{{ state['id_state'] }}`)"
+    />
   </div>
   <div>
-    <label for="display-{{ state['id'] }}">Display </label>
-    <input type="checkbox" name="" id="display-{{ state['id'] }}" />
+    <label for="display-{{ state['id_state'] }}">Display </label>
+    <input type="checkbox" name="" id="display-{{ state['id_state'] }}"
+    onchange="onEditDisplay(`{{ state['id_state'] }}`)" {% if state['display'] ==
+    True %} checked {% endif %} />
   </div>
 </div>

@@ -5,7 +5,7 @@ from app.db.query import query
 from app.utils import sql_requests
 
 
-@app.route("/priorities")
+@app.route("/states")
 def states():
     states_db = query(sql_requests.index_state, fetch="all")
     return render_template(

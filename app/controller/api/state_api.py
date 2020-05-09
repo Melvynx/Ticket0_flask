@@ -36,7 +36,7 @@ def edit_state(id_state):
     values = {
         "name": state["name"],
         "display": state["display"],
-        "id_priority": id_state,
+        "id_state": id_state,
     }
 
     result = query(sql_requests.edit_state, values)
@@ -50,7 +50,7 @@ def edit_state(id_state):
 
 
 @app.route("/states", methods=["POST"])
-def create_priority():
+def create_state():
     data = request.get_json()
 
     if not "state" in data:
@@ -79,7 +79,7 @@ def create_priority():
 
 
 @app.route("/states/<id_state>", methods=["DELETE"])
-def delete_priority(id_state):
+def delete_state(id_state):
     result = query(sql_requests.delete_key_state, {"id_state": id_state})
     result = query(sql_requests.delete_state, {"id_state": id_state})
 

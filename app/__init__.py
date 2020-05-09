@@ -44,5 +44,14 @@ from app.controller.model import (
     tiqet_page,
     auth_page,
     priority_page,
+    state_page,
 )
-from app.controller.api import category_api, item_api, tiqet_api, auth_api, comment_api, priority_api
+from app.controller.api import (
+    category_api,
+    item_api,
+    tiqet_api,
+    auth_api,
+    comment_api,
+    priority_api,
+    state_api,
+)

@@ -7,13 +7,16 @@
 {% block setting %}
 <a class="btn-link btn-sm p-0 pt-1" href="{{ url_for('categories') }}"><- Back</a>
 <div class="priority-block">
-  {% if states %} {% for state in states %}
-  <div class="d-flex flex-column">
-    {% include 'settings/state/state.html' %}
+  <div class="d-flex flex-column p-2">
+    <p>Click for edit.</p>
+    <p>Display is what column display in dashboard.</p>
+    {% if states %} {% for state in states %} {% include 'settings/state/state.html'
+    %} {% endfor %} {% else %}
+    <p>nothing...</p>
+    {% endif %}
   </div>
-  {% endfor %} {% else %}
-  <p>nothing...</p>
-  {% endif %} {% include 'settings/state/new_state.html' %}
+
+  {% include 'settings/state/new_state.html' %}
 </div>
 <!-- modal -->
 <div
@@ -48,4 +51,5 @@
 <script src="{{ url_for('static', filename='js/state.js') }}"></script>
 <script src="{{ url_for('static', filename='node_modules/bootstrap/js/dist/util.js') }}"></script>
 <script src="{{ url_for('static', filename='node_modules/bootstrap/js/dist/modal.js') }}"></script>
+<script src="{{ url_for('static', filename='node_modules/@popperjs/core/dist/umd/popper.js') }}"></script>
 {% endblock script_setting %} >

@@ -16,23 +16,23 @@ $(document).ready(() => {
   initPopper();
 });
 
-const initPopper = function() {
+const initPopper = function () {
   const ref = document.getElementById("comment");
   const popper = document.getElementById("comment-popper");
 
   // create the popper
   Popper.createPopper(ref, popper, { placement: "bottom" });
-}
+};
 
 /* title script "title.html" */
-const toggleEditTitle= function() {
+const toggleEditTitle = function () {
   $("#title").hide();
   $("#image-title").hide();
   $("#input-title").show().val($("#title").html()).on("keyup", titleSave).focus();
   $("#button-title").show();
-}
+};
 
-const titleSave= function(event) {
+const titleSave = function (event) {
   if (event) if (event.key !== ("Enter" | undefined)) return;
 
   const title = $("#input-title");
@@ -49,10 +49,10 @@ const titleSave= function(event) {
       toggleSnackbar(state.status, state.state);
     });
   }
-}
+};
 
 /* content script "content.html" */
-const toggleEditContent= function() {
+const toggleEditContent = function () {
   $("#content").hide();
   $("#image-content").hide();
   $("#input-content")
@@ -61,9 +61,9 @@ const toggleEditContent= function() {
     .focus()
     .height($("#content").height());
   $("#button-content").show();
-}
+};
 
-const contentSave= function() {
+const contentSave = function () {
   const input = $("#input-content");
 
   if (input.val().length <= 2 || input.val().length >= 5000) {
@@ -77,9 +77,9 @@ const contentSave= function() {
   editTiqet(TIQET_ID, { content: input.val().replace(/<br>/g, "\n") }, (state) => {
     toggleSnackbar(state.status, state.state);
   });
-}
+};
 
-const sendComment= function() {
+const sendComment = function () {
   if ($("#comment").val().length <= 1) {
     $("#comment").css("box-shadow", "0 0 0 0.2rem rgb(220,53,69,0.5)");
     $("#comment-popper").show();
@@ -127,9 +127,9 @@ const sendComment= function() {
       toggleSnackbar("Database has problem. Try an other time.", "danger");
     },
   });
-}
+};
 
-const updateComments = function() {
+const updateComments = function () {
   getComments((comments) => {
     const commentBox = $("#comments");
     commentBox.html("");
@@ -162,9 +162,9 @@ const updateComments = function() {
       element.innerHTML = element.innerHTML.replace(/\r?\n/g, "<br>");
     });
   });
-}
+};
 
-const getComments = function(callback) {
+const getComments = function (callback) {
   $.ajax({
     url: `${API_URL}/comments/${TIQET_ID}`,
     method: "GET",
@@ -181,8 +181,8 @@ const getComments = function(callback) {
       toggleSnackbar("Database has problem. Try an other time.", "danger");
     },
   });
-}
+};
 
-const removeShadow = function() {
+const removeShadow = function () {
   $("#comment").removeAttr("style");
-}
+};
