@@ -1,7 +1,7 @@
 const API_URL = "http://127.0.0.1:5000";
 
 // text: string, state: "danger" | "success"
-function toggleSnackbar(text, state) {
+const toggleSnackbar = function (text, state) {
   const snackbar = $("#snackbar");
   snackbar.html(text);
   switch (state) {
@@ -18,9 +18,9 @@ function toggleSnackbar(text, state) {
       return;
   }
   setTimeout(() => snackbar.removeClass("show"), 5000);
-}
+};
 
-function editTiqet(idTiqet, values, callback) {
+const editTiqet = function (idTiqet, values, callback) {
   const newTiqet = { tiqet: values };
   const newTiqetJson = JSON.stringify(newTiqet);
 
@@ -32,17 +32,20 @@ function editTiqet(idTiqet, values, callback) {
     contentType: "application/json",
     Accept: "application/json",
     success: (state) => {
-      callback(state);
+      callback && callback(state);
     },
     error: (result) => {
-      console.warn("Request status :", result.status);
+      console.warn(
+        `Request status : ${result.status}, request state:`,
+        result.responseJSON
+      );
       toggleSnackbar("Database has problem. Try an other time.", "danger");
     },
   });
-}
+};
 
 // by https://stackoverflow.com/a/21125098/12472736
-function getCookie(name) {
+const getCookie = function (name) {
   var match = document.cookie.match(new RegExp("(^| )" + name + "=([^;]+)"));
   if (match) return match[2];
-}
+};

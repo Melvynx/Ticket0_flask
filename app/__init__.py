@@ -43,5 +43,6 @@ from app.controller.model import (
     dashboard_page,
     tiqet_page,
     auth_page,
+    priority_page,
 )
-from app.controller.api import category_api, item_api, tiqet_api, auth_api, comment_api
+from app.controller.api import category_api, item_api, tiqet_api, auth_api, comment_api, priority_api

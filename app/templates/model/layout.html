@@ -23,9 +23,6 @@
     <script src="{{ url_for('static', filename='node_modules/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ url_for('static', filename='node_modules/autosize/dist/autosize.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/index.js') }}"></script>
-    {% block head %}
-    <!-- head -->
-    {% endblock %}
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='node_modules/bootstrap/dist/css/bootstrap.min.css') }}"
@@ -36,6 +33,9 @@
       href="{{ url_for('static', filename='css/bootstraptheme.css') }}"
       crossorigin="anonymous"
     />
+    {% block head %}
+    <!-- head -->
+    {% endblock %}
   </head>
   <body>
     <nav class="navbar navbar-expand-sm navbar-dark bg-primary navbar-app">

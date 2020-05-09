@@ -24,7 +24,9 @@
             >{{ comment["created_at"].strftime("%d/%m/%Y, %H:%M:%S") }}</span
           >
         </div>
-        <div class="comment bg-white rounded p-1 mt-1 mr-1 mb-1 d-inline-block">
+        <div
+          class="comment bg-white rounded p-1 mt-1 mr-1 mb-1 d-inline-block shadow-sm"
+        >
           <p class="comment-content">{{ comment["content"] }}</p>
         </div>
       </div>

@@ -1,17 +1,17 @@
 // on click button "edit" on the side of input name
-function onEditName() {
+const onEditName = function () {
   let name = $("#name");
   name.prop("disabled", false);
   $("#name-button-edit").hide();
   $("#name-button-save").show();
   name.focus();
-}
+};
 
 autosize($("#description-category-new"));
 autosize($("#description"));
 
 // event focus out input name
-function onSaveName(event) {
+const onSaveName = function (event) {
   // if save call by event
   if (event && event.key !== "Enter") return;
 
@@ -27,20 +27,20 @@ function onSaveName(event) {
   $("#name-button-save").hide();
 
   editCategory(API_CATEGORY_ID);
-}
+};
 
 // on click button "edit" on the side of textarea description
-function onEditDescription() {
+const onEditDescription = function () {
   let description = $("#description");
 
   description.prop("disabled", false);
   $("#description-button-edit").hide();
   $("#description-button-save").show();
   description.focus();
-}
+};
 
 // event focus out textarea description
-function onSaveDescription(event) {
+const onSaveDescription = function (event) {
   // if save call by key event, do only if is enter key
   if (event && event.key !== "Enter") return;
 
@@ -58,10 +58,10 @@ function onSaveDescription(event) {
   $("#description-button-save").hide();
 
   editCategory(API_CATEGORY_ID);
-}
+};
 
 // idCategory: number, callback: Function
-function editCategory(idCategory) {
+const editCategory = function (idCategory) {
   const description = $("#description").val();
   const name = $("#name").val();
 
@@ -79,14 +79,16 @@ function editCategory(idCategory) {
       toggleSnackbar(state.status, state.state);
     },
     error: (result) => {
-      console.warn(result.status);
+      console.warn(
+        `Request status : ${result.status}, request state: ${result.responseJSON}`
+      );
       toggleSnackbar("Database has problem. Try an other time.", "danger");
     },
   });
-}
+};
 
 // items - edit (id for know what input need to be changed)
-function onEditItem(id) {
+const onEditItem = function (id) {
   $("#item-name-" + id)
     .prop("disabled", false)
     .focus();
@@ -94,9 +96,9 @@ function onEditItem(id) {
   $(`#item-edit-${id}`).hide();
   $(`#item-save-${id}`).show();
   $(`#item-delete-${id}`).show();
-}
+};
 
-function onSaveItem(id) {
+const onSaveItem = function (id) {
   const name = $("#item-name-" + id);
   name.prop("disabled", true);
   const description = $("#item-description-" + id);
@@ -118,10 +120,10 @@ function onSaveItem(id) {
   $(`#item-save-${id}`).hide();
   $(`#item-delete-${id}`).hide();
   updateItem(id);
-}
+};
 
 // function to edit an item, API
-function updateItem(idItem) {
+const updateItem = function (idItem) {
   const name = $("#item-name-" + idItem).val();
   const description = $("#item-description-" + idItem).val();
 
@@ -139,27 +141,33 @@ function updateItem(idItem) {
       toggleSnackbar(state.status, state.state);
     },
     error: (result) => {
-      console.warn("Request status :", result.status);
+      console.warn(
+        `Request status : ${result.status}, request state:`,
+        result.responseJSON
+      );
       toggleSnackbar("Database has problem. Try an other time.", "danger");
     },
   });
-}
+};
 
 // function on toggle modal delete item
 
-function toggleModalItem(itemID) {
+const toggleModalItem = function (itemID) {
   $("#validationDeleteModal").modal("show");
   $("#modal-delete-button").data("id", itemID);
   $("#modal-delete-button").data("link", "items");
   $("#modal-title-delete").text("Are you sure to delete this item ?");
-  $("#modal-delete-body")
-    .html(`<p class="badge badge-primary mr-4">Item's id :${itemID}</p><p class="badge badge-primary">Item's name :
-    ${$(`#item-name-${itemID}`).val()}</p>
-  <p>If you delete this item, all tickets that are linked will be deleted.</p>
-  <p><b>This action is irreversible.</b></p>`);
-}
+  $("#modal-delete-body").html(
+    generateModalText(
+      "item",
+      itemID,
+      $(`#item-name-${itemID}`).val(),
+      "all tickets that are linked will be deleted."
+    )
+  );
+};
 
-function toggleModalCategory(categoryID) {
+const toggleModalCategory = function (categoryID) {
   if (category_item.length > 6) {
     toggleSnackbar("I can't delete the category if there's an item left.", "danger");
     return;
@@ -168,14 +176,37 @@ function toggleModalCategory(categoryID) {
   $("#modal-delete-button").data("id", categoryID);
   $("#modal-delete-button").data("link", "categories");
   $("#modal-title-delete").text("Are you sure to delete this category ?");
-  $("#modal-delete-body")
-    .html(`<p class="badge badge-primary mr-4">Category's id :${categoryID}</p><p class="badge badge-primary">Category's name :
-    ${$(`#name`).val()}</p>
-  <p>If you delete this category, all tickets that are linked will be deleted. All items linked with this category will be deleted too.</p>
-  <p><b>This action is irreversible.</b></p>`);
-}
+  $("#modal-delete-body").html(
+    generateModalText(
+      "category",
+      categoryID,
+      $(`#name`).val(),
+      "all items linked with this category will be deleted too."
+    )
+  );
+};
 
-function onDelete() {
+const generateModalText = function (name, id, value, text) {
+  const component = $(document.createElement("div"));
+  const idBadge = $(document.createElement("p"));
+  idBadge.text(`${name}'s id :${id}`);
+  idBadge.addClass("badge badge-primary mr-4");
+  const nameBadge = $(document.createElement("p"));
+  nameBadge.text(`${name}'s name : ${value}`);
+  nameBadge.addClass("badge badge-primary mr-4");
+  const information = $(document.createElement("p"));
+  information.text(`If you delete this ${name}, ${text}`);
+  const irreversible = $(document.createElement("p"));
+  irreversible.html("<b>This action is irreversible.</b>");
+  component.append(idBadge);
+  component.append(nameBadge);
+  component.append(information);
+  component.append(irreversible);
+
+  return component;
+};
+
+const onDelete = function () {
   id = $("#modal-delete-button").data("id");
   link = $("#modal-delete-button").data("link");
 
@@ -188,25 +219,28 @@ function onDelete() {
       window.location.reload();
     },
     error: (result) => {
-      console.warn("Request status :", result.status);
+      console.warn(
+        `Request status : ${result.status}, request state:`,
+        result.responseJSON
+      );
       toggleSnackbar("Database has problem. Try an other time.", "danger");
     },
   });
-}
+};
 
-function displayCreateBox() {
+const displayCreateBox = function () {
   $("#box-hide-item").hide();
-}
+};
 
 // for categories.html
 // function to try if champs is correct on create new category
-function onSubmitCategory() {
+const onSubmitCategory = function () {
   let title = $("#name-category-new").val();
-
-  if (title.length < 2 || title.length > 50) {
+  console.log(title, title.length);
+  if (title.length < 2 || title.length > 100) {
     toggleSnackbar("Title need to have between 3 and 49 caractes.", "danger");
     return;
   }
 
   $("#form-categories").submit();
-}
+};

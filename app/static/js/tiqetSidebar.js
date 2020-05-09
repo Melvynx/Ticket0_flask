@@ -8,16 +8,16 @@ $(document).ready(() => {
   handleCategory({ target: { value: $("#select-category").val() } });
 });
 
-function handleState(event) {
+const handleState = function (event) {
   const newState = checkNullValue(event.target.value);
 
   handleLoad(true);
   editTiqet(TIQET_ID, { fk_state: newState }, (state) => {
     handleLoad(false);
   });
-}
+};
 
-function handleCategory(event) {
+const handleCategory = function (event) {
   handleLoad(true);
   showItems(event.target.value, (items) => {
     handleLoad(false);
@@ -25,26 +25,27 @@ function handleCategory(event) {
       '<option value="null" selected data-display="- select item"> - </option>'
     );
     items.map((item) => {
-      $("#select-item").append(
-        `<option value="${item.id_item}" ${
-          ITEM_ID === String(item.id_item) ? "selected" : ""
-        }>${item.name}</option>`
-      );
+      const option = $(document.createElement("option"));
+      option.val(item.id_item);
+      option.attr("selected", ITEM_ID === String(item.id_item));
+      // niceSelect run script
+      option.text(item.name.replace(/<|>/g, "|"));
+      $("#select-item").append(option);
     });
     $("#select-item").niceSelect("update");
   });
-}
+};
 
-function handleAssigned(event) {
+const handleAssigned = function (event) {
   const newAssigned = checkNullValue(event.target.value);
 
   handleLoad(true);
   editTiqet(TIQET_ID, { fk_assigned: newAssigned }, (state) => {
     handleLoad(false);
   });
-}
+};
 
-function handlePriority(event) {
+const handlePriority = function (event) {
   const newPriority = checkNullValue(event.target.value);
 
   handleLoad(true);
@@ -52,25 +53,25 @@ function handlePriority(event) {
     handleLoad(false);
     console.log(state);
   });
-}
+};
 
-function handleItem(event) {
+const handleItem = function (event) {
   const newItem = checkNullValue(event.target.value);
 
   handleLoad(true);
   editTiqet(TIQET_ID, { fk_item: newItem }, (state) => {
     handleLoad(false);
   });
-}
+};
 
-function checkNullValue(value) {
+const checkNullValue = function (value) {
   if (String(value).length === 0) {
     return null;
   }
   return value;
-}
+};
 
-function showItems(idCategory, callback) {
+const showItems = function (idCategory, callback) {
   $.ajax({
     url: `${API_URL}/items/${idCategory}`,
     method: "GET",
@@ -80,13 +81,16 @@ function showItems(idCategory, callback) {
       callback && callback(items);
     },
     error: (result) => {
-      console.warn("Request status :", result.status);
+      console.warn(
+        `Request status : ${result.status}, request state:`,
+        result.responseJSON
+      );
       toggleSnackbar("Database has problem. Try an other time.", "danger");
     },
   });
-}
+};
 
-function handleLoad(state) {
+const handleLoad = function (state) {
   if (state) {
     $("#spinner").show();
     $("#done-icon").hide();
@@ -96,4 +100,4 @@ function handleLoad(state) {
     $("#done-icon").show();
     setTimeout(() => $("#spinner-load").hide(), 1000);
   }
-}
+};

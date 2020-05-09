@@ -3,21 +3,23 @@ $(document).ready(() => {
   $("select").niceSelect();
 });
 
-function categorySelectChange(event) {
+const categorySelectChange = function (event) {
   showItems(event.target.value, (items) => {
     $("#select-item").html(
       '<option value="null" selected data-display="- select item"> - </option>'
     );
     items.map((item) => {
-      $("#select-item").append(
-        `<option value="${item.id_item}">${item.name}</option>`
-      );
+      const option = $(document.createElement("option"));
+      option.val(item.id_item);
+      // niceSelect run script
+      option.text(item.name.replace(/<|>/g, "|"));
+      $("#select-item").append(option);
     });
     $("#select-item").niceSelect("update");
   });
-}
+};
 
-function showItems(idCategory, callback) {
+const showItems = function (idCategory, callback) {
   $.ajax({
     url: `${API_URL}/items/${idCategory}`,
     method: "GET",
@@ -27,13 +29,16 @@ function showItems(idCategory, callback) {
       callback && callback(items);
     },
     error: (result) => {
-      console.warn("Request status :", result.status);
+      console.warn(
+        `Request status : ${result.status}, request state:`,
+        result.responseJSON
+      );
       toggleSnackbar("Database has problem. Try an other time.", "danger");
     },
   });
-}
+};
 
-function onCreate() {
+const onCreate = function () {
   title = $("#tiqet-title").val();
   item = $("#select-item").val();
 
@@ -48,4 +53,4 @@ function onCreate() {
   }
 
   $("#tiqet-form-new").submit();
-}
+};

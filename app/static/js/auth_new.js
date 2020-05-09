@@ -2,7 +2,7 @@ $(document).ready(() => {
   $("#submit-form-login").on("click", onSubmit);
 });
 
-async function onSubmit() {
+const onSubmit = async function() {
   const username = $("#auth-username").val();
   const email = $("#auth-email").val();
   const password = $("#auth-password").val();
@@ -47,7 +47,7 @@ async function onSubmit() {
   });
 }
 
-async function checkCredential(username, email) {
+const checkCredential = async function(username, email) {
   const credential = { auth: { email: email, username: username } };
   const credentialJson = JSON.stringify(credential);
 
@@ -64,14 +64,16 @@ async function checkCredential(username, email) {
       },
       error: (result) => {
         resolve(false);
-        console.warn(result.responseJSON);
+        console.warn(
+          `Request status : ${result.status}, request state: ${result.responseJSON}`
+        );
         toggleSnackbar("Database has problem. Try an other time.", "danger");
       },
     });
   });
 }
 
-function checkEmail(email) {
+const checkEmail = function(email) {
   const reggex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   const isValidate = reggex.test(email);
   if (!isValidate) {
@@ -80,7 +82,7 @@ function checkEmail(email) {
   return { helper: "", state: true };
 }
 
-function checkPassword(password) {
+const checkPasswordfunction = function(password) {
   const reggex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
   const isValidate = reggex.test(password);
 
@@ -94,14 +96,14 @@ function checkPassword(password) {
   return { helper: "", state: true };
 }
 
-function checkConfirmPassword(password, confirmPassword) {
+const checkConfirmPassword = function(password, confirmPassword) {
   if (password !== confirmPassword) {
     return { helper: "Confirm password doesn't match with password.", state: false };
   }
   return { helper: "", state: true };
 }
 
-function checkUsername(username) {
+const checkUsername = function(username) {
   if (username.length > 20 || username.length < 3) {
     return {
       helper: "Username need to have between 3 and 20 caracteres.",
