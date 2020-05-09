@@ -94,8 +94,8 @@ def create_priority():
 
 @app.route("/priorities/<id_priority>", methods=["DELETE"])
 def delete_priority(id_priority):
-    result = query(sql_requests.delete_key_item, {"id_priority": id_priority})
-    result = query(sql_requests.delete_item, {"id_priority": id_priority})
+    result = query(sql_requests.delete_key_priority, {"id_priority": id_priority})
+    result = query(sql_requests.delete_priority, {"id_priority": id_priority})
 
     if result:
         status = jsonify(status="priority deleted successful", state="success")

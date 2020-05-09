@@ -1,0 +1,51 @@
+{% extends "model/settings.html" %}
+<!-- block content -->
+{% block link %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/state.css') }}" />
+{% endblock %}
+<!--        body-->
+{% block setting %}
+<a class="btn-link btn-sm p-0 pt-1" href="{{ url_for('categories') }}"><- Back</a>
+<div class="priority-block">
+  {% if states %} {% for state in states %}
+  <div class="d-flex flex-column">
+    {% include 'settings/state/state.html' %}
+  </div>
+  {% endfor %} {% else %}
+  <p>nothing...</p>
+  {% endif %} {% include 'settings/state/new_state.html' %}
+</div>
+<!-- modal -->
+<div
+  class="modal fade"
+  id="validationDeleteModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="validation delete modal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal-title-delete">
+          Are you sure to delete this state ?
+        </h5>
+      </div>
+      <div class="modal-body" id="modal-delete-body"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button type="button" id="modal-delete-button" class="btn btn-danger">
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end setting -->
+{% endblock setting %} {% block script_setting %}
+<script src="{{ url_for('static', filename='js/state.js') }}"></script>
+<script src="{{ url_for('static', filename='node_modules/bootstrap/js/dist/util.js') }}"></script>
+<script src="{{ url_for('static', filename='node_modules/bootstrap/js/dist/modal.js') }}"></script>
+{% endblock script_setting %} >

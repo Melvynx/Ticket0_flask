@@ -127,6 +127,16 @@ show_tiqet = """ SELECT T_Tiqet.id_tiqet, T_Tiqet.title, T_Tiqet.content, T_Tiqe
 #  index of state
 index_state = "SELECT * FROM `T_State`"
 
+edit_state = "UPDATE `T_State` SET `name` = %(name)s, `display` = %(display)s WHERE `T_State`.`id_state` = %(id_state)s; "
+
+create_state = "INSERT INTO `T_State` (`id_state`, `name`, `display`, `created_at`) VALUES (NULL, %(name)s, '1', CURRENT_TIMESTAMP); "
+
+delete_key_state = (
+    "UPDATE `T_Tiqet` SET `fk_state` = NULL WHERE `T_Tiqet`.`fk_state` = %(id_state)s;"
+)
+
+delete_state = "DELETE FROM `T_State` WHERE T_State.id_state = %(id_state)s;"
+
 # -----------
 # PRIORITY  |
 # -----------
@@ -138,9 +148,11 @@ edit_priority = """ UPDATE `T_Priority` SET `name` = %(name)s, `level` = %(level
 
 create_priority = """ INSERT INTO `T_Priority` (`id_priority`, `name`, `level`, `description`, `created_at`) VALUES (NULL, %(name)s, %(level)s, %(description)s, CURRENT_TIMESTAMP);  """
 
-delete_key_item = "UPDATE `T_Tiqet` SET `fk_priority` = NULL WHERE `T_Tiqet`.`fk_priority` = %(id_priority)s;"
+delete_key_priority = "UPDATE `T_Tiqet` SET `fk_priority` = NULL WHERE `T_Tiqet`.`fk_priority` = %(id_priority)s;"
 
-delete_item = "DELETE FROM `T_Priority` WHERE T_Priority.id_priority = %(id_priority)s;"
+delete_priority = (
+    "DELETE FROM `T_Priority` WHERE T_Priority.id_priority = %(id_priority)s;"
+)
 # -----------
 # USERS     |
 # -----------
