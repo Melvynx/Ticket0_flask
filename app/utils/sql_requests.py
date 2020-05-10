@@ -131,9 +131,7 @@ edit_state = "UPDATE `T_State` SET `name` = %(name)s, `display` = %(display)s WH
 
 create_state = "INSERT INTO `T_State` (`id_state`, `name`, `display`, `created_at`) VALUES (NULL, %(name)s, '1', CURRENT_TIMESTAMP); "
 
-delete_key_state = (
-    "UPDATE `T_Tiqet` SET `fk_state` = NULL WHERE `T_Tiqet`.`fk_state` = %(id_state)s;"
-)
+delete_key_state = "DELETE FROM `T_Tiqet` WHERE fk_state = %(id_state)s"
 
 delete_state = "DELETE FROM `T_State` WHERE T_State.id_state = %(id_state)s;"
 

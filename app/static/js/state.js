@@ -1,5 +1,9 @@
+// todo : use font awrsomes
+$(document).ready(() => {
+  $("#modal-delete-button").on("click", onDelete);
+});
+
 const onEditName = function (idState) {
-  console.log(idState);
   $(`#name-${idState}`).hide();
   $(`#name-i-${idState}`).show();
 };
@@ -79,6 +83,40 @@ const onCreate = function () {
     success: (state) => {
       toggleSnackbar(state.status, state.state);
       document.location.reload();
+    },
+    error: (result) => {
+      console.warn(
+        `Request status : ${result.status}, request state:`,
+        result.responseJSON
+      );
+      toggleSnackbar("Database has problem. Try an other time.", "danger");
+    },
+  });
+};
+
+const toggleDelete = function (id) {
+  $("#validationDeleteModal").modal("show");
+  $("#modal-delete-button").data("stateid", id);
+  $("#modal-delete-body").html(
+    generateModalText(
+      "state",
+      id,
+      $(`#name-i-${id}`).val(),
+      "Beware, all tickets linked to this state will be definitively deleted too."
+    )
+  );
+};
+
+const onDelete = function (event) {
+  const stateId = $(event.target).data("stateid");
+
+  $.ajax({
+    url: `${API_URL}/states/${stateId}`,
+    method: "DELETE",
+    Accept: "application/json",
+    success: (state) => {
+      toggleSnackbar(state.status, state.state);
+      window.location.reload();
     },
     error: (result) => {
       console.warn(

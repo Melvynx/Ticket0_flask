@@ -36,7 +36,6 @@ const titleSave = function (event) {
   if (event) if (event.key !== ("Enter" | undefined)) return;
 
   const title = $("#input-title");
-  console.log("SAVE");
 
   if (title.val().length <= 2 || title.val().length >= 100) {
     toggleSnackbar("Title need to have between 2 and 100 caractes.", "danger");

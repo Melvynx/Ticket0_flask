@@ -1,4 +1,6 @@
-<div class="border-top d-flex justify-content-between p-1">
+<div
+  class="state border-top border-bottom d-flex justify-content-between p-1 align-items-center"
+>
   <div>
     <p
       id="name-{{ state['id_state'] }}"
@@ -17,6 +19,14 @@
     />
   </div>
   <div>
+    <button
+      id="delete-{{ state['id_item'] }}"
+      type="button"
+      class="btn btn-outlined btn-sm"
+      onclick="toggleDelete(`{{ state['id_state'] }}`)"
+    >
+      <i class="fas fa-trash-alt fa-md"></i>
+    </button>
     <label for="display-{{ state['id_state'] }}">Display </label>
     <input type="checkbox" name="" id="display-{{ state['id_state'] }}"
     onchange="onEditDisplay(`{{ state['id_state'] }}`)" {% if state['display'] ==
