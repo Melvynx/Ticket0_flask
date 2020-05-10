@@ -51,7 +51,6 @@ const handlePriority = function (event) {
   handleLoad(true);
   editTiqet(TIQET_ID, { fk_priority: newPriority }, (state) => {
     handleLoad(false);
-    console.log(state);
   });
 };
 

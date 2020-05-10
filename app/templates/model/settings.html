@@ -32,13 +32,13 @@
       <div class="nav-bar mr-4 p-1 rounded">
         <a href="{{ url_for('priorities') }}" class="nav-a d-block">Priority</a>
       </div>
-      {% endif %} {% if "Users" == title_setting %}
+      {% endif %} {% if "States" == title_setting %}
       <div class="nav-bar mr-4 p-1 rounded bg-primary">
-        <a href="#" class="nav-a text-white d-block">Users</a>
+        <a href="{{ url_for('states') }}" class="nav-a text-white d-block">States</a>
       </div>
       {% else %}
       <div class="nav-bar mr-4 p-1 rounded">
-        <a href="#" class="nav-a d-block">Users</a>
+        <a href="{{ url_for('states') }}" class="nav-a d-block">States</a>
       </div>
       {% endif %} {% if user %}
       <div class="title mb-1 mt-2">
