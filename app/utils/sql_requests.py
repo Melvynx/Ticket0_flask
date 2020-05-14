@@ -188,3 +188,23 @@ auth_check_email = """ SELECT * FROM `T_User` WHERE `email` = %(email)s """
 auth_safe_edit = """ UPDATE `T_User` SET `firstname` = %(firstname)s, `lastname` = %(lastname)s, `email` = %(email)s WHERE `T_User`.`id_user` = %(id_user)s;  """
 
 auth_edit_password = """ UPDATE `T_User` SET `password` = %(new_password)s WHERE `T_User`.`id_user` = %(id_user)s;  """
+
+
+# -----------
+# LABEL     |
+# -----------
+
+label_by_tiqet = """ SELECT fk_tiqet, id_label AS label, color, name FROM t_tiqet_to_label
+RIGHT JOIN t_label ON fk_tiqet = %(id_tiqet)s
+GROUP BY id_label """
+
+create_label = """ INSERT INTO `T_Label` (`id_label`, `name`, `description`, `color`, `created_at`) VALUES (NULL, %(name)s, %(description)s, %(color)s, CURRENT_TIMESTAMP); """
+
+edit_label = """ UPDATE `T_Label` SET `name` = %(name)s, `description` = %(description)s, `color` = %(color)s WHERE `T_Label`.`id_label` = %(id_label)s ;  """
+
+index_label = """ SELECT * FROM `T_Label`  """
+
+delete_key_priority = "UPDATE `T_Tiqet_to_Label` SET `fk_label` = NULL WHERE `T_Tiqet_to_Label`.`fk_label` = %(id_label)s;"
+
+delete_priority = "DELETE FROM `T_Label` WHERE T_Label.id_label = %(id_label)s;"
+

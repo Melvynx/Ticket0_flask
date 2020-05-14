@@ -10,10 +10,12 @@
   <div class="d-flex flex-column p-2">
     <p>Click for edit.</p>
     <p>Display is what column display in dashboard.</p>
-    {% if states %} {% for state in states %} {% include 'settings/state/state.html'
-    %} {% endfor %} {% else %}
-    <p>nothing...</p>
-    {% endif %}
+    <div class="border p-2 rounded">
+      {% if states %} {% for state in states %} {% include
+      'settings/state/state.html' %} {% endfor %} {% else %}
+      <p>nothing...</p>
+      {% endif %}
+    </div>
   </div>
 
   {% include 'settings/state/new_state.html' %}
