@@ -51,21 +51,20 @@ const getCookie = function (name) {
 };
 
 const generateModalText = function (name, id, value, text) {
-  const component = $(document.createElement("div"));
-  const idBadge = $(document.createElement("p"));
-  idBadge.text(`${name}'s id :${id}`);
-  idBadge.addClass("badge badge-primary mr-4");
-  const nameBadge = $(document.createElement("p"));
-  nameBadge.text(`${name}'s name : ${value}`);
-  nameBadge.addClass("badge badge-primary mr-4");
-  const information = $(document.createElement("p"));
-  information.text(`If you delete this ${name}, ${text}`);
-  const irreversible = $(document.createElement("p"));
-  irreversible.html("<b>This action is irreversible.</b>");
-  component.append(idBadge);
-  component.append(nameBadge);
-  component.append(information);
-  component.append(irreversible);
+  const idBadge = $(document.createElement("p")).text(`${name}'s id :${id}`);
+  const nameBadge = $(document.createElement("p")).text(`${name}'s name : ${value}`);
+  const informationText = $(document.createElement("p")).text(
+    `If you delete this ${name}, ${text}`
+  );
+  const warningText = $(document.createElement("p")).html(
+    "<b>This action is irreversible.</b>"
+  );
 
-  return component;
+  idBadge.add(nameBadge).addClass("badge badge-primary mr-4");
+
+  return $(document.createElement("div"))
+    .append(idBadge)
+    .append(nameBadge)
+    .append(informationText)
+    .append(warningText);
 };
