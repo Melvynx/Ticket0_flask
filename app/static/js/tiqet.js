@@ -10,11 +10,60 @@ $(document).ready(() => {
   $("#content").on("click", toggleEditContent);
   $("#button-comment").on("click", sendComment);
   $("#comment").on("keyup", removeShadow);
-  $("select").niceSelect();
+  $(".niceSelect").niceSelect();
   autosize($("#input-content"));
+  const labelSelect = new Choices(document.getElementById("label-select"), {
+    removeItemButton: true,
+    itemSelectText: "",
+  });
+
+  initLabels((labelsId) => labelSelect.setChoiceByValue(labelsId));
+
+  $("#label-select").on("addItem", addLabel).on("removeItem", removeLabel);
+
+  // .setValue([{ value: "1", label: "Mon chien" }]);
 
   initPopper();
 });
+
+const addLabel = function (label) {
+  const label_id = label.detail.id;
+  $.ajax({
+    url: `${API_URL}/labels/${label_id}/tiqets/${TIQET_ID}`,
+    method: "POST",
+    dataType: "json",
+    Accept: "application/json",
+    success: (status) => {
+      console.log("done");
+    },
+  });
+};
+
+const removeLabel = function (label) {
+  const label_id = label.detail.id;
+  $.ajax({
+    url: `${API_URL}/labels/${label_id}/tiqets/${TIQET_ID}`,
+    method: "DELETE",
+    dataType: "json",
+    Accept: "application/json",
+    success: (status) => {
+      console.log("done");
+    },
+  });
+};
+
+const initLabels = function (callback) {
+  $.ajax({
+    url: `${API_URL}/labels/tiqets/${TIQET_ID}`,
+    method: "GET",
+    dataType: "json",
+    Accept: "application/json",
+    success: (labels) => {
+      if (labels.length === 0) return;
+      callback(labels.map((label) => String(label.id_label)));
+    },
+  });
+};
 
 const initPopper = function () {
   const ref = document.getElementById("comment");
@@ -130,37 +179,49 @@ const sendComment = function () {
 
 const updateComments = function () {
   getComments((comments) => {
-    const commentBox = $("#comments");
-    commentBox.html("");
+    const commentBox = $("#comments").html("");
     $("#comment").val("");
-    comments.map((comment) => {
-      const created_at = new Date(comment.created_at);
-      const date =
-        created_at.toLocaleDateString() + " ," + created_at.toLocaleTimeString();
-      commentBox.append(`<div class="d-flex mt-2">
-      <div class="">
-        <div
-          class="usernamme-data rounded-circle d-flex justify-content-center mr-2"
-          title="${comment.username}"
-        >
-          <span>${comment.username.toUpperCase()[0]}</span>
-        </div>
-      </div>
-      <div>
-        <div class="text-secondary comment-data">
-          <span class="font-weight-bold">${comment.username}</span> •
-          <span class="font-italic">${date}</span>
-        </div>
-        <div class="comment bg-white rounded p-1 mt-1 mr-1 mb-1 d-inline-block">
-          <p class="comment-content">${comment.content}</p>  
-        </div>
-      </div>
-    </div>`);
-    });
-    $(".comment-content").each((index, element) => {
-      element.innerHTML = element.innerHTML.replace(/\r?\n/g, "<br>");
-    });
+    comments.forEach((comment) => commentBox.append(generateComment(comment)));
   });
+};
+
+const generateComment = function (comment) {
+  const date = new Date(comment.created_at);
+  const dateString = date.toLocaleDateString() + " ," + date.toLocaleTimeString();
+
+  const usernameContainer = $(document.createElement("div"))
+    .addClass("usernamme-data rounded-circle d-flex justify-content-center mr-2")
+    .append(
+      $(document.createElement("span")).text(comment.username.toUpperCase()[0])
+    );
+
+  const dataContainer = $(document.createElement("div"))
+    .addClass("text-secondary comment-data")
+    .append(
+      $(document.createElement("span"))
+        .addClass("font-weight-bold")
+        .text(comment.username)
+    )
+    .append(
+      $(document.createElement("span")).addClass("font-italic").text(dateString)
+    );
+
+  const commentText = $(document.createElement("div"))
+    .addClass("comment bg-white rounded p-1 mt-1 mr-1 mb-1 d-inline-block")
+    .append(
+      $(document.createElement("p"))
+        .addClass("comment-content")
+        .text(comment.content.replace(/\r?\n/g, "<br>"))
+    );
+
+  const commentContainer = $(document.createElement("div"))
+    .append(dataContainer)
+    .append(commentText);
+
+  return $(document.createElement("div"))
+    .addClass("d-flex mt-2")
+    .append(usernameContainer)
+    .append(commentContainer);
 };
 
 const getComments = function (callback) {

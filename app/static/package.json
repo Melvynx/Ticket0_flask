@@ -10,6 +10,7 @@
     "@popperjs/core": "^2.4.0",
     "autosize": "^4.0.2",
     "bootstrap": "^4.4.1",
+    "choices.js": "^9.0.1",
     "jquery": "^3.5.0",
     "jquery-nice-select": "^1.1.0",
     "sortablejs": "^1.10.2"

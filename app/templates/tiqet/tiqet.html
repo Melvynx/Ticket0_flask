@@ -7,6 +7,10 @@
   rel="stylesheet"
   href="{{ url_for('static', filename='node_modules/jquery-nice-select/css/nice-select.css') }}"
 />
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='node_modules/choices.js/public/assets/styles/choices.min.css') }}"
+/>
 {% endblock %} {% block content %}
 <div class="d-flex rounded border">
   {% if tiqet %}
@@ -47,6 +51,7 @@
   const ITEM_ID = "{{ tiqet['id_item'] }}";
 </script>
 <script src="{{ url_for('static', filename='node_modules/jquery-nice-select/js/jquery.nice-select.js') }}"></script>
+<script src="{{ url_for('static', filename='node_modules/choices.js/public/assets/scripts/choices.min.js') }}"></script>
 <script type="module" src="{{ url_for('static', filename='js/tiqet.js') }}"></script>
 <script
   type="module"

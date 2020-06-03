@@ -45,6 +45,7 @@ from app.controller.model import (
     auth_page,
     priority_page,
     state_page,
+    label_page,
 )
 from app.controller.api import (
     category_api,
@@ -54,4 +55,5 @@ from app.controller.api import (
     comment_api,
     priority_api,
     state_api,
+    label_api,
 )

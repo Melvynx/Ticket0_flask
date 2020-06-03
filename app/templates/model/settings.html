@@ -40,6 +40,14 @@
       <div class="nav-bar mr-4 p-1 rounded">
         <a href="{{ url_for('states') }}" class="nav-a d-block">States</a>
       </div>
+      {% endif %} {% if "Labels" == title_setting %}
+      <div class="nav-bar mr-4 p-1 rounded bg-primary">
+        <a href="{{ url_for('labels') }}" class="nav-a text-white d-block">Labels</a>
+      </div>
+      {% else %}
+      <div class="nav-bar mr-4 p-1 rounded">
+        <a href="{{ url_for('labels') }}" class="nav-a d-block">Labels</a>
+      </div>
       {% endif %} {% if user %}
       <div class="title mb-1 mt-2">
         <h6 class="title-h6">Account</h6>
