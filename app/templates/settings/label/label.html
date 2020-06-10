@@ -11,12 +11,17 @@
     </div>
     <div class="input-block ml-2">
       <label class="label" for="label-color-{{ label['id_label'] }}">Color</label>
-      <input
-        id="label-color-{{ label['id_label'] }}"
-        class="form-control form-control-sm"
-        value="{{ label['color'] }}"
-        disabled
-      />
+      <div class="input-group input-group-sm">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">#</span>
+        </div>
+        <input
+          id="label-color-{{ label['id_label'] }}"
+          class="form-control"
+          value="{{ label['color'] }}"
+          disabled
+        />
+      </div>
     </div>
   </div>
   <div class="input-block">
@@ -37,7 +42,7 @@
       type="button"
       style="display: none;"
       class="btn btn-warning btn-outlined btn-sm"
-      onclick="togglePriorityModal(`{{ label['id_label'] }}`)"
+      onclick="toggleLabelModal(`{{ label['id_label'] }}`)"
     >
       <i class="fas fa-trash-alt fa-md"></i>
     </button>
@@ -46,7 +51,7 @@
         id="label-edit-{{ label['id_label'] }}"
         type="button"
         class="btn btn-link btn-sm"
-        onclick="onEditPriority(`{{ label['id_label'] }}`)"
+        onclick="onEditLabel(`{{ label['id_label'] }}`)"
       >
         Edit
       </button>
@@ -55,7 +60,7 @@
         type="button"
         style="display: none;"
         class="btn btn-warning btn-sm"
-        onclick="onSavePriority(`{{ label['id_label'] }}`)"
+        onclick="onSaveLabel(`{{ label['id_label'] }}`)"
       >
         Save
       </button>

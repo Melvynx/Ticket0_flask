@@ -20,15 +20,7 @@ const onSaveLabel = function (idLabel) {
   const name = $(`#label-name-${idLabel}`).val();
   const color = $(`#label-color-${idLabel}`).val();
 
-  if (name.length <= 2 || name.length >= 50) {
-    toggleSnackbar("Name need to be between 2 and 50 caracteres.", "danger");
-    return;
-  }
-
-  if (isNaN(Number(color))) {
-    toggleSnackbar("Level isn't a number.", "danger");
-    return;
-  }
+  if (checkLabel(name, color)) return;
 
   $(`#label-edit-${idLabel}`).show();
   $(`#label-save-${idLabel}`).hide();
@@ -40,14 +32,14 @@ const onSaveLabel = function (idLabel) {
     label: {
       name: name,
       description: $(`#label-description-${idLabel}`).val(),
-      color: Number(color),
+      color: color,
     },
   };
 
   const newLabelJson = JSON.stringify(newLabel);
 
   $.ajax({
-    url: `${API_URL}/priorities/${idLabel}`,
+    url: `${API_URL}/labels/${idLabel}`,
     method: "PATCH",
     data: newLabelJson,
     dataType: "json",
@@ -76,28 +68,20 @@ const onCreate = function () {
   const name = $("#new-name").val();
   const color = $("#new-color").val();
 
-  if (name.length <= 2 || name.length >= 50) {
-    toggleSnackbar("Name need to be between 2 and 50 caracteres.", "danger");
-    return;
-  }
-
-  if (isNaN(Number(color))) {
-    toggleSnackbar("Level isn't a number.", "danger");
-    return;
-  }
+  if (checkLabel(name, color)) return;
 
   const newLabel = {
     label: {
       name: name,
       description: $("#new-description").val(),
-      color: Number(color),
+      color: color,
     },
   };
-
+  console.log(newLabel);
   const newLabelJson = JSON.stringify(newLabel);
 
   $.ajax({
-    url: `${API_URL}/priorities`,
+    url: `${API_URL}/labels`,
     method: "POST",
     data: newLabelJson,
     dataType: "json",
@@ -134,7 +118,7 @@ const onDelete = function (event) {
   const labelId = $(event.target).data("labelid");
 
   $.ajax({
-    url: `${API_URL}/priorities/${labelId}`,
+    url: `${API_URL}/labels/${labelId}`,
     method: "DELETE",
     Accept: "application/json",
     success: (state) => {
@@ -149,4 +133,21 @@ const onDelete = function (event) {
       toggleSnackbar("Database has problem. Try an other time.", "danger");
     },
   });
+};
+
+const checkLabel = function (name, color) {
+  if (name.length <= 2 || name.length >= 50) {
+    toggleSnackbar("The name must be between 2 and 40 characters.", "danger");
+    return true;
+  }
+
+  if (color.includes("#") || color.length < 3 || color.length > 6) {
+    toggleSnackbar(
+      'The color must be between 3 and 6 characters and don\'t have "#"',
+      "danger"
+    );
+    return true;
+  }
+
+  return false;
 };
