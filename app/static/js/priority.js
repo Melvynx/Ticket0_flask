@@ -8,48 +8,48 @@ $(document).ready(() => {
   $("#modal-delete-button").on("click", onDelete);
 });
 
-const onEditLabel = function (idLabel) {
-  handleDisabled(idLabel, false);
-  $(`#label-edit-${idLabel}`).hide();
-  $(`#label-save-${idLabel}`).show();
-  $(`#label-save-${idLabel}`).show();
-  $(`#label-delete-${idLabel}`).show();
+const onEditPriority = function (idPriority) {
+  handleDisabled(idPriority, false);
+  $(`#priority-edit-${idPriority}`).hide();
+  $(`#priority-save-${idPriority}`).show();
+  $(`#priority-save-${idPriority}`).show();
+  $(`#priority-delete-${idPriority}`).show();
 };
 
-const onSaveLabel = function (idLabel) {
-  const name = $(`#label-name-${idLabel}`).val();
-  const color = $(`#label-color-${idLabel}`).val();
+const onSavePriority = function (idPriority) {
+  const name = $(`#priority-name-${idPriority}`).val();
+  const level = $(`#priority-level-${idPriority}`).val();
 
   if (name.length <= 2 || name.length >= 50) {
     toggleSnackbar("Name need to be between 2 and 50 caracteres.", "danger");
     return;
   }
 
-  if (isNaN(Number(color))) {
+  if (isNaN(Number(level))) {
     toggleSnackbar("Level isn't a number.", "danger");
     return;
   }
 
-  $(`#label-edit-${idLabel}`).show();
-  $(`#label-save-${idLabel}`).hide();
-  $(`#label-delete-${idLabel}`).hide();
-  $(`#label-save-${idLabel}`).hide();
-  handleDisabled(idLabel, true);
+  $(`#priority-edit-${idPriority}`).show();
+  $(`#priority-save-${idPriority}`).hide();
+  $(`#priority-delete-${idPriority}`).hide();
+  $(`#priority-save-${idPriority}`).hide();
+  handleDisabled(idPriority, true);
 
-  const newLabel = {
-    label: {
+  const newPriority = {
+    priority: {
       name: name,
-      description: $(`#label-description-${idLabel}`).val(),
-      color: Number(color),
+      description: $(`#priority-description-${idPriority}`).val(),
+      level: Number(level),
     },
   };
 
-  const newLabelJson = JSON.stringify(newLabel);
+  const newPriorityJson = JSON.stringify(newPriority);
 
   $.ajax({
-    url: `${API_URL}/priorities/${idLabel}`,
+    url: `${API_URL}/priorities/${idPriority}`,
     method: "PATCH",
-    data: newLabelJson,
+    data: newPriorityJson,
     dataType: "json",
     contentType: "application/json",
     Accept: "application/json",
@@ -67,39 +67,39 @@ const onSaveLabel = function (idLabel) {
 };
 
 const handleDisabled = function (id, state) {
-  $(`#label-name-${id}`).attr("disabled", state);
-  $(`#label-description-${id}`).attr("disabled", state);
-  $(`#label-color-${id}`).attr("disabled", state);
+  $(`#priority-name-${id}`).attr("disabled", state);
+  $(`#priority-description-${id}`).attr("disabled", state);
+  $(`#priority-level-${id}`).attr("disabled", state);
 };
 
 const onCreate = function () {
   const name = $("#new-name").val();
-  const color = $("#new-color").val();
+  const level = $("#new-level").val();
 
   if (name.length <= 2 || name.length >= 50) {
     toggleSnackbar("Name need to be between 2 and 50 caracteres.", "danger");
     return;
   }
 
-  if (isNaN(Number(color))) {
+  if (isNaN(Number(level))) {
     toggleSnackbar("Level isn't a number.", "danger");
     return;
   }
 
-  const newLabel = {
-    label: {
+  const newPriority = {
+    priority: {
       name: name,
       description: $("#new-description").val(),
-      color: Number(color),
+      level: Number(level),
     },
   };
 
-  const newLabelJson = JSON.stringify(newLabel);
+  const newPriorityJson = JSON.stringify(newPriority);
 
   $.ajax({
     url: `${API_URL}/priorities`,
     method: "POST",
-    data: newLabelJson,
+    data: newPriorityJson,
     dataType: "json",
     contentType: "application/json",
     Accept: "application/json",
@@ -117,24 +117,24 @@ const onCreate = function () {
   });
 };
 
-const toggleLabelModal = function (id) {
+const togglePriorityModal = function (id) {
   $("#validationDeleteModal").modal("show");
-  $("#modal-delete-button").data("labelid", id);
+  $("#modal-delete-button").data("priorityid", id);
   $("#modal-delete-body").html(
     generateModalText(
-      "label",
+      "priority",
       id,
-      $(`#label-name-${id}`).val(),
-      "all tickets linked to this label will no longer have it."
+      $(`#priority-name-${id}`).val(),
+      "all tickets linked to this priority will no longer have it."
     )
   );
 };
 
 const onDelete = function (event) {
-  const labelId = $(event.target).data("labelid");
+  const priorityId = $(event.target).data("priorityid");
 
   $.ajax({
-    url: `${API_URL}/priorities/${labelId}`,
+    url: `${API_URL}/priorities/${priorityId}`,
     method: "DELETE",
     Accept: "application/json",
     success: (state) => {
