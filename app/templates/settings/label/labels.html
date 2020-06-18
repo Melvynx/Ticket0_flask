@@ -1,12 +1,12 @@
 {% extends "model/settings.html" %}
 <!-- block content -->
 {% block link %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/priority.css') }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename='css/label.css') }}" />
 {% endblock %}
 <!--        body-->
 {% block setting %}
 <a class="btn-link btn-sm p-0 pt-1" href="{{ url_for('categories') }}"><- Back</a>
-<div class="priority-block">
+<div class="label-block">
   {% if labels %} {% for label in labels %} {% include 'settings/label/label.html' %}
   {% endfor %} {% else %}
   <p>nothing...</p>

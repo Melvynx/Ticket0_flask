@@ -27,7 +27,8 @@ $(document).ready(() => {
 });
 
 const addLabel = function (label) {
-  const label_id = label.detail.id;
+  const label_id = label.detail.value;
+
   $.ajax({
     url: `${API_URL}/labels/${label_id}/tiqets/${TIQET_ID}`,
     method: "POST",
@@ -40,7 +41,7 @@ const addLabel = function (label) {
 };
 
 const removeLabel = function (label) {
-  const label_id = label.detail.id;
+  const label_id = label.detail.value;
   $.ajax({
     url: `${API_URL}/labels/${label_id}/tiqets/${TIQET_ID}`,
     method: "DELETE",

@@ -213,3 +213,4 @@ delete_label = "DELETE FROM `T_Label` WHERE T_Label.id_label = %(id_label)s;"
 delete_tiqet_label_reation = "DELETE FROM `T_Tiqet_to_Label` WHERE T_Tiqet_to_Label.fk_tiqet = %(id_tiqet)s AND T_Tiqet_to_Label.fk_label = %(id_label)s"
 
 create_tiqet_label_reation = "INSERT INTO `T_Tiqet_to_Label` (`id_tiqet_to_label`, `fk_tiqet`, `fk_label`, `created_at`) VALUES (NULL, %(id_tiqet)s, %(id_label)s, CURRENT_TIMESTAMP);"
+""" INSERT INTO `T_Tiqet_to_Label` (`id_tiqet_to_label`, `fk_tiqet`, `fk_label`, `created_at`) VALUES (NULL, '13', '7', CURRENT_TIMESTAMP); """

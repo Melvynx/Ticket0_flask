@@ -1,24 +1,8 @@
-from flask import request, jsonify, make_response, flash, url_for, redirect
+from flask import request, jsonify, make_response
 
 from app import app
 from app.db.query import query
 from app.utils import sql_requests
-
-
-# @app.route("/labels", methods=["POST"])
-# def new_label():
-#     name = request.form.get("label-name")
-#     description = request.form.get("label-description")
-#     color = request.form.get("label-color")
-
-#     values = {"name": name, "description": description}
-#     #  todo : catch error on front
-#     result = query(sql_requests.create_label, values)
-#     if result:
-#         flash("Item create successful !", "success")
-#     else:
-#         flash("Can't create item with empty value.", "danger")
-#     return redirect(url_for("category"))
 
 
 @app.route("/labels/<id_label>", methods=["PATCH"])
@@ -76,9 +60,9 @@ def create_label_mon():
         return make_response(status, 400)
 
     values = {
-        "name": "TTTTTT",
-        "description": "ok ta mère",
-        "color": "101010",
+        "name": label["name"],
+        "description": label["description"],
+        "color": label["color"],
     }
 
     result = query(sql_requests.create_label, values)
@@ -109,8 +93,8 @@ def labels_tiqet(id_tiqet):
         sql_requests.show_label_by_tiqet, {"id_tiqet": id_tiqet}, fetch="all"
     )
 
-    labelsJson = jsonify(labels)
-    return make_response(labelsJson, 200)
+    labels_json = jsonify(labels)
+    return make_response(labels_json, 200)
 
 
 @app.route("/labels/<id_label>/tiqets/<id_tiqet>", methods=["POST"])

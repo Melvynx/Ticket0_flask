@@ -124,3 +124,18 @@
   bottom: 8px;
   right: 8px;
 }
+
+/* to edit */
+.choices__list--dropdown .choices__item--selectable {
+  padding-right: 10px !important;
+}
+
+.choices__list--multiple .choices__item {
+  background-color: #ffc107a0 !important;
+  border-color: #ffc107 !important;
+  color: #000 !important;
+}
+
+.choices__button {
+  border-color: #000 !important;
+}
