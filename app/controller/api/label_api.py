@@ -126,19 +126,3 @@ def delete_labels_tiqet(id_label, id_tiqet):
 
     return make_response(status, 200)
 
-
-# @app.route("/items/<id_item>", methods=["PATCH"])
-# def item_edit(id_item):
-#     data = request.get_json()
-#     item_data = data["item"]
-#     values = {
-#         "name": item_data["name"],
-#         "description": item_data["description"],
-#         "id": id_item,
-#     }
-#     response = query(sql_requests.update_item, values)
-#     if response:
-#         status = jsonify(status="item has been updated", state="success")
-#         return make_response(status, 200)
-#     status = jsonify(status="sql server has problem", state="danger")
-#     return make_response(status, 201)
