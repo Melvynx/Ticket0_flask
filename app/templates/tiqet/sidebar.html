@@ -7,8 +7,7 @@
   <div class="sidebar-data">
     <select
       id="select-state"
-      class="sidebar-select wide small"
-      id="select_state"
+      class="sidebar-select wide small niceSelect"
       name="tiqet-user"
     >
       <option value="null" data-display="- select state"> - </option>
@@ -32,8 +31,7 @@
   <div class="sidebar-data">
     <select
       id="select-priority"
-      class="sidebar-select wide small"
-      id="select_state"
+      class="sidebar-select wide small niceSelect"
       name="tiqet-user"
     >
       <option value="null" data-display="- select priority"> - </option>
@@ -57,8 +55,7 @@
   <div class="sidebar-data">
     <select
       id="select-assigned"
-      class="sidebar-select wide small"
-      id="select_state"
+      class="sidebar-select wide small niceSelect"
       name="tiqet-user"
     >
       <option value="null" data-display="- select assigned"> - </option>
@@ -83,8 +80,7 @@
   <div class="sidebar-data">
     <select
       id="select-category"
-      class="sidebar-select wide small"
-      id="select_state"
+      class="sidebar-select wide small niceSelect"
       name="tiqet-user"
     >
       <option value="null" data-display="- select category"> - </option>
@@ -111,14 +107,29 @@
   <div class="sidebar-data">
     <select
       id="select-item"
-      class="sidebar-select wide small"
-      id="select_state"
+      class="sidebar-select wide small niceSelect"
       name="tiqet-user"
     >
       <option value="null" data-display="- select item"> - </option>
     </select>
   </div>
 </div>
+
+
+<div class="d-flex justify-content-between p-2">
+  <div class="d-flex align-items-center text-white">
+    <i class="fas fa-th-large fa-md"></i>
+    <p class="m-0 ml-1">Labels</p>
+  </div>
+  <div class="sidebar-data">
+    <select class="form-control" name="choices-multiple-remove-button" id="label-select" placeholder="This is a placeholder" multiple>
+      {% if labels %} %{% for label in labels %}
+      <option value="{{ label['id_label'] }}">{{ label["name"] }}</option>
+      {% endfor %} {% endif %}
+    </select>
+  </div>
+</div>
+
 <div class="spinner-load position-absolute" style="display: none;" id="spinner-load">
   <div class="spinner-border text-light" role="status" id="spinner">
     <span class="sr-only">Loading...</span>

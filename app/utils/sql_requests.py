@@ -188,3 +188,29 @@ auth_check_email = """ SELECT * FROM `T_User` WHERE `email` = %(email)s """
 auth_safe_edit = """ UPDATE `T_User` SET `firstname` = %(firstname)s, `lastname` = %(lastname)s, `email` = %(email)s WHERE `T_User`.`id_user` = %(id_user)s;  """
 
 auth_edit_password = """ UPDATE `T_User` SET `password` = %(new_password)s WHERE `T_User`.`id_user` = %(id_user)s;  """
+
+
+# -----------
+# LABEL     |
+# -----------
+
+show_label_by_tiqet = """ SELECT T_Tiqet.id_tiqet, T_Label.id_label, T_Label.name, T_Label.color
+FROM T_Tiqet
+JOIN T_Tiqet_to_Label ON T_Tiqet.id_tiqet = T_Tiqet_to_Label.fk_tiqet
+JOIN T_Label ON T_Tiqet_to_Label.fk_label = T_Label.id_label
+WHERE T_Tiqet.id_tiqet = %(id_tiqet)s """
+
+create_label = """ INSERT INTO `T_Label` (`id_label`, `name`, `description`, `color`, `created_at`) VALUES (NULL, %(name)s, %(description)s, %(color)s, CURRENT_TIMESTAMP); """
+
+edit_label = """ UPDATE `T_Label` SET `name` = %(name)s, `description` = %(description)s, `color` = %(color)s WHERE `T_Label`.`id_label` = %(id_label)s ;  """
+
+index_label = """ SELECT * FROM `T_Label`  """
+
+delete_key_label = "UPDATE `T_Tiqet_to_Label` SET `fk_label` = NULL WHERE `T_Tiqet_to_Label`.`fk_label` = %(id_label)s;"
+
+delete_label = "DELETE FROM `T_Label` WHERE T_Label.id_label = %(id_label)s;"
+
+delete_tiqet_label_reation = "DELETE FROM `T_Tiqet_to_Label` WHERE T_Tiqet_to_Label.fk_tiqet = %(id_tiqet)s AND T_Tiqet_to_Label.fk_label = %(id_label)s"
+
+create_tiqet_label_reation = "INSERT INTO `T_Tiqet_to_Label` (`id_tiqet_to_label`, `fk_tiqet`, `fk_label`, `created_at`) VALUES (NULL, %(id_tiqet)s, %(id_label)s, CURRENT_TIMESTAMP);"
+""" INSERT INTO `T_Tiqet_to_Label` (`id_tiqet_to_label`, `fk_tiqet`, `fk_label`, `created_at`) VALUES (NULL, '13', '7', CURRENT_TIMESTAMP); """

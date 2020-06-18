@@ -1,0 +1,33 @@
+<div class="label mb-4 border shadow p-2 rounded">
+  <div id="new-comment" style="display: none;">
+    <div class="d-flex">
+      <div class="input-block mr-2">
+        <label class="label" for="new-name">Name</label>
+        <input id="new-name" class="form-control form-control-sm" />
+      </div>
+      <div class="input-block ml-2">
+        <label class="label" for="new-color">Color</label>
+        <div class="input-group input-group-sm">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">#</span>
+          </div>
+          <input id="new-color" class="form-control form-control-sm" />
+        </div>
+      </div>
+    </div>
+    <div class="input-block">
+      <label class="label" for="new-description">Description</label>
+      <textarea id="new-description" class="form-control form-control-sm"></textarea>
+    </div>
+    <div class="w-100 d-flex flex-row-reverse mt-1">
+      <button id="new-create" type="button" class="btn btn-warning btn-sm">
+        Create
+      </button>
+    </div>
+  </div>
+  <div id="new-comment-icon" class="h-100">
+    <div class="d-flex justify-content-center align-items-center">
+      <i class="fas fa-plus-circle text-dark fa-5x"></i>
+    </div>
+  </div>
+</div>

@@ -30,11 +30,13 @@ def new():
 
 @app.route("/tiqet/<id_tiqet>", methods=["GET"])
 def tiqet(id_tiqet):
+    tiqet_db = query(sql_requests.show_tiqet, {"id_tiqet": id_tiqet}, fetch="one")
+
     categories_db = query(sql_requests.index_category, fetch="all")
     states_db = query(sql_requests.index_state, fetch="all")
     priorities_db = query(sql_requests.index_priorities, fetch="all")
     users_db = query(sql_requests.index_users, fetch="all")
-    tiqet_db = query(sql_requests.show_tiqet, {"id_tiqet": id_tiqet}, fetch="one")
+    labels_db = query(sql_requests.index_label, fetch="all")
     comments_db = query(
         sql_requests.index_comments, {"id_tiqet": id_tiqet}, fetch="all"
     )
@@ -46,4 +48,5 @@ def tiqet(id_tiqet):
         priorities=priorities_db,
         users=users_db,
         categories=categories_db,
+        labels=labels_db,
     )

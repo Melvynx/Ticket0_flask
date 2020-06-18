@@ -1,24 +1,16 @@
 {% extends "model/settings.html" %}
 <!-- block content -->
 {% block link %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/state.css') }}" />
+<link rel="stylesheet" href="{{ url_for('static', filename='css/label.css') }}" />
 {% endblock %}
 <!--        body-->
 {% block setting %}
 <a class="btn-link btn-sm p-0 pt-1" href="{{ url_for('categories') }}"><- Back</a>
-<div class="priority-block">
-  <div class="d-flex flex-column p-2">
-    <p>Click for edit.</p>
-    <p>Display is what column display in dashboard.</p>
-    <div class="border p-2 rounded">
-      {% if states %} {% for state in states %} {% include
-      'settings/state/state.html' %} {% endfor %} {% else %}
-      <p>nothing...</p>
-      {% endif %}
-    </div>
-  </div>
-
-  {% include 'settings/state/new_state.html' %}
+<div class="label-block">
+  {% if labels %} {% for label in labels %} {% include 'settings/label/label.html' %}
+  {% endfor %} {% else %}
+  <p>nothing...</p>
+  {% endif %} {% include 'settings/label/new_label.html' %}
 </div>
 <!-- modal -->
 <div
@@ -33,7 +25,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="modal-title-delete">
-          Are you sure to delete this state ?
+          Are you sure to delete this label ?
         </h5>
       </div>
       <div class="modal-body" id="modal-delete-body"></div>
@@ -50,8 +42,7 @@
 </div>
 <!-- end setting -->
 {% endblock setting %} {% block script_setting %}
-<script src="{{ url_for('static', filename='js/state.js') }}"></script>
+<script src="{{ url_for('static', filename='js/label.js') }}"></script>
 <script src="{{ url_for('static', filename='node_modules/bootstrap/js/dist/util.js') }}"></script>
 <script src="{{ url_for('static', filename='node_modules/bootstrap/js/dist/modal.js') }}"></script>
-<script src="{{ url_for('static', filename='node_modules/@popperjs/core/dist/umd/popper.js') }}"></script>
 {% endblock script_setting %} >
