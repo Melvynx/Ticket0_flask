@@ -27,16 +27,15 @@ def query(sql, values=False, fetch=False, multi=False):
         else:
             result = True
 
-        # MM 2020 commit
         database.db.commit()
 
     except (
         Exception,
+        AttributeError,
+        TypeError,
         mysql.connector.Error,
         mysql.connector.InternalError,
-        TypeError,
         mysql.connector.DatabaseError,
-        AttributeError,
     ) as e:
         # MM 2020 rollback (undo commit) on error
         database.db.rollback()

@@ -125,4 +125,3 @@ def delete_labels_tiqet(id_label, id_tiqet):
         status = jsonify(status="Error.", state="success")
 
     return make_response(status, 200)
-
