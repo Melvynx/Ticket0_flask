@@ -15,7 +15,7 @@ To run this project you need to use `Pycharm` 🐍.
 
 Go and the settings here :
 
-<img width="300" src="https://i.imgur.com/H6xm15r.png" />
+<img width="500" src="https://i.imgur.com/H6xm15r.png" />
 
 Select `venv` and install the dependency.
 
