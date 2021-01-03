@@ -7,11 +7,11 @@ It was requested to use Flask for the backend and I decided to use JS with JQuer
 
 I really never use Bootstrap and JQuery so it was a firt time for me!
 
-## Installation
+## Installation
 
 ### Backend
 
-To run this project you need to use `Pycharm`.
+To run this project you need to use `Pycharm` 🐍.
 
 Go and the settings here :
 
@@ -19,7 +19,7 @@ Go and the settings here :
 
 Select `venv` and install the dependency.
 
-To start, open `run.py` in pycharm and clic in the red arrow.
+To start, open `run.py` in pycharm and clic in the green arrow ✅➡️.
 
 ### Fronted
 
@@ -27,8 +27,8 @@ run :
 ```bash
 cd app/yarn
 
-npm i
+npm i # 🔆 
 # or
-yarn
+yarn #🐳 
 ```
 It's done.
