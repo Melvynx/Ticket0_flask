@@ -23,7 +23,7 @@ To start, open `run.py` in pycharm and clic in the green arrow ✅➡️.
 
 ### Fronted
 
-run :
+run in the root of project :
 ```bash
 cd app/yarn
 
