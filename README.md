@@ -29,6 +29,6 @@ cd app/yarn
 
 npm i # 🔆 
 # or
-yarn #🐳 
+yarn # 🐳 
 ```
 It's done.
