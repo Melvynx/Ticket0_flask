@@ -2,10 +2,10 @@
 
 ## Motivation 🏃‍♂️
 
-This project was done during a test at epsic.
+I made this during a project at Epsic.
 It was requested to use Flask for the backend and I decided to use JS with JQuery and Bootstrap 🍓 to make the frontend.
 
-I really never use Bootstrap and JQuery so it was a firt time for me!
+I never really used Bootstrap and JQuery so it was a first time for me!
 
 ## Installation
 
@@ -19,7 +19,7 @@ Go and the settings here :
 
 Select `venv` and install the dependency.
 
-To start, open `run.py` in pycharm and clic in the green arrow ✅➡️.
+To start, open `run.py` in pycharm and click on the green arrow ✅➡️.
 
 ### Fronted
 
