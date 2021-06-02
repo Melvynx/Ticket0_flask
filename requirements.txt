@@ -27,6 +27,6 @@ requests==2.23.0
 shellescape==3.8.1
 six==1.14.0
 toml==0.10.0
-urllib3==1.25.9
+urllib3==1.26.5
 Werkzeug==1.0.1
 wrapt==1.12.1
