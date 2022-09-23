@@ -18,7 +18,7 @@ MarkupSafe==1.1.1
 mccabe==0.6.1
 mysql-connector-python==8.0.19
 Naked==0.1.31
-protobuf==3.11.3
+protobuf==3.18.3
 pycparser==2.20
 pycrypto==2.6.1
 pylint==2.5.0
